@@ -88,7 +88,14 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $erreurSituation = "La situation amoureuse est invalide.";
       }
     }
-///////rajouter le champ enfants tout court
+    if (empty($_POST["enfants"])) {
+      $enfants = "";
+    } else {
+      $enfants = test_input($_POST["enfants"]);
+      if (preg_match("/^[a-zA-Z ]*$/", $enfants)) {
+        $erreurEnfants = "Le champ enfants est invalide.";
+      }
+    }
     if (empty($_POST["nombreEnf"])) {
       $erreurNombreEnf = "Le champ nombre d'enfants est requis";
     } else {
@@ -97,7 +104,6 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $erreurNombreEnf = "Le nombre d'enfants est invalide.";
       }
     }
-/////////////////////////pause ici///////////
     if (empty($_POST["poids"])) {
       $erreurPoids = "Le champ poids est requis";
     } else {
@@ -138,7 +144,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     }
 
     if (empty($_POST["msgAcc"])) {
-      $erreurMsgAcc = "Le champ message d'accueil est requis"; //////////////
+      $msgAcc = "";
     } else {
       $msgAcc = test_input($_POST["msgAcc"]);
       if (!preg_match("/^[a-zA-Z ]*$/", $msgAcc)) {
@@ -147,7 +153,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     }
 
     if (empty($_POST["citation"])) {
-      $erreurCitation = "Le champ citation est requis"; //////////////
+      $citation = "";
     } else {
       $citation = test_input($_POST["citation"]);
       if (!preg_match("/^[a-zA-Z ]*$/", $citation)) {
@@ -156,7 +162,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     }
 
     if (empty($_POST["interets"])) {
-      $erreurInterets = "Le champ interets est requis"; //////////////
+      $interets = "";
     } else {
       $interets = test_input($_POST["interets"]);
       if (!preg_match("/^[a-zA-Z ]*$/", $interets)) {
@@ -165,25 +171,33 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     }
 
     if (empty($_POST["fumeur"])) {
-      $erreurFumeur = "Le champ fumeur est requis"; //////////////
+      $fumeur = "";
     } else {
       $fumeur = test_input($_POST["fumeur"]);
       if (!preg_match("/^[a-zA-Z ]*$/", $fumeur)) {
         $erreurFumeur = "Le champ fumeur est invalide.";
       }
     }
+    if (empty($_POST["chiens"])) {
+      $chiens = "";
+    } else {
+      $chiens = test_input($_POST["chiens"]);
+      if (!preg_match("/^[a-zA-Z ]*$/", $chiens)) {
+        $erreurChiens = "Le champ est invalide.";
+      }
+    }
 
     if (empty($_POST["nbDoggos"])) {
-      $erreurNbDoggos = "Le champ couleur de yeux est requis";
+      $erreurNbDoggos = "Le champ nombre de chiens est requis";
     } else {
       $nbDoggos = test_input($_POST["nbDoggos"]);
       if (($nbDoggos != "1")&&($nbDoggos != "2" )&&($nbDoggos != "3+" )) {
-        $erreurNbDoggos = "La couleur des yeux est invalide.";
+        $erreurNbDoggos = "Le nombre de chiens est invalide.";
       }
     }
 
     if (empty($_POST["infoschiens"])) {
-      $erreurInfoschiens = "Le champ infoschiens est requis"; //////////////
+      $infoschiens = "";
     } else {
       $infoschiens = test_input($_POST["infoschiens"]);
       if (!preg_match("/^[a-zA-Z ]*$/", $infoschiens)) {
@@ -192,7 +206,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     }
 
     if (empty($_POST["photos"])) {
-      $erreurPhotos = "Le champ photos est requis"; //////////////
+      $erreurPhotos = "";
     } else {
       $photos = test_input($_POST["photos"]);
       if (!preg_match("/^[a-zA-Z ]*$/", $photos)) { //à chercher//////////
@@ -216,7 +230,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $erreurPassword = "Le mot de passe est invalide.";
       }
     }
-    //////////la suite ici///////
+  /////
     }
     function test_input($data)
     {
