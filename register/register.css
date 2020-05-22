@@ -38,7 +38,7 @@ input[type=button], input[type=submit], input[type=reset] {
   input[type=submit]:hover {
     background-color:#908CB1 ;
   }
-  input[type=text],input[type=number],input[type=password], select {
+  input[type=text],input[type=password]{
     padding: 12px 20px;
     margin: 4px 0;
     width: 350px;
@@ -48,11 +48,39 @@ input[type=button], input[type=submit], input[type=reset] {
   input[type=date] {
     padding: 12px 20px;
     margin: 4px 0;
-
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+ input[type=number] {
+    padding: 12px;
+    margin: 4px 0;
+    margin-right: 10px;
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  } 
+  select {
+    padding: 12px;
+    margin: 4px 0;
+    margin-right: 10px;
+    width: 100px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
 
-#blocSexe {
+   input[type=file] {
+    padding: 12px;
+    margin: 4px 0;
+    margin-right: 10px;
+   }
+.blocSexe {
   padding: 12px 0px 20px;
+}
+
+#nbEnfants {
+  display: none;
+}
+
+#nbChiens {
+  display: none;
 }
