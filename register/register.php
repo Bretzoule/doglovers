@@ -13,18 +13,40 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
   </head>
 
   <body>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (empty($_POST["nom"])) { 
+        $erreurNom = "Le champ nom est requis";
+      } else {
+        $nom = test_input($_POST["nom"]); 
+        if (!preg_match("/^[a-zA-Z ]*$/", $nom)) {
+          $erreurNom = "Le nom est invalide.";
+        }
+      }
+    }
+
+    function test_input($data)
+    {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
+    ?>
+
     <div id="page">
       <div id="bloc_Register">
         <form accept-charset="UTF-8" action="confirmRegistration.php" method="POST">
           <h3>Informations Générales :</h3>
           <label for="nom">Nom</label><br>
-          <input name="nom" type="text" pattern="[^\x3B]+" value="" placeholder="Votre nom" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <br>
+          <input name="nom" type="text" pattern="[^§]+" value="" placeholder="Votre nom" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span> <?php echo $erreurNom ?> </span><br>
           <label for="prenom">Prénom</label><br>
-          <input name="prenom" pattern="[^\x3B]+" type="text" value="" placeholder="Votre prénom" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
+          <input name="prenom" pattern="[^§]+" type="text" value="" placeholder="Votre prénom" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
           <label for="adresse">Adresse, cette information sera privée.</label><br>
-          <input name="adresse" pattern="[^\x3B]+" type="text" value="" placeholder="Adresse complète" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
+          <input name="adresse" pattern="[^§]+" type="text" value="" placeholder="Adresse complète" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
           <label for="lieures">Lieu de résidence, cette adresse sera publique.</label><br>
-          <input name="lieures" pattern="[^\x3B]+" type="text" value="" placeholder="(Pays, Ville, Département)" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /><br>
+          <input name="lieures" pattern="[^§]+" type="text" value="" placeholder="(Pays, Ville, Département)" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /><br>
           <label for="sexe">Sexe</label><br>
           <div class="blocSexe">
             <label><input checked="checked" name="sexe" type="radio" value="Homme" /> Homme </label>
@@ -33,7 +55,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           <label for="birthday">Date de Naissance</label><br>
           <input type="date" name="dateNaissance" value="" required><br>
           <label for="profession">Profession</label> <br>
-          <input name="lieures" pattern="[^\x3B]+" type="text" value="" placeholder="Votre profession ou activité." oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /><br>
+          <input name="lieures" pattern="[^§]+" type="text" value="" placeholder="Votre profession ou activité." oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /><br>
           <label for="situation">Situation amoureuse</label><br>
           <div class="blocSexe">
             <label><input checked="checked" name="situation" type="radio" value="Célibataire" required /> Célibataire</label> /
@@ -58,8 +80,8 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           <label for="couleurCheveux">Couleur de vos cheveux</label> <br>
           <select name="couleurCheveux" id="couleurCheveux">
             <option value="Brun"></option>
-            <option value="Brun"></option>
-            <option value="Brun"></option>
+            <option value="blonde"></option>
+            <option value="chatain clair"></option>
             <option value="Brun"></option>
             <option value="Brun"></option>
             <option value="Brun"></option>
@@ -110,5 +132,4 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
 <?php
 } else {
   header('Location: ./../erreurs/alreadyIn.php');
-}
-?>
+} ?>
