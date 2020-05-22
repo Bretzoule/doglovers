@@ -12,7 +12,7 @@
 <body>
 <div id="bloc_Register">
   <span> Pas de compte sur Dog Lovers ?</span> <br>
-  <a id="creerCompte" title="Créer un compte" href="./resetpassword.php">Créer un compte ici !</a>
+  <a id="creerCompte" title="Créer un compte" href="./../register.php">Créer un compte ici !</a>
 </div>
 
 <div id="bloc_Login">
