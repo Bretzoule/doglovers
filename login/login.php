@@ -12,13 +12,13 @@
 <body>
 <div id="bloc_Register">
   <span> Pas de compte sur Dog Lovers ?</span> <br>
-  <a id="creerCompte" title="Créer un compte" href="./../register.php">Créer un compte ici !</a>
+  <a id="creerCompte" title="Créer un compte" href="./../register/register.php">Créer un compte ici !</a>
 </div>
 
 <div id="bloc_Login">
     <form accept-charset="UTF-8" action="./verificationConnexion.php" method="post">
-        <input name="pseudo" type="text" pattern="[^\s\x3B]+" value="" placeholder="Pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
-        <input name="password" type="password" pattern="[^\s\x3B]+" value="" placeholder="Mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
+        <input name="pseudo" type="text" pattern="[^\s§]+" value="" placeholder="Pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
+        <input name="password" type="password" pattern="[^\s§]+" value="" placeholder="Mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
         <a id="goublie" title="Mot de passe oublié" href="./resetpassword.php">J'ai oublié mon mot de passe.</a> <br>
         <input type="submit" value="Se connecter"></input>
     </form>
