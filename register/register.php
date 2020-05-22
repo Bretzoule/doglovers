@@ -66,7 +66,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       $erreurDateNaissance = "Le champ date de naissance est requis";
     } else {
       $dateNaissance = test_input($_POST["dateNaissance"]);
-      if (!preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $dateNaissance) {
+      if (!preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $dateNaissance)) {
         $erreurDateNaissance = "La date de naissance est invalide.";
       }
     }
