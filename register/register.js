@@ -9,3 +9,12 @@ function changeVisibility(docID) {
         fields.style.display = "block";
     }
 }
+
+
+function updateCheckBoxOnload(docID,docIDShow) {
+    fields = document.getElementById(docID);
+    toShow = document.getElementById(docIDShow);
+    if (fields.checked == true) {
+        toShow.style.display = "block";
+    }
+}
