@@ -1,13 +1,7 @@
 <!-- Enregistrement des inscirts -->
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="PoudlArel.css" />
-</style>
-</head>
-<body>
-
 <?php
 //on démarre la session
+if ($_SESSION["dataPassed"] = "true") {
 session_start();
 if ($_SESSION['enfants'] == "on"){
   $nbrEnfants = $_SESSION['nombreEnf'];
@@ -33,16 +27,11 @@ $content = $_SESSION['nom']."|".$_SESSION['prenom'].
 //on écrit ce que contient la variable dans le fichier nommé userList.txt
 //FILE_APPEND permet d'écrire à la suite du fichier
 file_put_contents('userList.txt', $content, FILE_APPEND);
-
+// remove all session variables
+session_unset();
+session_destroy();
 header ('location: /login/login.php');
+} else {
+  header('Location: /erreurs/forbidden.php');
+}
 ?>
-|blocchien|§|bloc truc|§|
-   </br>
-   <!--Création d'un bouton inscrire un nouvel élève et d'un retour à l'accueil-->
-   <!--
-<a href="inscriptionEleves.php"><input type="button" value="Inscrire un nouvel élève" /></a>
-<a href="tp_Poudlard.php"><input type="button" value="Retour à la page d'accueil" /></a>
--->
-</br>
-</body>
-</html>
