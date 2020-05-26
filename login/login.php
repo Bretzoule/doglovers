@@ -42,12 +42,16 @@ function changeVisibility(docID) {
     <?php
     session_start();
     if((isset($_SESSION['error'])) && ($_SESSION['error']=='error')){
-      echo '<span id="loginError">Identifiant ou mot de passe incorrect.</span>';
+      echo '<span id="loginError"> Identifiant ou mot de passe incorrect.</span>';
+      session_unset();
       session_destroy();
-    } else if ((isset($_SESSION['logout'])) && ($_SESSION['error']=='success')) {
+    } else if ((isset($_SESSION['logout'])) && ($_SESSION['logout']=='success')) {
       echo '<span id="logoutSuccess">Déconnecté avec succès !</span>';
+      session_unset();
       session_destroy();
     }
+    session_unset();
+    session_destroy();
     ?>
   </div>
 </div>
