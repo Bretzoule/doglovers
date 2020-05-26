@@ -23,13 +23,13 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       $data = htmlspecialchars($data);
       return $data;
     }
-    
-    $nomOk = $prenomOk = $adresseOk = $sexeOk = $dateNaissanceOk = $situationOk = $tailleOk = $poidsOk = $CouleurCheveuxOk = $CouleurYeuxOk = false;
 
-    $lieuresFilled = $professionFilled = $enfantsFilled = true;
+    $nomOk = $prenomOk = $adresseOk = $sexeOk = $dateNaissanceOk = $situationOk = $tailleOk = $poidsOk = $CouleurCheveuxOk = $CouleurYeuxOk = $pseudoOk = $passwordOk = false;
+
+    $lieuresFilled = $professionFilled = $enfantsFilled = $msgAccFilled = $interetFilled = $citationFilled = $fumeurFilled = $infoschiensFilled = true;
 
     $erreurNom = $erreurSexe = $erreurPoids = $erreurPseudo = $erreurFumeur = $erreurPrenom = $erreurMsgAcc
-      = $erreurPhotos = $erreurAdresse = $erreurCitation = $erreurNbDoggos = $erreurPassword = $erreurInterets
+      = $erreurPhotos = $erreurAdresse = $erreurCitation = $erreurNbDoggos = $erreurPassword = $erreurDoggos= $erreurInterets
       = $erreurNombreEnf = $erreurSituation = $erreurInfoschiens = $erreurCouleurYeux = $erreurCouleurCheveux
       = $erreurDateNaissance = $erreurTaille = "";
 
@@ -129,15 +129,16 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         if ($_SESSION["enfants"] != "on") {
           $erreurEnfants = "Une erreur s'est produite";
           !$enfantsFilled;
-        }
-        if (empty($_POST["nombreEnf"])) {
-          $erreurNombreEnf = "Le champ nombre d'enfants est requis";
-          !$enfantsFilled;
         } else {
-          $_SESSION["nombreEnf"] = test_input($_POST["nombreEnf"]);
-          if (($_SESSION["nombreEnf"] != "1") && ($_SESSION["nombreEnf"] != "2") && ($_SESSION["nombreEnf"] != "3-5") && ($_SESSION["nombreEnf"] != "5+") && ($_SESSION["nombreEnf"] != "-1")) {
-            $erreurNombreEnf = "Le nombre d'enfants est invalide.";
+          if (empty($_POST["nombreEnf"])) {
+            $erreurNombreEnf = "Le champ nombre d'enfants est requis";
             !$enfantsFilled;
+          } else {
+            $_SESSION["nombreEnf"] = test_input($_POST["nombreEnf"]);
+            if (($_SESSION["nombreEnf"] != "1") && ($_SESSION["nombreEnf"] != "2") && ($_SESSION["nombreEnf"] != "3-5") && ($_SESSION["nombreEnf"] != "5+") && ($_SESSION["nombreEnf"] != "-1")) {
+              $erreurNombreEnf = "Le nombre d'enfants est invalide.";
+              !$enfantsFilled;
+            }
           }
         }
       }
@@ -197,6 +198,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["msgAcc"] = test_input($_POST["msgAcc"]);
         if (!preg_match("/^[a-zA-Z ,.-]*$/", $_SESSION["msgAcc"])) {
           $erreurMsgAcc = "Le message d'accueil est invalide.";
+          !$msgAccFilled;
         }
       }
 
@@ -206,6 +208,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["citation"] = test_input($_POST["citation"]);
         if (!preg_match("/^[a-zA-Z ,.-]*$/", $_SESSION["citation"])) {
           $erreurCitation = "La citation est invalide.";
+          !$citationFilled;
         }
       }
 
@@ -215,6 +218,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["interets"] = test_input($_POST["interets"]);
         if (!preg_match("/^[a-zA-Z ,.-]*$/", $_SESSION["interets"])) {
           $erreurInterets = "Les centres d'interets sont invalides.";
+          !$interetFilled;
         }
       }
 
@@ -224,6 +228,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["fumeur"] = test_input($_POST["fumeur"]);
         if ($_SESSION["fumeur"] != "on") {
           $erreurFumeur = "Une erreur s'est produite.";
+          !$fumeurFilled;
         }
       }
 
@@ -232,49 +237,59 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       } else {
         $_SESSION["chiens"] = test_input($_POST["chiens"]);
         if ($_SESSION["chiens"] != "on") {
-          $erreurEnfants = "Une erreur s'est produite";
-        }
-        if (empty($_POST["nbDoggos"])) {
-          $erreurNbDoggos = "Le champ nombre de chiens est requis";
+          $erreurDoggos = "Une erreur s'est produite";
+          !$chiensFilled;
         } else {
-          $_SESSION["nbDoggos"] = test_input($_POST["nbDoggos"]);
-          if (($_SESSION["nbDoggos"] != "1") && ($_SESSION["nbDoggos"]  != "2") && ($_SESSION["nbDoggos"]  != "3+")) {
-            $erreurNbDoggos = "Le nombre de chiens est invalide.";
+          if (empty($_POST["nbDoggos"])) {
+            $erreurNbDoggos = "Le champ nombre de chiens est requis";
+            !$chiensFilled;
+          } else {
+            $_SESSION["nbDoggos"] = test_input($_POST["nbDoggos"]);
+            if (($_SESSION["nbDoggos"] != "1") && ($_SESSION["nbDoggos"]  != "2") && ($_SESSION["nbDoggos"]  != "3+")) {
+              $erreurNbDoggos = "Le nombre de chiens est invalide.";
+              !$chiensFilled; 
+            }
           }
         }
       }
+
       if (empty($_POST["infoschiens"])) {
         $_SESSION["infoschiens"]  = "";
       } else {
         $_SESSION["infoschiens"] = test_input($_POST["infoschiens"]);
         if (!preg_match("/^[a-zA-Z ,.-]*$/", $_SESSION["infoschiens"])) {
           $erreurInfoschiens = "Les informations à propos des chiens sont invalides ou contiennent des caractères interdits.";
+          !$infoschiensFilled;
         }
       }
 
       if (empty($_POST["pseudo"])) {
         $erreurPseudo = "Le champ pseudo est requis";
       } else {
+        $pseudoOk = "true";
         $_SESSION["pseudo"] = test_input($_POST["pseudo"]);
         if (!preg_match("/^[a-zA-Z,-.]*$/", $_SESSION["pseudo"])) {
           $erreurPseudo = "Le pseudo est invalide.";
+          !$pseudoOk;
         }
       }
 
       if (empty($_POST["password"])) {
         $erreurPassword = "Le champ mot de passe est requis";
       } else {
+        $passwordOk = "true";
         $_SESSION["password"] = test_input($_POST["password"]);
         if (!preg_match("/[^§\s]+/", $_SESSION["password"])) {
           $erreurPassword = "Le mot de passe est invalide.";
+          !$passwordOk;
         }
       }
     }
 
-    if($nomOk == true) {
+    if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $dateNaissanceOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $pseudoOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled) {
+      $_SESSION["dataPassed"] = "true";
       header('Location: ./confirmRegistration.php');
     }
-
     ?>
 
     <div id="page">
@@ -306,7 +321,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
             <label><input id="enfants" name="enfants" type="checkbox" onclick="changeVisibility('nbEnfants')" <?php if (isset($_POST['enfants'])) echo "checked='checked'"; ?> />avec enfants.</label><br>
             <div id="nbEnfants"> <span>* <?php echo $erreurNombreEnf; ?> </span>
               <select name="nombreEnf" id="nombreEnf">
-                <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '-1')) { ?>selected="true" <?php }; ?> value="-1" >Ne pas mentionner</option>
+                <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '-1')) { ?>selected="true" <?php }; ?> value="-1">Ne pas mentionner</option>
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '1')) { ?>selected="true" <?php }; ?> value="1">1 Enfant</option>
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '2')) { ?>selected="true" <?php }; ?> value="2">2 Enfants</option>
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '3-5')) { ?>selected="true" <?php }; ?> value="3-5">Entre 3 et 5 Enfants</option>
@@ -348,7 +363,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           <input name="citation" pattern="[^§]+" type="text" value="<?php echo $_SESSION['citation'] ?>" placeholder="Une citation ?" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /><br>
           <label for="interets">Interets</label><br>
           <input name="interets" pattern="[^§]+" type="text" value="<?php echo $_SESSION['interets'] ?>" placeholder="Vos interets" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /><br>
-          <label><input type="checkbox" name="fumeur" id="fumeur" <?php if (isset($_POST['fumeur'])) echo "checked='checked'"; ?> >Fumeur ?</label><br>
+          <label><input type="checkbox" name="fumeur" id="fumeur" <?php if (isset($_POST['fumeur'])) echo "checked='checked'"; ?>>Fumeur ?</label><br>
           <label><input name="chiens" id="chiens" type="checkbox" onclick="changeVisibility('nbChiens')" <?php if (isset($_POST['chiens'])) echo "checked='checked'"; ?> /> Je possède un ami à 4 pattes !</label><br>
           <div id="nbChiens"> <span>* <?php echo $erreurNbDoggos; ?> </span>
             <select name="nbDoggos" id="nbDoggos">
@@ -370,9 +385,11 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       </div>
     </div>
     <script>
-      updateCheckBoxOnload('enfants','nbEnfants');updateCheckBoxOnload('chiens','nbChiens');
+      updateCheckBoxOnload('enfants', 'nbEnfants');
+      updateCheckBoxOnload('chiens', 'nbChiens');
     </script>
   </body>
+
   </html>
 <?php
 } else {
