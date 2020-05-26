@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  
+
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
   <link rel="stylesheet" type="text/css" href="./login.css">
@@ -10,11 +10,27 @@
 </head>
 
 <body>
-<div id="bloc_Register">
-  <span> Pas de compte sur Dog Lovers ?</span> <br>
-  <a id="creerCompte" title="Créer un compte" href="./../register/register.php">Créer un compte ici !</a>
-</div>
-
+  <div id="bloc_colonne">
+  <div id="bloc_placement">
+    <div id="bloc_Register">
+    <span> Pas de compte sur Dog Lovers ?</span> <br>
+    <a id="creerCompte" title="Créer un compte" href="./../register/register.php">Créer un compte ici !</a>
+    </div>
+    <div id="bloc_Image">
+      <img src="/ressources/logo.png" alt="logo"></img>
+    </div>
+<div id="bloc_Connexion">
+<input type="button" class="boutonSpoiler" value="Se connecter" onclick="changeVisibility('bloc_Login')"></input>
+<script type="text/javascript">
+function changeVisibility(docID) {
+    fields = document.getElementById(docID)
+    if (fields.style.display == "block") {
+        fields.style.display = "none";
+} else {
+        fields.style.display = "block";
+    }
+}
+</script>
 <div id="bloc_Login">
     <form accept-charset="UTF-8" action="./verificationConnexion.php" method="post">
         <input name="pseudo" type="text" pattern="[^\s§]+" value="" placeholder="Pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
@@ -22,7 +38,7 @@
         <a id="goublie" title="Mot de passe oublié" href="./resetpassword.php">J'ai oublié mon mot de passe.</a> <br>
         <input type="submit" value="Se connecter"></input>
     </form>
-    
+
     <?php
     session_start();
     if((isset($_SESSION['error'])) && ($_SESSION['error']=='error')){
@@ -34,7 +50,16 @@
     }
     ?>
   </div>
-  
-  </div>
+</div>
+</div>
+<div id="bloc_Noms">
+  <div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 1</img></div>
+<div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 2</img></div>
+<div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 3</img></div>
+<div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 4</img></div>
+</div>
+
+
+</div>
 </body>
 </html>

@@ -1,7 +1,9 @@
 
 body,html {
     height:100%;
-    margin: 0; 
+    margin: 0;
+    border: 3px solid #908CB1;
+    background-color: #BBC6D9;
 }
 #page {
     display: flex;
@@ -10,21 +12,51 @@ body,html {
 }
 
 #bloc_Login {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     margin-top: 40px;
     padding: 15px;
     width:fit-content;
     border-radius: 12px;
-    box-shadow: 0px 10px 25px 0px gray;
-  
+    box-shadow: 0px 10px 25px 0px #908CB1;
+    border: 3px solid #908CB1;
+    background-color: white;
+
 }
-#creerCompte{  
+#creerCompte{
     display: inline-block;
     font-weight: bold;
     text-decoration: none;
     color:#5D3B78;
+}
+#bloc_colonne{
+  display: flex;
+  flex-direction: column;
+}
+
+#bloc_placement{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#bloc_Connexion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  padding: 15px;
+  width:fit-content;
+  border-radius: 12px;
+  box-shadow: 0px 10px 25px 0px gray;
+border: 3px solid #B85985;
+  background-color: white;
+    margin-bottom: auto;
+  padding-right: 3%;
+}
+#bloc_Image{
+  display: flex;
+  margin-top: 40px;
 }
 #bloc_Register {
   display: flex;
@@ -35,11 +67,34 @@ body,html {
   width:fit-content;
   border-radius: 12px;
   box-shadow: 0px 10px 25px 0px gray;
-  
+border: 3px solid #B85985;
+  background-color: white;
+  margin-bottom: auto;
 }
-
+#bloc_Noms{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40px;
+  padding: 15px;
+  width:fit-content;
+  border-radius: 12px;
+  box-shadow: 0px 10px 25px 0px gray;
+  border: 3px solid #EF5C76;
+    background-color: white;
+}
+#bloc_Noms{
+  transform: translate(10px,10px);
+  margin: auto;
+  margin-top: 10px;
+}
+.Colonne{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 input[type=button], input[type=submit], input[type=reset] {
-    background-color:#BBC6D9;
+    background-color:#5D3B78;
     border: none;
     color: white;
     margin-left: 50%;
@@ -63,7 +118,7 @@ input[type=button], input[type=submit], input[type=reset] {
   #goublie {
     padding: 10px 10px;
     margin: 4px 0;
-    margin-left: 30px;    
+    margin-left: 30px;
     display: inline-block;
     font-weight: bold;
     text-decoration: none;
@@ -77,11 +132,11 @@ input[type=button], input[type=submit], input[type=reset] {
     margin-top: 40px;
     border-radius: 5px;
     padding: 15px;
-    background-color:rgb(104, 54, 54); 
+    background-color:rgb(104, 54, 54);
   }
   #logoutSuccess {
     margin-top: 40px;
     border-radius: 5px;
-    padding: 15px;   
-    background-color:rgb(61, 136, 92);  
+    padding: 15px;
+    background-color:rgb(61, 136, 92);
   }
