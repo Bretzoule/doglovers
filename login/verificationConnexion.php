@@ -52,4 +52,4 @@ if ($file) {
     phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
 }
     $_SESSION["error"] = "error";
-    header('Location: ./index.php');
+    header('Location: /login/login.php');
