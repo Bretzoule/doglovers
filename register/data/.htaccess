@@ -1,0 +1,7 @@
+ErrorDocument 403 /errors/erreur403.php
+Options -indexes
+Options +FollowSymlinks
+RewriteEngine On
+<FilesMatch "\.[tT][xX][tT]$">
+Deny from all
+</FilesMatch>
