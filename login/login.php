@@ -52,8 +52,6 @@ function changeVisibility(docID) {
       session_unset();
       session_destroy();
     }
-    session_unset();
-    session_destroy();
     ?>
   </div>
 </div>
