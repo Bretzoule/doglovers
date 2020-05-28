@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Erreur Authentification</title>
-    <link rel="stylesheet" type="text/css" href="./erreurs.css">
+    <link rel="stylesheet" type="text/css" href="/errors/erreurs.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
 </head>
 
