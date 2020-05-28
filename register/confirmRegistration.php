@@ -25,7 +25,7 @@ if ($_SESSION["dataPassed"] = "true") {
     . "§" . $_SESSION['msgAcc'] . "§" . $_SESSION['citation'] . "§" . $_SESSION['interets'] . "§" . $_SESSION['fumeurs']
     . "§" . $nbrDoggos . "|" . $infosChiens
     . "§" . $_SESSION['photo'] 
-    . "§" . "free" . "§" . date("Y-m-d") . "§" . uniqid ($prefix = "user_")
+    . "§" . "free" . "§" . date("Y-m-d") . "§" . uniqid($prefix = "user_")
     . $_SESSION['pseudo'] . "§" . password_hash($_SESSION['password'],PASSWORD_DEFAULT) . " \r\n";
   //on écrit ce que contient la variable dans le fichier nommé userList.txt
   //FILE_APPEND permet d'écrire à la suite du fichier
