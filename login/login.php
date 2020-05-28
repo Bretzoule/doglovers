@@ -11,13 +11,15 @@
 
 <body>
   <div id="bloc_colonne">
+    <div class="Colonne">
+    <div id="bloc_Image">
+      <img src="/ressources/dogloverslogo.png" alt="logo"></img>
+    </div>
+  </div>
   <div id="bloc_placement">
     <div id="bloc_Register">
     <span> Pas de compte sur Dog Lovers ?</span> <br>
     <a id="creerCompte" title="Créer un compte" href="./../register/register.php">Créer un compte ici !</a>
-    </div>
-    <div id="bloc_Image">
-      <img src="/ressources/logo.png" alt="logo"></img>
     </div>
 <div id="bloc_Connexion">
 <input type="button" class="boutonSpoiler" value="Se connecter" onclick="changeVisibility('bloc_Login')"></input>
@@ -57,10 +59,36 @@ function changeVisibility(docID) {
 </div>
 </div>
 <div id="bloc_Noms">
-  <div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 1</img></div>
-<div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 2</img></div>
-<div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 3</img></div>
-<div class="Colonne"><img src="/ressources/logo.png" alt="">Nom 4</img></div>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+   $(function(){
+      setInterval(function(){
+         $(".slideshow ul").animate({marginLeft:-200},800,function(){
+            $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first"));
+         })
+      }, 3500);
+   });
+</script>
+  <div class="slideshow">
+
+  <ul>
+
+    <li><div class="Colonne">Nom 1<img src="/ressources/dogloverslogo.png" alt="Nom 1" width="200" height="200" /></div></li>
+    <li><div class="Colonne">Nom 2<img src="/ressources/dogloverslogo.png" alt="" width="200" height="200" /></div></li>
+		<li><div class="Colonne">Nom 3<img src="/ressources/dogloverslogo.png" alt="" width="200" height="200" /></div></li>
+		<li><div class="Colonne">Nom 4<img src="/ressources/dogloverslogo.png" alt="" width="200" height="200" /></div></li>
+
+  </ul>
+
+</div>
+
+<!--
+  <div class="Colonne"><img src="/ressources/dogloverslogo.png" alt="">Nom 1</img></div>
+<div class="Colonne"><img src="/ressources/dogloverslogo.png" alt="">Nom 2</img></div>
+<div class="Colonne"><img src="/ressources/dogloverslogo.png" alt="">Nom 3</img></div>
+<div class="Colonne"><img src="/ressources/dogloverslogo.png" alt="">Nom 4</img></div>
+-->
 </div>
 
 
