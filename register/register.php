@@ -286,7 +286,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       }
     }
 
-    if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $dateNaissanceOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $pseudoOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled) {
+    if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $dateNaissanceOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $pseudoOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled && (!isset($_SESSION["erreur"]))) {
       $_SESSION["dataPassed"] = "true";
       header('Location: ./confirmRegistration.php');
     }
@@ -382,6 +382,12 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           <input name="password" type="password" pattern="[^\s]+" value="" placeholder="Mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <span>* <?php echo '<span>' . $erreurPassword . '</span>'; ?><br>
             <input type="submit" value="Ajouter !"></input>
         </form>
+        <?php 
+        if (isset($_SESSION["erreur"]) && ($_SESSION["errreur"] == "login_existant")) {
+          echo '<span id="loginError"> Identifiant ou mot de passe incorrect.</span>';
+          unset($_SESSION["erreur"]);
+        }
+        ?>
       </div>
     </div>
     <script>

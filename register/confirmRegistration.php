@@ -1,9 +1,27 @@
 <!-- Enregistrement des inscirts -->
 <?php
+session_start();
 
+function checkAlreadyRegistered() {
+  $file = fopen('./../register/data/userList.txt', 'r');
+  if ($file) {
+    while (($line = fgets($file)) !== false) {
+        $userData = explode(";", $line);
+        if ((trim($_SESSION["pseudo"]) == trim($userData[sizeof($userData)-2]))) {
+            $_SESSION["erreur"] = "login_existant";
+            header('Location: register/register.php');
+            fclose($file);
+            exit();
+        }
+    }
+    fclose($file);
+} else {
+    phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
+}
+}
 //on démarre la session
-if ($_SESSION["dataPassed"] = "true") {
-  session_start();
+if (($_SESSION["dataPassed"] = "true") && (!checkAlreadyRegistered())) {
+  
   if ($_SESSION['enfants'] == "on") {
     $nbrEnfants = $_SESSION['nombreEnf'];
   } else {

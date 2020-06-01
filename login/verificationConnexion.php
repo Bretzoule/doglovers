@@ -17,7 +17,7 @@ function getMemberShipType($memberShipString) {
     }
 }
 
-$file = fopen('./../register/userList.txt', 'r'); // ouverture du fichier
+$file = fopen('./../register/data/userList.txt', 'r'); // ouverture du fichier
 if ($file) {
     while (($line = fgets($file)) !== false) {
         $userData = explode(";", $line);
@@ -34,7 +34,7 @@ if ($file) {
 } else {
     phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
 }
-$file = fopen('./../register/adminList.txt', 'r'); // ouverture du fichier
+$file = fopen('./../register/data/adminList.txt', 'r'); // ouverture du fichier
 if ($file) {
     while (($line = fgets($file)) !== false) {
         $userData = explode(";", $line);
