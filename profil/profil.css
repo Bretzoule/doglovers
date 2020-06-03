@@ -1,0 +1,19 @@
+#Bloc_Infos{
+  display: flex;
+  flex-direction: row;
+}
+
+#InfosGenerales{
+  display: flex;
+  flex-direction: column;
+}
+
+#InfosProfil{
+  display: flex;
+  flex-direction: column;
+}
+
+#InfosPhysiques{
+  display: flex;
+  flex-direction: column;
+}
