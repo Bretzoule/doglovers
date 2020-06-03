@@ -7,12 +7,12 @@ function phpAlert($msg) {
 function getMemberShipType($memberShipString) {
     $infoMS = explode(":",$memberShipString);
     if ($infoMS[0] = "free") {
-        return "free";
+        return "1";
     } else {
         if (date("Y-m-d") > $infoMS[1]) {
-            return "free";
+            return "1";
         } else {
-            return "member";
+            return "2";
         }
     }
 }
@@ -20,7 +20,7 @@ function getMemberShipType($memberShipString) {
 $file = fopen('./../register/data/userList.txt', 'r'); // ouverture du fichier
 if ($file) {
     while (($line = fgets($file)) !== false) {
-        $userData = explode(";", $line);
+        $userData = explode("§", $line);
         if ((password_verify(trim($_POST["password"]),trim($userData[sizeof($userData)-1])) && (trim($_POST["pseudo"]) == trim($userData[sizeof($userData)-2])))) {
             $_SESSION["udata"] = array();
             $_SESSION["udata"] = array_slice($userData,0,sizeof($userData)-2);
@@ -37,11 +37,11 @@ if ($file) {
 $file = fopen('./../register/data/adminList.txt', 'r'); // ouverture du fichier
 if ($file) {
     while (($line = fgets($file)) !== false) {
-        $userData = explode(";", $line);
+        $userData = explode("§", $line);
         if ((password_verify(trim($_POST["password"]),trim($userData[sizeof($userData)-1])) && (trim($_POST["pseudo"]) == trim($userData[sizeof($userData)-2])))) {
             $_SESSION["udata"] = array();
             $_SESSION["udata"] = array_slice($userData,0,sizeof($userData)-2);
-            $_SESSION["login_Type"] = "admin";
+            $_SESSION["login_Type"] = "3";
             header('Location: ./../home/accueil.php');
             fclose($file);
             exit();
