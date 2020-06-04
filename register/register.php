@@ -13,8 +13,13 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
   </head>
 
   <body>
-
+    
     <?php
+    setlocale(LC_ALL,'fr_FR.UTF-8');
+    function phpAlert($msg)
+    {
+      echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+    }
 
     function test_input($data)
     {
@@ -23,13 +28,82 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       $data = htmlspecialchars($data);
       return $data;
     }
+    function testImages($photosFilled, $erreurPhotos) {
+    if (empty($_FILES["photos"]["name"][0])) {
+      $_SESSION["photos"] = "";
+    } else {
+      $files = array_filter($_FILES['photos']['name']);
+      $total = count($_FILES['photos']['name']);
+      $target_dir = "data/uploads/";
+      $i = 0;
+      while (($i < $total) && ($photosFilled)) {
+        
+        $target_file = $target_dir . basename($_FILES["photos"]["tmp_name"][$i]);
+        $imageFileType = strtolower(pathinfo(basename($_FILES["photos"]["name"][$i]), PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["photos"]["tmp_name"][$i]);
+        if ($check === false) {
+          $photosFilled = false;
+          $erreurPhotos = "Le fichier ne semble pas être une image";
+        }
+        if (file_exists($target_file)) {
+          $photosFilled = false;
+          $erreurPhotos = "Un fichier portant le même nom existe déjà...";
+        }
+        if ($_FILES["photos"]["size"][$i] > 5000000) {
+          $photosFilled = false;
+          $erreurPhotos = "Le fichier est trop volumineux !";
+        }
+        
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"
+        ) {
+          $photosFilled = false;
+          $erreurPhotos = "Format non pris en charge, les formats d'images acceptés sont .png, .jpg, .jpeg et .gif !";
+        }
+        if ($photosFilled) {
+          $file_name = $target_dir . uniqid($prefix = "photo_") . "." . $imageFileType;
+          if (move_uploaded_file($_FILES["photos"]["tmp_name"][$i], $file_name)) {
+            $_SESSION["photos"] .= "register/" . $file_name;
+            if ($i != ($total - 1)) {
+              $_SESSION["photos"] .= "|";
+            }
+          } else {
+            phpAlert("Une erreur s'est produite lors de l'envoi du fichier.");
+            $erreurPhotos = "Une erreur s'est produite.";
+            $photosFilled = false;
+          }
+        }
+        $i++;
+      }
+    }
+    return($photosFilled);
+  }
+
+  function checkAlreadyRegistered()
+{
+  $lastvalue = true;
+  $file = fopen('./data/userList.txt', 'r');
+  if ($file) {
+    while ((($line = fgets($file)) !== false) && $lastvalue) {
+      $userData = explode("§", $line);
+      //echo "|" . trim($_SESSION["adresse"]) . "| == |" . trim($userData[1]) . "|";
+      if ((trim($_SESSION["pseudo"]) == trim($userData[sizeof($userData) - 2])) || (trim($_SESSION["adresse"]) == trim($userData[1]))) {
+        $lastvalue = false;
+        $_SESSION["erreur"] = "login_existant";
+      }
+    }
+    fclose($file);
+    return($lastvalue);
+  } else {
+    phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
+  }
+}
 
     $nomOk = $prenomOk = $adresseOk = $sexeOk = $dateNaissanceOk = $situationOk = $tailleOk = $poidsOk = $CouleurCheveuxOk = $CouleurYeuxOk = $pseudoOk = $passwordOk = false;
 
-    $lieuresFilled = $professionFilled = $enfantsFilled = $msgAccFilled = $interetFilled = $citationFilled = $fumeurFilled = $infoschiensFilled = true;
+    $lieuresFilled = $professionFilled = $enfantsFilled = $msgAccFilled = $interetFilled = $citationFilled = $fumeurFilled = $infoschiensFilled = $photosFilled = true;
 
     $erreurNom = $erreurSexe = $erreurPoids = $erreurPseudo = $erreurFumeur = $erreurPrenom = $erreurMsgAcc = $erreurProfession
-      = $erreurPhotos = $erreurAdresse = $erreurCitation = $erreurNbDoggos = $erreurPassword = $erreurDoggos= $erreurInterets = $erreurLieuRes
+      = $erreurPhotos = $erreurAdresse = $erreurCitation = $erreurNbDoggos = $erreurPassword = $erreurDoggos = $erreurInterets = $erreurLieuRes
       = $erreurNombreEnf = $erreurSituation = $erreurInfoschiens = $erreurCouleurYeux = $erreurCouleurCheveux
       = $erreurDateNaissance = $erreurTaille = "";
 
@@ -247,7 +321,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
             $_SESSION["nbDoggos"] = test_input($_POST["nbDoggos"]);
             if (($_SESSION["nbDoggos"] != "1") && ($_SESSION["nbDoggos"]  != "2") && ($_SESSION["nbDoggos"]  != "3+")) {
               $erreurNbDoggos = "Le nombre de chiens est invalide.";
-              $chiensFilled = false; 
+              $chiensFilled = false;
             }
           }
         }
@@ -285,16 +359,18 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         }
       }
     }
-
-    if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $dateNaissanceOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $pseudoOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled && (!isset($_SESSION["erreur"]))) {
+    
+    if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $dateNaissanceOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $pseudoOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled && (checkAlreadyRegistered())) {
+      if (testImages($photosFilled,$erreurPhotos)) {
       $_SESSION["dataPassed"] = "true";
       header('Location: ./confirmRegistration.php');
+      }
     }
     ?>
 
     <div id="page">
       <div id="bloc_Register">
-        <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
           <h3>Informations Générales :</h3>
           <label for="nom">Nom</label><br>
           <input name="nom" type="text" pattern="[^§]+" value="<?php echo $_SESSION['nom'] ?>" placeholder="Votre nom" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurNom; ?> </span><br>
@@ -304,11 +380,11 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           <input name="adresse" pattern="[^§]+" type="text" value="<?php echo $_SESSION['adresse'] ?>" placeholder="Adresse Mail" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurAdresse; ?> </span><br>
           <label for="lieures">Lieu de résidence, cette adresse sera publique.</label><br>
           <input name="lieures" pattern="[^§]+" type="text" value="<?php echo $_SESSION['lieures'] ?>" placeholder="(Pays, Ville, Département)" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurLieuRes; ?> <br>
-          <label for="sexe">Sexe</label><br> 
-          <div class="blocSexe"> 
+          <label for="sexe">Sexe</label><br>
+          <div class="blocSexe">
             <label><input checked="checked" name="sexe" type="radio" id="Homme" value="Homme" /> Homme </label>
             <label><input name="sexe" type="radio" value="Femme" id="Femme" /> Femme </label> <br>
-            <label><input name="sexe" type="radio" value="Autre" id="Autre" /> Autre </label> 
+            <label><input name="sexe" type="radio" value="Autre" id="Autre" /> Autre </label>
           </div> <?php echo $erreurSexe; ?> <br>
           <label for="birthday">Date de Naissance</label><br>
           <input type="date" name="dateNaissance" value="<?php echo $_SESSION['dateNaissance'] ?>" required> <span>* <?php echo $erreurDateNaissance; ?> </span><br>
@@ -324,7 +400,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '-1')) { ?>selected="true" <?php }; ?> value="-1">Ne pas mentionner</option>
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '1')) { ?>selected="true" <?php }; ?> value="1">1 Enfant</option>
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '2')) { ?>selected="true" <?php }; ?> value="2">2 Enfants</option>
-                <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '3-5')) { ?>selected="true" <?php }; ?> value="3-5">Entre 3 et 5 Enfants</option>   
+                <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '3-5')) { ?>selected="true" <?php }; ?> value="3-5">Entre 3 et 5 Enfants</option>
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '5+')) { ?>selected="true" <?php }; ?> value="5+">Plus de 5 Enfants</option>
               </select>
             </div>
@@ -364,7 +440,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           <label for="interets">Interets</label><br>
           <input name="interets" pattern="[^§]+" type="text" value="<?php echo $_SESSION['interets'] ?>" placeholder="Vos interets" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurInterets; ?> <br>
           <label><input type="checkbox" name="fumeur" id="fumeur" <?php if (isset($_POST['fumeur'])) echo "checked='checked'"; ?>>Fumeur ?</label><br>
-          <label><input name="chiens" id="chiens" type="checkbox" onclick="changeVisibility('nbChiens')" <?php if (isset($_POST['chiens'])) echo "checked='checked'"; ?> /> Je possède un ami à 4 pattes !</label><br> 
+          <label><input name="chiens" id="chiens" type="checkbox" onclick="changeVisibility('nbChiens')" <?php if (isset($_POST['chiens'])) echo "checked='checked'"; ?> /> Je possède un ami à 4 pattes !</label><br>
           <div id="nbChiens"> <span>* <?php echo $erreurNbDoggos; ?> </span>
             <select name="nbDoggos" id="nbDoggos">
               <option <?php if (isset($_SESSION['nbDoggos']) && ($_SESSION['nbDoggos'] == '1')) { ?>selected="true" <?php }; ?> value="1">1 Chien</option>
@@ -375,17 +451,17 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           </div>
           <h3>Photos !</h3>
           <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span> <br>
-          <input type="file" id="photos" name="photos" accept="image/png, image/jpeg" multiple> <br>
+          <input type="file" id="photos" name="photos[]" accept="image/png, image/jpeg, image/gif, image/jpg" multiple="multiple"><span> <?php echo $erreurPhotos; ?> </span><br>
           <label for="pseudo">Pseudo</label><br>
           <input name="pseudo" type="text" pattern="[^\s§]+" value="<?php echo $_SESSION['pseudo'] ?>" placeholder="Votre pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurPseudo; ?> </span><br>
           <label for="password">Mot de Passe</label><br>
           <input name="password" type="password" pattern="[^\s]+" value="" placeholder="Mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <span>* <?php echo '<span>' . $erreurPassword . '</span>'; ?><br>
             <input type="submit" value="Ajouter !"></input>
         </form> <br>
-        <?php 
+        <?php
         if (isset($_SESSION["erreur"]) && ($_SESSION["erreur"] == "login_existant")) {
           $_SESSION["dataPassed"] = "false";
-          echo '<span id="loginError"> Identifiant ou mot de passe incorrect.</span>';
+          echo '<span id="loginError"> Utilisateur déjà enregistré ( Mail ou Pseudo déjà utilisé...)</span>';
           unset($_SESSION["erreur"]);
         }
         ?>
