@@ -21,8 +21,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <div class="menu">
       <ul>
         <li><a class="active" href="./accueil.php">Accueil</a></li>
-        <li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
+        <li class="formulaireee"><form  action="./recherche/recherche.php" method="get"><input class="searchbar" name="recherche" type="text" value="" placeholder="(Recherche.....)" /></form></li>
       </ul>
     </div>
     <div id="page">
