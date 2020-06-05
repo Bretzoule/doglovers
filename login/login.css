@@ -3,7 +3,7 @@ body,html {
     height:100%;
     margin: 0;
     border: 3px solid #908CB1;
-    background-color: #BBC6D9;/*aliceblue?*/
+    background-color: aliceblue;/*#BBC6D9*/
 }
 #page {
     display: flex;
