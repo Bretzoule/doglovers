@@ -1,19 +1,24 @@
 <?php 
 session_start();
-if (isset($_SESSION["passworded"]) && ($_SESSION["passworded"] == "true")) {
 
-    $file = fopen('./../register/data/userList.txt', 'r');
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+
+if (isset($_SESSION["passworded"]) && ($_SESSION["passworded"] == "true")) {
+    $path = "./../register/data/userList.txt";
+    $file = fopen($path, 'r');
     if ($file) {
         $lastvalue = true;
         while ((($line = fgets($file)) !== false) && $lastvalue) {
             $userData = explode("§", $line);
-            //echo "|" . trim($_SESSION["adresse"]) . "| == |" . trim($userData[1]) . "|";
+            echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[1]) . "| <br>";
             if ((trim($_SESSION["adresseM"]) == trim($userData[1]))) {
-                $contents = file_get_contents($file);
+                $contents = file_get_contents($path);
                 $userData[sizeof($userData)-1] = password_hash($_SESSION['Newpassword'],PASSWORD_DEFAULT);
                 $userData = implode("§",$userData);
                 $contents = str_replace($line,$userData,$contents);
-                file_put_contents($file, $contents);
+                file_put_contents($path, $contents);
                 $lastvalue = false;
             }
         }
@@ -29,7 +34,7 @@ if (isset($_SESSION["passworded"]) && ($_SESSION["passworded"] == "true")) {
     } else {
         $_SESSION["erreur"] = "resetConfirmed";
     }
-    header("Location: /login/resetPassword.php");
+    header("Location: ./resetPassword.php");
 } else {
     header("Location: /errors/erreur403.php");
 }

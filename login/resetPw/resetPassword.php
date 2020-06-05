@@ -11,6 +11,10 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         <link rel="shortcut icon" href="./../ressources/favicon.ico" />
     </head>
     <?php
+    
+    function phpAlert($msg) {
+        echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+    }
 
     function test_input($data)
     {
@@ -46,7 +50,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     }
     if ($adresseOk && $NewpasswordOk) {
         $_SESSION["passworded"] = "true";
-        header("Location: /login/reset.php");
+        header("Location: /login/resetPw/reset.php");
     }
 }
     ?>
