@@ -10,11 +10,29 @@
 </head>
 
 <body>
-  <input type="button" class="boutonSpoiler" value="Infos Publiques" onclick=""></input>
-<input type="button" class="boutonSpoiler" value="Infos Privées" onclick=""></input>
-<input type="button" class="boutonSpoiler" value="Modifier mon profil" onclick=""></input>
-<h2>Mon Profil</h2>
+  <div id="blocTitre"></div>
+  <div id="Titre">
+  <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
+  <h1>Mon Profil</h1>
+</div>
+<div class="menu">
+  <ul>
+    <li><a class="active" href="../home/accueil.php">Accueil</a></li>
+    <li><a class="active" href="./profil.php">Infos Publiques</a></li>
+  <li><a class="active" href="./profil.php">Infos Privées</a></li>
+  <li><input type="button" class="boutonSpoiler" value="Modifier mon profil" onclick=""></input></li>
+    <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
+  </ul>
+</div>
 <?php
+function afficher ($donneeBis,$i,$j){
+  if($donneeBis[$i][$j]==""){
+    $afficher = false;
+  }else{
+    $afficher = true;
+  }
+  return($afficher);
+}
 //on récupère les contenus des fichiers prof et élèves
 $contenu_du_fichierUserList = file_get_contents('../register/data/userList.txt');
 //on met chaque ligne dans un tableau
@@ -40,36 +58,39 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
 
   while (($i<count($donnee)-1)){
     $donneeBis[$i] = explode("|",$donnee[$i]);
-    echo("donneBis[i] = ".$donneeBis[$i][$i]."</br>");
     $i++;
     }
     //Données modifiables :
     ?>
-    <div id="Bloc_Infos">
-      <div id="Photos">
-        <h3>Photos !</h3>
+    <div id="Infos">
+      <div id="BlocInfo">
+        <h2>Photos !</h2>
         <ul>
           <li>Photos : <?php echo("Ici une photo");?></li>
         </ul>
         <input type="button" class="boutonSpoiler" value="Ajouter une photo" onclick=""></input>
       </div>
-      <div id="InfosGenerales">
-        <h3>Informations Générales :</h3>
+      <div id="BlocInfo">
+        <h2>Informations Générales :</h2>
         <ul>
           <li>Nom : <?php echo($donneeBis[0][0]); $_SESSION["Nom"]=$donneeBis[0][0];?></li>
           <li>Prénom : <?php echo($donneeBis[0][1]); $_SESSION["Prénom"]=$donneeBis[0][1];?></li>
           <li>Adresse : <?php echo($donneeBis[1][0]); $_SESSION["Adresse"]=$donneeBis[1][0];?></li>
+<?php if (afficher($donneeBis,1,1)){ ?>
           <li>Lieu de résidence : <?php echo($donneeBis[1][1]); $_SESSION["LieuRes"]=$donneeBis[1][1];?></li>
+<?php } ?>
           <li>Sexe : <?php echo($donnee[2]); $_SESSION["Sexe"]=$donnee[2];?></li>
           <li>Date de naissance : <?php echo($donnee[3]); $_SESSION["DateNaissance"]=$donnee[3];?></li>
+<?php if (afficher($donneeBis,4,0)){ ?>
           <li>Profession : <?php echo($donnee[4]); $_SESSION["Profession"]=$donnee[4];?></li>
+<?php } ?>
           <li>Situation amoureuse : <?php echo($donneeBis[5][0]); $_SESSION["Situation"]=$donneeBis[5][0];?></li>
           <?php if(($donneeBis[5][1]=="1")||($donneeBis[5][1]=="2")||($donneeBis[5][1]=="3-5")||($donneeBis[5][1]=="5+")){ ?>
           <li>Nombre d'enfants : <?php echo($donneeBis[5][1]); $_SESSION["NbrEnfants"]=$donneeBis[5][1];?></li>
         <?php } ?>
         </ul>
       </div>
-      <div id="InfosPhysiques">
+      <div id="BlocInfo">
         <h3>Informations physiques :</h3>
         <ul>
           <li>Poids : <?php echo($donneeBis[6][0]); $_SESSION["Poids"]=$donneeBis[6][0];?></li>
@@ -78,13 +99,16 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
           <li>Couleur des yeux : <?php echo($donneeBis[6][3]); $_SESSION["CouleurYeux"]=$donneeBis[6][3];?></li>
         </ul>
       </div>
-      <div id="InfosProfil">
+      <div id="BlocInfo">
         <h3>Informations profil :</h3>
         <ul>
+          <?php if (afficher($donneeBis,7,0)){ ?>
           <li>Message d'accueil : <?php echo($donnee[7]); $_SESSION["MsgAcc"]=$donnee[7];?></li>
+<?php} if (afficher($donneeBis,8,0)){ ?>
           <li>Citation : <?php echo($donnee[8]); $_SESSION["Citation"]=$donnee[8];?></li>
+<?php} if (afficher($donneeBis,9,0)){ ?>
           <li>Interets : <?php echo($donnee[9]); $_SESSION["Interets"]=$donnee[9];?></li>
-<?php if($donnee[10]=="on"){ ?>
+<?php } if($donnee[10]=="on"){ ?>
           <li>Fumeur ? : <?php echo("oui"); $_SESSION["Fumeur"]=$donnee[10];?></li>
         <?php } if(($donnee[11][0]=="1")||($donnee[11][0]=="2")||($donnee[11][0]=="3+")){ ?>
           <li>Nombre de chiens : <?php echo($donneeBis[11][0]); $_SESSION["NombreChiens"]=$donneeBis[11][0];?></li>
