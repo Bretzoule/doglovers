@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
-    <link rel="stylesheet" type="text/css" href="./loginBis.css">
+    <link rel="stylesheet" type="text/css" href="./login.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico"/> <!--??-->
   </head>
 
