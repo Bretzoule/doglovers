@@ -7,6 +7,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Accueil</title>
     <link rel="stylesheet" type="text/css" href="./accueil.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./recherche/recherche.js"></script>
     <link rel="shortcut icon" href="./../ressources/favicon.ico"/>
   </head>
 
@@ -19,6 +21,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <div class="menu">
       <ul>
         <li><a class="active" href="./accueil.php">Accueil</a></li>
+        <li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
       </ul>
     </div>
