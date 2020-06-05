@@ -40,6 +40,6 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
     $_SESSION["inscrit"] = "success";
     header('location: /login/login.php'); 
   } else {
-  header('Location: /erreurs/forbidden.php');
+  header('Location: /errors/erreur403.php'); 
 }
 ?>
