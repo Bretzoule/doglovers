@@ -37,7 +37,7 @@ function changeVisibility(docID) {
     <form accept-charset="UTF-8" action="./verificationConnexion.php" method="post">
         <input name="pseudo" type="text" pattern="[^\s§]+" value="" placeholder="Pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
         <input name="password" type="password" pattern="[^\s§]+" value="" placeholder="Mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
-        <a id="goublie" title="Mot de passe oublié" href="./resetpassword.php">J'ai oublié mon mot de passe.</a> <br>
+        <a id="goublie" title="Mot de passe oublié" href="./resetPw/resetpassword.php">J'ai oublié mon mot de passe.</a> <br>
         <input type="submit" value="Se connecter"></input>
     </form>
 
