@@ -12,7 +12,7 @@ if (isset($_SESSION["passworded"]) && ($_SESSION["passworded"] == "true")) {
         $lastvalue = true;
         while ((($line = fgets($file)) !== false) && $lastvalue) {
             $userData = explode("§", $line);
-            echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[1]) . "| <br>";
+            echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
             if ((trim($_SESSION["adresseM"]) == trim($userData[1]))) {
                 $contents = file_get_contents($path);
                 $userData[sizeof($userData)-1] = password_hash($_SESSION['Newpassword'],PASSWORD_DEFAULT);

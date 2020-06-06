@@ -86,7 +86,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     while ((($line = fgets($file)) !== false) && $lastvalue) {
       $userData = explode("§", $line);
       //echo "|" . trim($_SESSION["adresse"]) . "| == |" . trim($userData[1]) . "|";
-      if ((trim($_SESSION["pseudo"]) == trim($userData[sizeof($userData) - 2])) || (trim($_SESSION["adresse"]) == trim($userData[1]))) {
+      if ((trim($_SESSION["pseudo"]) == trim($userData[0])) || (trim($_SESSION["adresse"]) == trim($userData[sizeof($userData) - 2]))) {
         $lastvalue = false;
         $_SESSION["erreur"] = "login_existant";
       }

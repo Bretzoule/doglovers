@@ -21,10 +21,10 @@ $file = fopen('./../register/data/userList.txt', 'r'); // ouverture du fichier
 if ($file) {
     while (($line = fgets($file)) !== false) {
         $userData = explode("§", $line);
-        if ((password_verify(trim($_POST["password"]),trim($userData[sizeof($userData)-1])) && (trim($_POST["pseudo"]) == trim($userData[sizeof($userData)-2])))) {
-            $_SESSION["udata"] = array();
-            $_SESSION["udata"] = array_slice($userData,0,sizeof($userData)-2);
-            $_SESSION["login_Type"] = getMemberShipType($_SESSION["udata"][sizeof($userData)-5]);
+        if ((password_verify(trim($_POST["password"]),trim($userData[sizeof($userData)-1])) && (trim($_POST["pseudo"]) == trim($userData[0])))) {
+            // $_SESSION["udata"] = array();
+            // $_SESSION["udata"] = array_slice($userData,0,sizeof($userData)-2);
+            $_SESSION["login_Type"] = getMemberShipType($userData[sizeof($userData)-6]);
             header('Location: ./../home/accueil.php');
             fclose($file);
             exit();
@@ -38,7 +38,7 @@ $file = fopen('./../register/data/adminList.txt', 'r'); // ouverture du fichier
 if ($file) {
     while (($line = fgets($file)) !== false) {
         $userData = explode("§", $line);
-        if ((password_verify(trim($_POST["password"]),trim($userData[sizeof($userData)-1])) && (trim($_POST["pseudo"]) == trim($userData[sizeof($userData)-2])))) {
+        if ((password_verify(trim($_POST["password"]),trim($userData[sizeof($userData)-1])) && (trim($_POST["pseudo"]) == trim($userData[0])))) {
             $_SESSION["udata"] = array();
             $_SESSION["udata"] = array_slice($userData,0,sizeof($userData)-2);
             $_SESSION["login_Type"] = "3";

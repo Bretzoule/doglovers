@@ -20,16 +20,20 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
       $infosChiens = "";
     }
     //on récupère les données de l'inscrit dans une variable
-    $content = $_SESSION['nom'] . "|" . $_SESSION['prenom'] .
-      "§" . $_SESSION['adresse'] . "§" . $_SESSION['lieures']
+    $content =  $_SESSION['pseudo']
+      . "§" . $_SESSION['lieures']
       . "§" . $_SESSION['sexe'] . "§" . $_SESSION['dateNaissance'] . "§" . $_SESSION['profession']
       . "§" . $_SESSION['situation'] . "|" . $nbrEnfants
       . "§" . $_SESSION['poids'] . "|" . $_SESSION['taille'] . "|" . $_SESSION['couleurCheveux'] . "|" . $_SESSION['couleurYeux']
       . "§" . $_SESSION['msgAcc'] . "§" . $_SESSION['citation'] . "§" . $_SESSION['interets'] . "§" . $_SESSION['fumeur']
       . "§" . $nbrDoggos . "|" . $infosChiens
       . "§" . $_SESSION['photos']
-      . "§" . "free" . "§" . date("Y-m-d") . "§" . uniqid($prefix = "user_")
-      . "§" . $_SESSION['pseudo'] . "§" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "\r\n";
+      . "§" . "free" // [sizeof(userData)-6]
+      . "§" . date("Y-m-d") 
+      . "§" . uniqid($prefix = "user_")
+      . "§" . $_SESSION['nom'] . "|" . $_SESSION['prenom'] 
+      . "§" . $_SESSION['adresse'] 
+      . "§" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "\r\n";
     //on écrit ce que contient la variable dans le fichier nommé userList.txt
     //FILE_APPEND permet d'écrire à la suite du fichier
     file_put_contents('./data/userList.txt', $content, FILE_APPEND);

@@ -52,7 +52,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
   récupérer les différentes données présentes dans chaque ligne*/
   $donnee = explode("§",$nbrUser[$j]);
   /*on regarde si l'identifiant dans la ligne en cour est le bon ainsi que le mdp*/
-  if($donnee[16] == $_SESSION['pseudo']){
+  if($donnee[0] == $_SESSION['pseudo']){
     /*si c'est le cas on passe fin a true pour arréter la recherche*/
     $fin = true;
 
@@ -73,11 +73,9 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
       <div id="BlocInfo">
         <h2>Informations Générales :</h2>
         <ul>
-          <li>Nom : <?php echo($donneeBis[0][0]); $_SESSION["Nom"]=$donneeBis[0][0];?></li>
-          <li>Prénom : <?php echo($donneeBis[0][1]); $_SESSION["Prénom"]=$donneeBis[0][1];?></li>
-          <li>Adresse : <?php echo($donneeBis[1][0]); $_SESSION["Adresse"]=$donneeBis[1][0];?></li>
+        <li>Pseudo : <?php echo($donnee[0]); $_SESSION["Pseudo"]=$donnee[0]?></li>
 <?php if (afficher($donneeBis,1,1)){ ?>
-          <li>Lieu de résidence : <?php echo($donneeBis[1][1]); $_SESSION["LieuRes"]=$donneeBis[1][1];?></li>
+          <li>Lieu de résidence : <?php echo($donnee[1]); $_SESSION["LieuRes"]=$donnee[1];?></li>
 <?php } ?>
           <li>Sexe : <?php echo($donnee[2]); $_SESSION["Sexe"]=$donnee[2];?></li>
           <li>Date de naissance : <?php echo($donnee[3]); $_SESSION["DateNaissance"]=$donnee[3];?></li>
@@ -120,8 +118,10 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
 
     <h3>Infos à ne pas écrire</h3>
     <ul>
-      <li>Pseudo : <?php echo($donnee[16]);?></li>
-      <li>Mot de passe : <?php echo($donnee[17]);?></li>
+      <li>Nom : <?php echo($donneeBis[16][0]); $_SESSION["Nom"]=$donneeBis[16][0];?></li>
+      <li>Prénom : <?php echo($donneeBis[16][1]); $_SESSION["Prénom"]=$donneeBis[16][1];?></li>
+      <li>Adresse : <?php echo($donnee[17]);?></li>
+      <li>Mot de passe : <?php echo($donnee[18]);?></li>
     </ul>
     <?php
   }
