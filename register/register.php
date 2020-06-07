@@ -297,7 +297,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         }
       }
 
-      if (!isset($_POST["fumeur"])) {
+      if (empty($_POST["fumeur"])) {
         $_SESSION["fumeur"] = "";
       } else {
         $_SESSION["fumeur"] = test_input($_POST["fumeur"]);
@@ -307,7 +307,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         }
       }
 
-      if (!isset($_POST["chiens"])) {
+      if (empty($_POST["chiens"])) {
         $_SESSION["chiens"] = "";
       } else {
         $_SESSION["chiens"] = test_input($_POST["chiens"]);
