@@ -30,7 +30,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             document.getElementById("resultats").innerHTML = this.responseText;
-            document.getElementById("resultats").style.border = "1px solid #A5ACB2";
+            document.getElementById("resultats").style.background = "#A5ACB2";
+            document.getElementById("resultats").style.paddingLeft = "0";
           }
         }
         xmlhttp.open("GET", "./recherche/recherche.php?recherche=" + str, true);
@@ -42,7 +43,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <li><a class="active" href="./accueil.php">Accueil</a></li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <li class="formulaireee">
-          <form action="./recherche/recherche.php" method="get"><input class="searchbar" name="recherche" type="text" value="" onkeyup="showResult(this.value)" placeholder="(Recherche.....)" />
+          <form action="./recherche/searchPage.php" method="get"><input class="searchbar" name="recherche" type="text" value="" onkeyup="showResult(this.value)" placeholder="(Recherche.....)" />
           <div id="resultats"></div>
           </form>
         </li>
