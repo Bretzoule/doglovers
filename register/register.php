@@ -538,5 +538,5 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
 </html>
 <?php
 } else {
-  header('Location: ./../erreurs/alreadyIn.php');
+  header('Location: ./../home/accueil.php');
 } ?>
