@@ -16,7 +16,7 @@
     </div>
     <div class="menu">
         <ul>
-            <li><a href="/home/accueil.php">Accueil</a></li>
+            <li><a href="/login/login.php">Accueil</a></li>
             <li class="deconnexion"><a href="/login/logout.php">Deconnexion</a></li>
         </ul>
     </div>
