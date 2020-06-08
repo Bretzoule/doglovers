@@ -38,7 +38,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       $target_dir = "data/uploads/";
       $i = 0;
       while (($i < $total) && ($photosFilled)) {
-        
+
         $target_file = $target_dir . basename($_FILES["photos"]["tmp_name"][$i]);
         $imageFileType = strtolower(pathinfo(basename($_FILES["photos"]["name"][$i]), PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["photos"]["tmp_name"][$i]);
@@ -54,7 +54,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           $photosFilled = false;
           $erreurPhotos = "Le fichier est trop volumineux !";
         }
-        
+
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"
         ) {
           $photosFilled = false;
@@ -140,7 +140,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $adresseOk = true;
         $_SESSION["adresse"] = test_input($_POST["adresse"]);
         if (!preg_match("/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/", $_SESSION["adresse"])) {
-          $erreurAdresse = "L'adresse mail est invalide.";
+          $erreurAdresse = "<br><div class=\"mail_pasok\">L'adresse mail est invalide.</div>";
           $adresseOk = false;
         }
       }
@@ -360,7 +360,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         }
       }
     }
-    
+
     if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $dateNaissanceOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $pseudoOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled && (checkAlreadyRegistered())) {
       if (testImages($photosFilled,$erreurPhotos)) {
       $_SESSION["dataPassed"] = "true";
@@ -509,16 +509,19 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
 
           <br><br>
 
+
+            <?php
+          if (isset($_SESSION["erreur"]) && ($_SESSION["erreur"] == "login_existant")) {
+            $_SESSION["dataPassed"] = "false";
+            echo '<div class="deja_use">Utilisateur déjà enregistré<br>( Mail ou Pseudo déjà utilisé...)</div>';
+            unset($_SESSION["erreur"]);
+          }
+          ?>
+
           <div class="part_boutons"><!--partie boutons-->
             <input type="submit" value="Ajouter !"></input>
           </div><!--fin partie boutons-->
-          <?php
-        if (isset($_SESSION["erreur"]) && ($_SESSION["erreur"] == "login_existant")) {
-          $_SESSION["dataPassed"] = "false";
-          echo '<span id="loginError"> Utilisateur déjà enregistré ( Mail ou Pseudo déjà utilisé...)</span>';
-          unset($_SESSION["erreur"]);
-        }
-        ?>
+
         </div><!--fin float right-->
 
       </div><!--fin page-->

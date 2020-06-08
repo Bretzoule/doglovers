@@ -50,17 +50,35 @@
 
       <div id="bloc_sign"> <!--Bloc connexion/inscription-->
 
+        <input type="radio" name="r" id="r1" checked> <!--Reliés à la navigation-->
+        <input type="radio" name="r" id="r2">
+
         <div class="slideshow2"> <!--Partie slide connexion/inscription-->
 
           <div class="slides"> <!--bloc contenant toutes les slides-->
-            <input type="radio" name="r" id="r1" checked> <!--Reliés à la navigation-->
-            <input type="radio" name="r" id="r2">
 
             <div class="slide s1"> <!--slide connexion-->
 
               <div class="slide1_ecrit"> <!--partie écrit-->
-                Vous avez déjà un compte ?<br><br>
-                Connectez-vous !
+                <div class="slide1_ecrit_msg">
+                  Vous avez déjà un compte ?<br><br>
+                  Connectez-vous !
+                </div>
+
+                <div class="mess_err_deco"><!--message d'erreur ou déconnexion-->
+                  <?php
+                  session_start();
+                  if((isset($_SESSION['error'])) && ($_SESSION['error']=='error')){
+                    echo '<div id="loginError"> Identifiant ou mot de passe incorrect.</div>';
+                    session_unset();
+                    session_destroy();
+                  } else if ((isset($_SESSION['logout'])) && ($_SESSION['logout']=='success')) {
+                    echo '<div id="logoutSuccess">Déconnecté avec succès !</div>';
+                    session_unset();
+                    session_destroy();
+                  }
+                  ?>
+                </div><!--fin message d'erreur ou déconnexion-->
 
               </div><!--fin partie écrit-->
 
@@ -71,21 +89,6 @@
                   <a id="goublie" title="Mot de passe oublié" href="./resetPw/resetpassword.php">J'ai oublié mon mot de passe.</a> <br>
                   <input type="submit" id="buttonSignin" value="Se connecter"></input>
                 </form>
-
-                <div class="mess_err_deco"><!--message d'erreur ou déconnexion-->
-                  <?php
-                  session_start();
-                  if((isset($_SESSION['error'])) && ($_SESSION['error']=='error')){
-                    echo '<span id="loginError"> Identifiant ou mot de passe incorrect.</span>';
-                    session_unset();
-                    session_destroy();
-                  } else if ((isset($_SESSION['logout'])) && ($_SESSION['logout']=='success')) {
-                    echo '<span id="logoutSuccess">Déconnecté avec succès !</span>';
-                    session_unset();
-                    session_destroy();
-                  }
-                  ?>
-                </div><!--fin message d'erreur ou déconnexion-->
 
 
               </div> <!--fin partie connexion-->
@@ -116,8 +119,8 @@
         </div> <!--Fin partie slide connexion/inscription-->
 
         <div class="navigation"> <!--Navigation-->
-          <label for="r1" class="bar"></label>
-          <label for="r2" class="bar"></label>
+          <label for="r1" class="bar b1"></label>
+          <label for="r2" class="bar b2"></label>
         </div> <!--Fin navigation-->
 
       </div><!--Fin bloc connexion/inscription-->
