@@ -70,7 +70,6 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
 
                 <div class="mess_err_deco"><!--message d'erreur ou déconnexion-->
                   <?php
-                  session_start();
                   if((isset($_SESSION['error'])) && ($_SESSION['error']=='error')){
                     echo '<div id="loginError"> Identifiant ou mot de passe incorrect.</div>';
                     session_unset();
