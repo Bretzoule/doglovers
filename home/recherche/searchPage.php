@@ -21,8 +21,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     </div>
     <div class="menu">
       <ul>
-        <li><a class="active" href="./accueil.php">Accueil</a></li>
-        <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
+        <li><a href="/home/accueil.php">Accueil</a></li>
+        <li class="deconnexion"><a href="/login/logout.php">Deconnexion</a></li>
         </form>
         </li>
       </ul>
