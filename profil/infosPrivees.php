@@ -18,8 +18,8 @@
 <div class="menu">
   <ul>
     <li><a class="active" href="../home/accueil.php">Accueil</a></li>
-    <li><a class="active" href="">Infos Publiques</a></li>
-  <li><a class="active" href="./infosPrivees.php">Infos Privées</a></li>
+    <li><a class="active" href="./profil.php">Infos Publiques</a></li>
+  <li><a class="active" href="">Infos Privées</a></li>
   <li><a class="active" href="./modification.php">Modifier mon profil</a></li>
     <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
   </ul>
@@ -116,6 +116,15 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
       </div>
     </div>
 
+<div id="BlocInfo">
+      <h2>Informations privées</h2>
+    <ul>
+      <li>Nom : <?php echo($donneeBis[16][0]); $_SESSION["Nom"]=$donneeBis[16][0];?></li>
+      <li>Prénom : <?php echo($donneeBis[16][1]); $_SESSION["Prénom"]=$donneeBis[16][1];?></li>
+      <li>Adresse : <?php echo($donnee[17]); $_SESSION["Adresse"]=$donnee[17];?></li>
+      <li>Mot de passe : <?php echo($donnee[18]);?></li>
+    </ul>
+  </div>
     <?php
   }
   //on passe à la ligne suivante
