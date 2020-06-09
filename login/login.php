@@ -132,7 +132,7 @@ if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success") { ?>
   </body>
 
 </html>
-<?php
+<?php 
 } else {
   header('Location: ./../home/accueil.php');
 } ?>

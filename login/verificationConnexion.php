@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $_SESSION['pseudo'] = $_POST['pseudo'];
 function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
