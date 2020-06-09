@@ -5,7 +5,7 @@
 
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
-  <link rel="stylesheet" type="text/css" href="profil.css">
+  <link rel="stylesheet" type="text/css" href="MonProfil.css">
   <link rel="shortcut icon" href="./../ressources/favicon.ico"/>
 </head>
 
@@ -67,7 +67,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
       <div id="BlocInfo">
         <h2>Photos !</h2>
         <ul>
-          <li>Photos : <?php echo ($donnee[12]);?></li>
+          <li>Photos : <img  src="<?php echo ($donnee[12]);?>"></img></li>
         </ul>
         <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span>
         <input type="file" id="photos" name="photos"placeholder="Ajouter une photo" accept="image/png, image/jpeg" multiple/>

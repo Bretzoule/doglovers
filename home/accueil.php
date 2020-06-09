@@ -41,7 +41,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <div class="menu">
       <ul>
         <li><a class="active" href="./accueil.php">Accueil</a></li>
-        <li><a class="active" href="../profil/profil.php">Mon profil</a></li>
+        <li><a class="active" href="../profil/MonProfil.php">Mon profil</a></li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <li class="formulaireee">
           <form action="./recherche/searchPage.php" method="get"><input class="searchbar" name="recherche" type="text" value="" onkeyup="showResult(this.value)" placeholder="(Recherche.....)" />

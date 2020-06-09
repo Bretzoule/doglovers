@@ -5,7 +5,7 @@
 
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
-  <link rel="stylesheet" type="text/css" href="profil.css">
+  <link rel="stylesheet" type="text/css" href="MonProfil.css">
   <link rel="shortcut icon" href="./../ressources/favicon.ico"/>
 </head>
 
@@ -18,7 +18,7 @@
 <div class="menu">
   <ul>
     <li><a class="active" href="../home/accueil.php">Accueil</a></li>
-    <li><a class="active" href="./profil.php">Infos Publiques</a></li>
+    <li><a class="active" href="./MonProfil.php">Infos Publiques</a></li>
   <li><a class="active" href="">Infos Privées</a></li>
   <li><a class="active" href="./modification.php">Modifier mon profil</a></li>
     <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
