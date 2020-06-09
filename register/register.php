@@ -491,7 +491,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           <div class="photo"><!--bloc photo-->
             <h3>Photos !</h3>
             <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span> <br>
-            <input type="file" id="photos" name="photos" accept="image/png, image/jpeg" multiple> <br>
+            <input type="file" id="photos" name="photos[]" accept="image/png, image/jpeg" multiple> <br>
           </div><!--fin bloc photo-->
 
           <br><br>
