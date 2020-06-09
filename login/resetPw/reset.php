@@ -5,19 +5,19 @@ function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 
-if (isset($_SESSION["passworded"]) && ($_SESSION["passworded"] == "true")) {
-    $path = "./../register/data/userList.txt";
-    $file = fopen($path, 'r');
-    if ($file) {
-        $lastvalue = true;
-        while ((($line = fgets($file)) !== false) && $lastvalue) {
-            $userData = explode("§", $line);
+if (isset($_SESSION["passworded"]) && ($_SESSION["passworded"] == "true")) { // vérification demande de réinitilisation de pw
+    $path = "./../../register/data/userList.txt"; // chemin fichier utilisateur
+    $file = fopen($path, 'r'); // ouverture du fichier
+    if ($file) { // si le fichier est bien ouvert alors
+        $lastvalue = true; 
+        while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
+            $userData = explode("§", $line); // séparation des données de la ligne utilisateur
             //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
-            if ((trim($_SESSION["adresseM"]) == trim($userData[1]))) {
+            if ((trim($_SESSION["adresseM"]) == trim($userData[sizeof($userData)-2])) && (trim($_SESSION["PseudoReset"]) == trim($userData[0]))) { // si l'adresse mail entrée correspond a une adresse mail en bdd alors 
                 $contents = file_get_contents($path);
                 $userData[sizeof($userData)-1] = password_hash($_SESSION['Newpassword'],PASSWORD_DEFAULT);
                 $userData = implode("§",$userData);
-                $contents = str_replace($line,$userData,$contents);
+                $contents = str_replace($line,$userData . "\r\n",$contents);
                 file_put_contents($path, $contents);
                 $lastvalue = false;
             }

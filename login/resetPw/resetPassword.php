@@ -23,9 +23,9 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $data = htmlspecialchars($data);
         return $data;
     }
-    $_SESSION["adresseM"] = $_SESSION["passworded"] = $_SESSION["Newpassword"] = $erreurAdresseM = $erreurNewPassword = "";
+    $_SESSION["adresseM"] = $_SESSION["passworded"] = $_SESSION["Newpassword"] = $_SESSION["PseudoReset"] = $erreurPseudoReset = $erreurAdresseM = $erreurNewPassword = "";
 
-    $adresseOk = $NewpasswordOk = false;
+    $adresseOk = $NewpasswordOk = $PseudoResetOk = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["adresseM"])) {
@@ -48,7 +48,17 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
             $NewpasswordOk = false;
         }
     }
-    if ($adresseOk && $NewpasswordOk) {
+        if (empty($_POST["PseudoReset"])) {
+            $erreurPseudoReset = "Le champ nouveau mot de passe est requis";
+        } else {
+            $PseudoResetOk = "true";
+            $_SESSION["PseudoReset"] = test_input($_POST["PseudoReset"]);
+            if (!preg_match("/[^§\s]+/", $_SESSION["PseudoReset"])) {
+                $erreurPseudoReset = "Le pseudo est invalide.";
+                $PseudoResetOk = false;
+            }
+    }
+    if ($adresseOk && $NewpasswordOk && $PseudoResetOk) {
         $_SESSION["passworded"] = "true";
         header("Location: /login/resetPw/reset.php");
     }
@@ -60,7 +70,9 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
             <img src="/ressources/dogloverslogo.png" alt="logo"></img>
             <div id="oubliage">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <label for="password">Adresse Mail</label><br>
+                <label for="PseudoReset">Pseudo</label><br>
+                    <input name="PseudoReset" type="text" pattern="[^\s§]+" value="" placeholder="Pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /> <br>
+                <label for="adresseM">Adresse Mail</label><br>
                     <input name="adresseM" type="text" pattern="[^\s§]+" value="" placeholder="Adresse Mail" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /> <br>
                     <span> <?php echo $erreurAdresseM ?></span> <br>
                     <label for="password">Mot de Passe</label><br>
@@ -71,7 +83,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
                 </form>
                 <span><?php
                         if (isset($_SESSION["erreur"]) &&  $_SESSION["erreur"] == "badMail") {
-                            echo "Adresse Mail inconnue.";
+                            echo "Adresse Mail ou Pseudo inconnu.";
                             unset($_SESSION["erreur"]);
                         } else if (isset($_SESSION["erreur"]) &&  $_SESSION["erreur"] == "resetConfirmed") {
                             echo "Mot de passe réinitialisé!.";
