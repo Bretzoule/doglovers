@@ -166,7 +166,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
   récupérer les différentes données présentes dans chaque ligne*/
   $donnee = explode("§",$nbrUser[$j]);
   /*on regarde si l'identifiant dans la ligne en cour est le bon ainsi que le mdp*/
-  if($donnee[0] == $_SESSION['Pseudo']){
+  if($donnee[0] == $_SESSION['pseudo']){
     /*si c'est le cas on passe fin a true pour arréter la recherche*/
     $fin = true;
 
@@ -177,7 +177,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
 
 }
 }
-$content =  $_SESSION['Pseudo']
+$content =  $_SESSION['pseudo']
   . "§" . $_SESSION['LieuRes']
   . "§" . $_SESSION['Sexe'] . "§" . $_SESSION['DateNaissance'] . "§" . $_SESSION['Profession']
   . "§" . $_SESSION['Situation'] . "|" . $nbrEnfants

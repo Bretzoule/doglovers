@@ -42,21 +42,22 @@ $i = 0;
 $fin = false;
 //on démarre une session
 session_start();
-//$_SESSION['pseudo'] = "lebato";
-$_SESSION['password'] = "gigi";
 /*on lit le tableau (donc le fichier text ligne par ligne)
-jusqu'à ce qu'on ait trouvé un identifiant et un mdp correspondant
+jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
 while (($j<count($nbrUser)-1)&&(!$fin)){
   /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
   récupérer les différentes données présentes dans chaque ligne*/
   $donnee = explode("§",$nbrUser[$j]);
-  /*on regarde si l'identifiant dans la ligne en cour est le bon ainsi que le mdp*/
+  /*on regarde si l'identifiant dans la ligne en cour est le bon*/
   if($donnee[0] == $_SESSION['pseudo']){
     /*si c'est le cas on passe fin a true pour arréter la recherche*/
     $fin = true;
 
   while (($i<count($donnee)-1)){
+    /*on fait un tableau de tableau : on reprend le tableau séparer selon
+    les § et on le sépare à nouveaux selon les | on pourra donc
+    récupérer les différentes données en faisant $donneeBis[$i][$j]*/
     $donneeBis[$i] = explode("|",$donnee[$i]);
     $i++;
     }
@@ -74,6 +75,9 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
       <div id="BlocInfo">
         <h2>Informations Générales :</h2>
         <ul>
+          <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
+        contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
+      Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
         <li>Pseudo : <?php echo($donnee[0]); $_SESSION["Pseudo"]=$donnee[0]?></li>
 <?php if (afficher($donneeBis,1,1)){ ?>
           <li>Lieu de résidence : <?php echo($donnee[1]); $_SESSION["LieuRes"]=$donnee[1];?></li>
@@ -92,8 +96,8 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
       <div id="BlocInfo">
         <h2>Informations physiques :</h2>
         <ul>
-          <li>Poids : <?php echo($donneeBis[6][0]); $_SESSION["Poids"]=$donneeBis[6][0];?></li>
-          <li>Taille : <?php echo($donneeBis[6][1]); $_SESSION["Taille"]=$donneeBis[6][1];?></li>
+          <li>Poids : <?php echo($donneeBis[6][0]); $_SESSION["Poids"]=$donneeBis[6][0];?> kg</li>
+          <li>Taille : <?php echo($donneeBis[6][1]); $_SESSION["Taille"]=$donneeBis[6][1];?> cm</li>
           <li>Couleur des cheveux : <?php echo($donneeBis[6][2]); $_SESSION["CouleurCheveux"]=$donneeBis[6][2];?></li>
           <li>Couleur des yeux : <?php echo($donneeBis[6][3]); $_SESSION["CouleurYeux"]=$donneeBis[6][3];?></li>
         </ul>
