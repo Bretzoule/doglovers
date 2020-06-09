@@ -30,7 +30,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       return $data;
     }
     function testImages($photosFilled,&$erreurPhotos) {
-    if (empty($_FILES["photos"]["name"][0])) {
+    if (empty($_FILES["photos"]["name"][0]) && $_FILES["photos"]["error"] == 0) {
       $_SESSION["photos"] = "";
     } else {
       $files = array_filter($_FILES['photos']['name']);
@@ -38,23 +38,22 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       $target_dir = "data/uploads/";
       $i = 0;
       while (($i < $total) && ($photosFilled)) {
-
+        if ($_FILES["photos"]["error"][$i] == 0) {
         $target_file = $target_dir . basename($_FILES["photos"]["tmp_name"][$i]);
         $imageFileType = strtolower(pathinfo(basename($_FILES["photos"]["name"][$i]), PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["photos"]["tmp_name"][$i]);
         if ($check === false) {
           $photosFilled = false;
           $erreurPhotos = "Le fichier ne semble pas être une image";
-        }
+        } else
         if (file_exists($target_file)) {
           $photosFilled = false;
           $erreurPhotos = "Un fichier portant le même nom existe déjà...";
-        }
+        } else
         if ($_FILES["photos"]["size"][$i] > 5000000) {
           $photosFilled = false;
           $erreurPhotos = "Le fichier est trop volumineux !";
-        }
-
+        } else
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"
         ) {
           $photosFilled = false;
@@ -74,8 +73,12 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           }
         }
         $i++;
+      }  else {
+        phpAlert("Image trop grande, merci d'uploader des images dont la taille de dépasse pas 1Mo chacune.");
+        $photosFilled = false;
       }
     }
+  }
     return($photosFilled);
   }
 
