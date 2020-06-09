@@ -96,7 +96,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                   while ($i < sizeof($utilisateur) && !$found && (strpos($response, $utilisateur[0]) === false)) { // permet de vérifier tout les données de l'utilisateur
                     if (stristr($utilisateur[$i], $keyword)) { // , tant que rien de cohérent n'a été trouvé et que l'utilisateur ne matche pas déjà avec un keyword
                       $link = (empty($photoArray[$usercount])) ? $default : "/register/data/uploads/".$photoArray[$usercount];
-                      $response .= '<span><a href="/profil/profil.php?user=' . $utilisateur[0] . '"><img alt="image utilisateur" src="'. $link .'"></a><br>' . $utilisateur[0] .'</span>'; // ajoute l'utilisateur aux résultats 
+                      $response .= '<div><a href="/profil/profil.php?user=' . $utilisateur[0] . '"><img alt="image utilisateur" src="'. $link .'"></a><br>' . $utilisateur[0] .'</div>'; // ajoute l'utilisateur aux résultats 
                       $found = true;
                     }
                     $i++;
