@@ -50,7 +50,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           $photosFilled = false;
           $erreurPhotos = "Un fichier portant le même nom existe déjà...";
         } else
-        if ($_FILES["photos"]["size"][$i] > 5000000) {
+        if ($_FILES["photos"]["size"][$i] > 10000000) {
           $photosFilled = false;
           $erreurPhotos = "Le fichier est trop volumineux !";
         } else
@@ -74,7 +74,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         }
         $i++;
       }  else {
-        phpAlert("Image trop grande, merci d'uploader des images dont la taille de dépasse pas 1Mo chacune.");
+        phpAlert("Image trop grande, merci d'uploader des images dont la taille de dépasse pas". ini_get("upload_max_filesize") ."o chacune.");
         $photosFilled = false;
       }
     }
@@ -493,8 +493,9 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
 
           <div class="photo"><!--bloc photo-->
             <h3>Photos !</h3>
-            <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span> <br>
+            <span>Vous pouvez mettre en ligne jusqu'à 4 photos ! /!\ La taille d'un fichier ne peut dépasser <?php echo ini_get("upload_max_filesize"); ?>o ! </span> <br>
             <input type="file" id="photos" name="photos[]" accept="image/png, image/jpeg, image/jpg, image/gif" multiple> <br>
+            <?php echo $erreurPhotos; ?> </span>
           </div><!--fin bloc photo-->
 
           <br><br>
