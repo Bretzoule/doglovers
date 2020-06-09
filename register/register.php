@@ -373,7 +373,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       <a href="./../login/login.php"><img src="./../ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
     </div> <!--Fin partie logo-->
 
-    <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data>
+    <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
       <div class="page"><!--page-->
 
         <div class="part_gauche"><!--float left-->
