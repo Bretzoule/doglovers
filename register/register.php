@@ -373,7 +373,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       <a href="./../login/login.php"><img src="./../ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
     </div> <!--Fin partie logo-->
 
-    <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+    <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data>
       <div class="page"><!--page-->
 
         <div class="part_gauche"><!--float left-->
@@ -490,7 +490,6 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
 
           <div class="photo"><!--bloc photo-->
             <h3>Photos !</h3>
-
             <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span> <br>
             <input type="file" id="photos" name="photos" accept="image/png, image/jpeg" multiple> <br>
           </div><!--fin bloc photo-->
