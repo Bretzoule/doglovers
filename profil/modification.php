@@ -1,3 +1,14 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+<html>
+
+<head>
+
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+  <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
+  <link rel="stylesheet" type="text/css" href="MonProfil.css">
+  <link rel="shortcut icon" href="./../ressources/favicon.ico"/>
+</head>
+<body>
 <div id="part_logo"> <!--Partie logo-->
   <a href="./../login/login.php"><img src="./../ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
 </div> <!--Fin partie logo-->

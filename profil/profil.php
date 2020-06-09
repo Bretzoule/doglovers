@@ -19,8 +19,6 @@
   <ul>
     <li><a class="active" href="../home/accueil.php">Accueil</a></li>
     <li><a class="active" href="">Infos Publiques</a></li>
-  <li><a class="active" href="./infosPrivees.php">Infos Privées</a></li>
-  <li><a class="active" href="./modification.php">Modifier mon profil</a></li>
     <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
   </ul>
 </div>

@@ -82,3 +82,4 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
 }
 ?>
 </body>
+</html>
