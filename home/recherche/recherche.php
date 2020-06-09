@@ -44,7 +44,7 @@ if (!empty($_GET["recherche"])) {
                 $i = 0;
                 while ($i < sizeof($utilisateur) && !$found && (strpos($response, $utilisateur[0]) === false)) { // permet de vérifier tout les données de l'utilisateur
                     if (stristr($utilisateur[$i], $keyword)) { // , tant que rien de cohérent n'a été trouvé et que l'utilisateur ne matche pas déjà avec un keyword
-                        $response .= '<span><a href="profil/profil.php?user=' . $utilisateur[0] . '">' . $utilisateur[0] . '</a></span><br>'; // ajoute l'utilisateur aux résultats 
+                        $response .= '<span><a href="/profil/profil.php?user=' . $utilisateur[0] . '">' . $utilisateur[0] . '</a></span><br>'; // ajoute l'utilisateur aux résultats 
                         $found = true;
                     }
                     $i++;
