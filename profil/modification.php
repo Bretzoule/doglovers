@@ -178,9 +178,9 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
 }
 }
 $content =  $_SESSION['Pseudo']
-  . "§" . $_SESSION['lieures']
-  . "§" . $_SESSION['sexe'] . "§" . $_SESSION['dateNaissance'] . "§" . $_SESSION['profession']
-  . "§" . $_SESSION['situation'] . "|" . $nbrEnfants
+  . "§" . $_SESSION['LieuRes']
+  . "§" . $_SESSION['Sexe'] . "§" . $_SESSION['DateNaissance'] . "§" . $_SESSION['Profession']
+  . "§" . $_SESSION['Situation'] . "|" . $nbrEnfants
   . "§" . $_SESSION['poids'] . "|" . $_SESSION['taille'] . "|" . $_SESSION['couleurCheveux'] . "|" . $_SESSION['couleurYeux']
   . "§" . $_SESSION['MsgAcc'] . "§" . $_SESSION['citation'] . "§" . $_SESSION['interets'] . "§" . $_SESSION['fumeur']
   . "§" . $nbrDoggos . "|" . $infosChiens
