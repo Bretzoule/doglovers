@@ -79,7 +79,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
         contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
       Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
         <li>Pseudo : <?php echo($donnee[0]); $_SESSION["Pseudo"]=$donnee[0]?></li>
-<?php if (afficher($donneeBis,1,1)){ ?>
+<?php if (afficher($donneeBis,1,0)){ ?>
           <li>Lieu de résidence : <?php echo($donnee[1]); $_SESSION["LieuRes"]=$donnee[1];?></li>
 <?php } ?>
           <li>Sexe : <?php echo($donnee[2]); $_SESSION["Sexe"]=$donnee[2];?></li>
