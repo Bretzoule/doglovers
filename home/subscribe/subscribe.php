@@ -4,7 +4,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
   <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
   <html>
   <?php
-  function getDateFinAbonnement(): string
+  function getDateFinAbonnement(string $username): string
   {
     $path = "./../../register/data/userList.txt";
     $file = fopen($path, 'r');
@@ -12,7 +12,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       $lastvalue = true;
       while ((($line = fgets($file)) !== false) && $lastvalue) {
         $userData = explode("§", $line);
-        if ((trim($_SESSION["pseudo"]) == trim($userData[0]))) {
+        if ((trim($_SESSION["Pseudo"]) == trim($userData[0]))) {
           $tmpdate = explode(':', trim($userData[sizeof($userData) - 6]));
           $date = $tmpdate[1];
           $lastvalue = false;
@@ -56,29 +56,25 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           <?php
           if ($_SESSION["login_Type"] == 1) {
             echo "votre type d'abonnement en cours.";
-           } else {
-             echo ' <a href="./confirmSubscription.php?abonnement=cancel"><input type="button" value="Se désabonner !"></a>';
+          // } else {
+          //   echo ' <a href="./confirmSubscription?abonnement=cancel"><input type="button" value="Se désabonner !"></a>';
            }
           ?> </span> <br>
         <span id="titreInfo"> Abonné </span> <br>
-        <span> <?php if ($_SESSION["login_Type"] >= 2) {
-                  echo "Votre type d'abonnement en cours. <br>";
-                  echo "Abonné(e) jusqu'au " . getDateFinAbonnement() . " ! <br>";
+        <span> <?php if ($_SESSION["login_Type"] > 2) {
+                  echo "votre type d'abonnement en cours. <br>";
+                  echo "jusqu\'au" . getDateFinAbonnement($_SESSION["pseudo"]);
                 } else { ?>
                   <input type="button" value="Consulter les formules d'abonnement !" onclick ="displaySubMode()"> <br>
                   <div id="listeabonnements">
                   <a href="./confirmSubscription.php?abonnement=48h"><input type="button" value="S'abonner pour 48hrs !"></a>
-                  <span>Au prix réduit de 0.99€ !</span> <br> 
+                  <span>Au prix réduit de 0.99€ !</span> <br>
                   <a href="./confirmSubscription.php?abonnement=1mo"><input type="button" value="S'abonner pour 1 mois !"></a>
                   <span>Au prix de 6.99€ !</span> <br>
                   <a href="./confirmSubscription.php?abonnement=6mo"><input type="button" value="S'abonner pour 6 mois !"></a>
                   <span>Au prix de 29.99€ (soit 4.99 par mois) !</span> <br>
                   </div>
                 <?php }
-                if (isset($_SESSION["erreurAbo"])) {
-                  echo $_SESSION["erreurAbo"];
-                  unset($_SESSION["erreurAbo"]);
-                }
                 ?> </span> <br>
       </div>
     </div>

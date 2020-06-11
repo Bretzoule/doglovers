@@ -9,40 +9,40 @@
   <link rel="shortcut icon" href="./../ressources/favicon.ico"/>
 </head>
 
-<body>
+<body><?php
+  function afficher ($donneeBis,$i,$j){
+    if($donneeBis[$i][$j]==""){
+      $afficher = false;
+    }else{
+      $afficher = true;
+    }
+    return($afficher);
+  }
+  //on récupère les contenus des fichiers prof et élèves
+  $contenu_du_fichierUserList = file_get_contents('../register/data/userList.txt');
+  //on met chaque ligne dans un tableau
+  $nbrUser = explode("\n",$contenu_du_fichierUserList);
+  $j = 0;
+  $i = 0;
+  $fin = false;
+  //on démarre une session
+  session_start();
+  if ($_SERVER["REQUEST_METHOD"] == "GET") {
+  $user = $_GET["user"];
+  ?>
   <div id="blocTitre"></div>
   <div id="Titre">
   <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
-  <h1>Mon Profil</h1>
+  <h1>Profil de <?php echo($user);?></h1>
 </div>
 <div class="menu">
   <ul>
     <li><a  href="../home/accueil.php">Accueil</a></li>
-    <li><a class="active" href="">Infos Publiques</a></li>
+    <li><a class="active" href="">Infos <?php echo($user);?></a></li>
     <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
   </ul>
 </div>
 <?php
-function afficher ($donneeBis,$i,$j){
-  if($donneeBis[$i][$j]==""){
-    $afficher = false;
-  }else{
-    $afficher = true;
-  }
-  return($afficher);
-}
-//on récupère les contenus des fichiers prof et élèves
-$contenu_du_fichierUserList = file_get_contents('../register/data/userList.txt');
-//on met chaque ligne dans un tableau
-$nbrUser = explode("\n",$contenu_du_fichierUserList);
-$j = 0;
-$i = 0;
-$fin = false;
-//on démarre une session
-session_start();
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-$user = $_GET["user"];
-}
 /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
@@ -126,6 +126,9 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
   }
   //on passe à la ligne suivante
   $j++;
+}if(!$fin){echo("<h1>Une erreur s'est produite, ce profil n'existe pas.</h1>");}
+}else{
+  echo("Une erreur s'est produite, ce profil n'existe pas.");
 }
 ?>
 </body>
