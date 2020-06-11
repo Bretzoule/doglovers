@@ -44,7 +44,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <li><a  href="/home/subscribe/subscribe.php">Gérer l'abonnement</a></li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <input type="checkbox" name="r" id="r1">
-        <label for="r1" class="bar"><img src="./../ressources/loupe.PNG" alt="img_loupe" class="rounded-corners" onclick="changeVisibility('resultats')"></label>
+        <label for="r1" class="bar"><img src="./../ressources/loupe.png" alt="img_loupe" class="rounded-corners" onclick="changeVisibility('resultats')"></label>
         <li class="formulaireee">
           <div class="slides">
             <div class="slide s1"><!--vide-->
