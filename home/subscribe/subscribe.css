@@ -127,3 +127,7 @@ h2 {
 #titreInfo{
     font-weight: bold;
 }
+
+ #listeabonnements {
+     display: none;
+ }
