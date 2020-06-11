@@ -12,7 +12,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       $lastvalue = true;
       while ((($line = fgets($file)) !== false) && $lastvalue) {
         $userData = explode("§", $line);
-        if ((trim($_SESSION["Pseudo"]) == trim($userData[0]))) {
+        if ((trim($_SESSION["pseudo"]) == trim($userData[0]))) {
           $tmpdate = explode(':', trim($userData[sizeof($userData) - 6]));
           $date = $tmpdate[1];
           $lastvalue = false;
@@ -54,16 +54,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <span id="titreInfo"> Gratuit</span> <br>
         <span>
           <?php
-          if ($_SESSION["login_Type"] == 1) {
-            echo "votre type d'abonnement en cours.";
-          // } else {
-          //   echo ' <a href="./confirmSubscription?abonnement=cancel"><input type="button" value="Se désabonner !"></a>';
+          if (intval($_SESSION["login_Type"]) == 1) {
+            echo "votre abonnement en cours.";
+          } else {
+            echo ' <a href="./confirmSubscription.php?abonnement=cancel"><input type="button" value="Se désabonner !"></a>';
            }
           ?> </span> <br>
         <span id="titreInfo"> Abonné </span> <br>
-        <span> <?php if ($_SESSION["login_Type"] > 2) {
-                  echo "votre type d'abonnement en cours. <br>";
-                  echo "jusqu\'au" . getDateFinAbonnement($_SESSION["pseudo"]);
+        <span> <?php if (intval($_SESSION["login_Type"] >= 2)) {
+                  echo "vous êtes abonné(e) jusqu'au " . getDateFinAbonnement($_SESSION["pseudo"]) . " !";
                 } else { ?>
                   <input type="button" value="Consulter les formules d'abonnement !" onclick ="displaySubMode()"> <br>
                   <div id="listeabonnements">
