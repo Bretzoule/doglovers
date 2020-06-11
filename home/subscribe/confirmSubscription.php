@@ -41,12 +41,36 @@
             }
     }
 
+    function removeSub()
+    {
+        $path = "./../../register/data/userList.txt"; // chemin fichier utilisateur
+            $file = fopen($path, 'r'); // ouverture du fichier
+            if ($file) { // si le fichier est bien ouvert alors
+                $lastvalue = true;
+                while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
+                    $userData = explode("§", $line); // séparation des données de la ligne utilisateur
+                    //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
+                    if ((trim($_SESSION["pseudo"]) == trim($userData[0]))) { // si le pseudo correspond a un pseudo  en bdd alors 
+                        $contents = file_get_contents($path); // récupération des données du fichier 
+                        $userData[sizeof($userData)-6] = "free";
+                        $userData = implode("§",$userData);
+                        $contents = str_replace($line, $userData,$contents);  // ajout de la ligne dans les données
+                        file_put_contents($path, $contents); // ajout des données au fichier
+                        $lastvalue = false;
+                    }
+                }
+                fclose($file);
+            } else {
+                phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
+            }
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && ($_SESSION["login_Type"] > 0)) {
     $typeAbo = $_GET["abonnement"];
     switch ($typeAbo) {
         case '48h':
             addSubscription("P2D");
-            $_SESSION["erreurAbo"] = "Merci d'avoir renouvelé votre abonnement de 48h!";
+            $_SESSION["erreurAbo"] = "Merci d'avoir renouvelé votre abonnement pour 48h!";
             $_SESSION["login_Type"] = 2;
             break;
         case '1mo':
@@ -59,11 +83,11 @@
             $_SESSION["erreurAbo"] = "Merci d'avoir renouvelé votre abonnement de 6 mois!";
             $_SESSION["login_Type"] = 2;
             break;
-        // case 'cancel':
-        //     removeSub();
-        // $_SESSION["erreurAbo"] = "Vous avez bien annulé votre abonnement !";
-        // $_SESSION["login_Type"] = 1;
-        //     break;
+        case 'cancel':
+            removeSub();
+        $_SESSION["erreurAbo"] = "Vous avez bien annulé votre abonnement !";
+        $_SESSION["login_Type"] = 1;
+            break;
         default:
             $_SESSION["erreurAbo"] = "Erreur lors de la gestion de l'abonnement";
             break;

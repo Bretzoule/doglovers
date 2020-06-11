@@ -56,14 +56,14 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           <?php
           if ($_SESSION["login_Type"] == 1) {
             echo "votre type d'abonnement en cours.";
-          // } else {
-          //   echo ' <a href="./confirmSubscription?abonnement=cancel"><input type="button" value="Se désabonner !"></a>';
+           } else {
+             echo ' <a href="./confirmSubscription.php?abonnement=cancel"><input type="button" value="Se désabonner !"></a>';
            }
           ?> </span> <br>
         <span id="titreInfo"> Abonné </span> <br>
         <span> <?php if ($_SESSION["login_Type"] >= 2) {
-                  echo "votre type d'abonnement en cours. <br>";
-                  echo "jusqu\'au" . getDateFinAbonnement();
+                  echo "Votre type d'abonnement en cours. <br>";
+                  echo "Abonné(e) jusqu'au " . getDateFinAbonnement() . " ! <br>";
                 } else { ?>
                   <input type="button" value="Consulter les formules d'abonnement !" onclick ="displaySubMode()"> <br>
                   <div id="listeabonnements">
@@ -75,6 +75,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                   <span>Au prix de 29.99€ (soit 4.99 par mois) !</span> <br>
                   </div>
                 <?php }
+                if (isset($_SESSION["erreurAbo"])) {
+                  echo $_SESSION["erreurAbo"];
+                  unset($_SESSION["erreurAbo"]);
+                }
                 ?> </span> <br>
       </div>
     </div>
