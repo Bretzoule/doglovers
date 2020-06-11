@@ -8,7 +8,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Recherche</title>
     <link rel="stylesheet" type="text/css" href="./searchPage.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./recherche.js"></script>
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
