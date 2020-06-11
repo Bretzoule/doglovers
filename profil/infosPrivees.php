@@ -17,10 +17,10 @@
 </div>
 <div class="menu">
   <ul>
-    <li><a class="active" href="../home/accueil.php">Accueil</a></li>
-    <li><a class="active" href="./MonProfil.php">Infos Publiques</a></li>
+    <li><a  href="../home/accueil.php">Accueil</a></li>
+    <li><a  href="./MonProfil.php">Infos Publiques</a></li>
   <li><a class="active" href="">Infos Privées</a></li>
-  <li><a class="active" href="./modification.php">Modifier mon profil</a></li>
+  <li><a  href="./modification.php">Modifier mon profil</a></li>
     <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
   </ul>
 </div>
