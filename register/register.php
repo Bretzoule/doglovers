@@ -62,7 +62,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         if ($photosFilled) {
           $file_name = $target_dir . uniqid($prefix = "photo_") . "." . $imageFileType;
           if (move_uploaded_file($_FILES["photos"]["tmp_name"][$i], $file_name)) {
-            $_SESSION["photos"] .= "register/" . $file_name;
+            $_SESSION["photos"] .= "/register/" . $file_name;
             if ($i != ($total - 1)) {
               $_SESSION["photos"] .= "|";
             }
