@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    
     function subAdd(string $toAdd, string $memberType):string
     {
         $tmp = explode(':',$memberType);
@@ -16,7 +16,7 @@
             $path = "./../../register/data/userList.txt"; // chemin fichier utilisateur
             $file = fopen($path, 'r'); // ouverture du fichier
             if ($file) { // si le fichier est bien ouvert alors
-                $lastvalue = true; 
+                $lastvalue = true;
                 while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
                     $userData = explode("§", $line); // séparation des données de la ligne utilisateur
                     //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
@@ -34,6 +34,7 @@
             }
     }
 
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $typeAbo = $_GET["abonnement"];
     switch ($typeAbo) {
         case '48h':
