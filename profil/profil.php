@@ -40,6 +40,9 @@ $i = 0;
 $fin = false;
 //on démarre une session
 session_start();
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+$user = $_GET["user"];
+}
 /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
@@ -48,7 +51,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
   récupérer les différentes données présentes dans chaque ligne*/
   $donnee = explode("§",$nbrUser[$j]);
   /*on regarde si l'identifiant dans la ligne en cour est le bon*/
-  if($donnee[0] == $_SESSION['pseudo']){
+  if($donnee[0] == $user){
     /*si c'est le cas on passe fin a true pour arréter la recherche*/
     $fin = true;
 
