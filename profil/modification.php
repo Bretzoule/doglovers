@@ -188,7 +188,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
 
 }
 }
-$content =  $_SESSION['pseudo']
+/*$content =  $_SESSION['pseudo']
   . "§" . $_SESSION['LieuRes']
   . "§" . $_SESSION['Sexe'] . "§" . $_SESSION['DateNaissance'] . "§" . $_SESSION['Profession']
   . "§" . $_SESSION['Situation'] . "|" . $nbrEnfants
@@ -201,7 +201,7 @@ $content =  $_SESSION['pseudo']
   . "§" . uniqid($prefix = "user_")
   . "§" . $_SESSION['nom'] . "|" . $_SESSION['prenom']
   . "§" . $_SESSION['adresse']
-  . "§" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "\r\n";
+  . "§" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "\r\n";*/
 
 //  file_put_contents('./data/userList.txt', $content, FILE_APPEND);
 ?>

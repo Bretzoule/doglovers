@@ -70,8 +70,6 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
         <ul>
           <li>Photos : <img  src="<?php echo ($donnee[12]);?>"></img></li>
         </ul>
-        <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span>
-        <input type="file" id="photos" name="photos"placeholder="Ajouter une photo" accept="image/png, image/jpeg" multiple/>
       </div>
       <div id="BlocInfo">
         <h2>Informations Générales :</h2>
