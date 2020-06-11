@@ -39,6 +39,10 @@
   <ul>
     <li><a  href="../home/accueil.php">Accueil</a></li>
     <li><a class="active" href="">Infos <?php echo($user);?></a></li>
+    <?php
+    if (intval($_SESSION["login_Type"]) >= 2) { ?>
+    <li><a href="">Envoyer un message à <?php echo($user); ?></a></li>
+    <?php } ?>
     <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
   </ul>
 </div>
@@ -46,16 +50,16 @@
 /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
-while (($j<count($nbrUser)-1)&&(!$fin)){
+while (($j<count($nbrUser)-1)&&(!$fin)) {
   /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
   récupérer les différentes données présentes dans chaque ligne*/
   $donnee = explode("§",$nbrUser[$j]);
   /*on regarde si l'identifiant dans la ligne en cour est le bon*/
-  if($donnee[0] == $user){
+  if($donnee[0] == $user) {
     /*si c'est le cas on passe fin a true pour arréter la recherche*/
     $fin = true;
 
-  while (($i<count($donnee)-1)){
+  while (($i<count($donnee)-1)) {
     /*on fait un tableau de tableau : on reprend le tableau séparer selon
     les § et on le sépare à nouveaux selon les | on pourra donc
     récupérer les différentes données en faisant $donneeBis[$i][$j]*/
@@ -72,6 +76,63 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
         </ul>
       </div>
       <div id="BlocInfo">
+
+      <?php 
+      //le profil c'est celui qui est visité  $user
+      //l'utilisateur c'est celui qui visite : $_SESSION['pseudo]
+      //$utilisateurEnLigne c'est la ligne du fichier de la forme $user§visiteur1|nbvisites§visteur2|nbvisites...
+
+        $contentBis = file_get_contents("../register/data/matchs.txt");
+        $utilisateurEnLigne = explode("\r\n",$contentBis);
+        $profilTrouve = false;
+        $a = 0;
+        //on cherche dans le fichier si l'utilisateurenligne y est
+        while (($a < count($utilisateurEnLigne)-1) && !$profilTrouve) {
+          //on met les diférents noms de visiteurs ainsi que leur nombre de visites dans des cases
+          $detailUtilisateur = explode("§",$utilisateurEnLigne[$a]);
+          //trim permet de supprimer les espaces en début et en fin de chaîne -- Louve adooooooooore cette fonction <3 
+          if (trim($detailUtilisateur[0]) == trim($user)) {
+            print_r($detailUtilisateur);
+            //on initialise les variables
+            $profilTrouve = true;
+            $i=1;
+            $visiteurTrouve = false;
+            //on regarde si le profil sélectionné à déjà été vu par l'utilisateur
+            while(($i <= count($detailUtilisateur)-1) && !$visiteurTrouve) { 
+              //strpos retourne l'index de la valeur recherchée ou "false" si elle n'apparait pas dans la chaîne 
+              //si c'est le cas alors on incrémente le nombre de visites
+              if (strpos(trim($detailUtilisateur[$i]),trim($_SESSION["pseudo"])) !== false) {
+                //on sépare les données de l'utilisateur 
+                $sousDetails = explode("|",$detailUtilisateur[$i]); 
+                //intval permet de retourner la valeur en "int" d'une chaine de caractères
+                $sousDetails[1] = intval($sousDetails[1])+1; //on incrémente
+                //implode concatenne les cases d'un tableau avec comme séparateur ce qu'il y a entre les guillemets
+                //on rassemble le tableau en chaine de caractere
+                $detailUtilisateur[$i] = implode("|",$sousDetails);
+                //on arrête la recherche
+                $visiteurTrouve = true;
+              }
+              $i++;
+            } 
+             //on rassemble ici aussi
+             $tmpUtilisateurEnLigne = implode("§",$detailUtilisateur);
+             //si l'utilisateur n'as jamais visité le profil alors on l'ajoute
+            if (!$visiteurTrouve) {
+              $tmpUtilisateurEnLigne = trim($tmpUtilisateurEnLigne) . "§" . trim($_SESSION["pseudo"]) . "|1";
+            }
+            if ($profilTrouve) {
+              //str_replace cherche ca $utilisateurEnLigne[$a] dans $contentBis et le remplace pas $tmpUtilisateurEnLigne
+              echo "#" . $tmpUtilisateurEnLigne . "# == #" . $utilisateurEnLigne[$a] . "# <br>";
+              $contentBis = str_replace(trim($utilisateurEnLigne[$a]),$tmpUtilisateurEnLigne,$contentBis);
+            //on met le contenu dans le fichier
+              file_put_contents("../register/data/matchs.txt",$contentBis);
+            }
+          }
+          $a++; // on incrémente
+        }
+
+      ?>
+
         <h2>Informations Générales :</h2>
         <ul>
           <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
@@ -124,7 +185,7 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
   }
   //on passe à la ligne suivante
   $j++;
-}if(!$fin){echo("<h1>Une erreur s'est produite, ce profil n'existe pas.</h1>");}
+} if(!$fin){echo("<h1>Une erreur s'est produite, ce profil n'existe pas.</h1>");}
 }else{
   echo("Une erreur s'est produite, ce profil n'existe pas.");
 }
