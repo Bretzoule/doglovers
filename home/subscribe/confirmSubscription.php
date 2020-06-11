@@ -1,6 +1,11 @@
 <?php 
     session_start();
-    
+
+    function phpAlert($msg)
+    {
+      echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+    }
+
     function subAdd(string $toAdd, string $memberType):string
     {
         $tmp = explode(':',$memberType);
@@ -8,7 +13,8 @@
         $currentDate -> add(new DateInterval($toAdd));
         $tmp[0] = "member";
         $tmp[1] = $currentDate->format('Y-m-d');
-        return(implode(":", $tmp));
+        $data = implode(":", $tmp);
+        return($data);
     }
 
     function addSubscription(string $toAdd)
@@ -20,10 +26,11 @@
                 while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
                     $userData = explode("§", $line); // séparation des données de la ligne utilisateur
                     //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
-                    if ((trim($_SESSION["Pseudo"]) == trim($userData[0]))) { // si le pseudo correspond a un pseudo  en bdd alors 
+                    if ((trim($_SESSION["pseudo"]) == trim($userData[0]))) { // si le pseudo correspond a un pseudo  en bdd alors 
                         $contents = file_get_contents($path); // récupération des données du fichier 
                         $userData[sizeof($userData)-6] = subAdd($toAdd,$userData[sizeof($userData)-6]); // mise à jour de l'abonnement
-                        $contents = str_replace($line,$userData . "\r\n",$contents);  // ajout de la ligne dans les données
+                        $userData = implode("§",$userData);
+                        $contents = str_replace($line, $userData,$contents);  // ajout de la ligne dans les données
                         file_put_contents($path, $contents); // ajout des données au fichier
                         $lastvalue = false;
                     }
@@ -34,24 +41,28 @@
             }
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && ($_SESSION["login_Type"] > 0)) {
     $typeAbo = $_GET["abonnement"];
     switch ($typeAbo) {
         case '48h':
             addSubscription("P2D");
             $_SESSION["erreurAbo"] = "Merci d'avoir renouvelé votre abonnement de 48h!";
+            $_SESSION["login_Type"] = 2;
             break;
         case '1mo':
             addSubscription("P1M");
             $_SESSION["erreurAbo"] = "Merci d'avoir renouvelé votre abonnement de 1 mois!";
+            $_SESSION["login_Type"] = 2;
             break;
         case '6mo':
             addSubscription("P6M");
             $_SESSION["erreurAbo"] = "Merci d'avoir renouvelé votre abonnement de 6 mois!";
+            $_SESSION["login_Type"] = 2;
             break;
         // case 'cancel':
         //     removeSub();
         // $_SESSION["erreurAbo"] = "Vous avez bien annulé votre abonnement !";
+        // $_SESSION["login_Type"] = 1;
         //     break;
         default:
             $_SESSION["erreurAbo"] = "Erreur lors de la gestion de l'abonnement";
