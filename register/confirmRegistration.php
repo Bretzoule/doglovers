@@ -36,6 +36,8 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
       . "§" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "\r\n";
     //on écrit ce que contient la variable dans le fichier nommé userList.txt
     //FILE_APPEND permet d'écrire à la suite du fichier
+    $contentBis = $_SESSION["pseudo"]."\r\n";
+    file_put_contents('./data/matchs.txt', $contentBis, FILE_APPEND);
     file_put_contents('./data/userList.txt', $content, FILE_APPEND);
     // remove all session variables
     session_unset();
