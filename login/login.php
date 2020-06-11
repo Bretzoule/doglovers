@@ -88,7 +88,7 @@ if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success") { ?>
                 <form accept-charset="UTF-8" action="./verificationConnexion.php" method="post">
                   <input name="pseudo" type="text" pattern="[^\s§]+" value="" placeholder="Pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
                   <input name="password" type="password" pattern="[^\s§]+" value="" placeholder="Mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /><br>
-                  <a id="goublie" title="Mot de passe oublié" href="./resetPw/resetpassword.php">J'ai oublié mon mot de passe.</a> <br>
+                  <a id="goublie" title="Mot de passe oublié" href="./resetPw/resetPassword.php">J'ai oublié mon mot de passe.</a> <br>
                   <input type="submit" id="buttonSignin" value="Se connecter"></input>
                 </form>
 
