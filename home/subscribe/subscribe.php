@@ -58,7 +58,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             echo "votre type d'abonnement en cours.";
           // } else {
           //   echo ' <a href="./confirmSubscription?abonnement=cancel"><input type="button" value="Se désabonner !"></a>';
-          // }
+           }
           ?> </span> <br>
         <span id="titreInfo"> Abonné </span> <br>
         <span> <?php if ($_SESSION["login_Type"] > 2) {
@@ -67,11 +67,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                 } else { ?>
                   <input type="button" value="Consulter les formules d'abonnement !" onclick ="displaySubMode()"> <br>
                   <div id="listeabonnements">
-                  <a href="./confirmSubscription?abonnement=48h"><input type="button" value="S'abonner pour 48hrs !"></a> 
+                  <a href="./confirmSubscription.php?abonnement=48h"><input type="button" value="S'abonner pour 48hrs !"></a>
                   <span>Au prix réduit de 0.99€ !</span> <br> 
-                  <a href="./confirmSubscription?abonnement=1mo"><input type="button" value="S'abonner pour 1 mois !"></a>
+                  <a href="./confirmSubscription.php?abonnement=1mo"><input type="button" value="S'abonner pour 1 mois !"></a>
                   <span>Au prix de 6.99€ !</span> <br>
-                  <a href="./confirmSubscription?abonnement=6mo"><input type="button" value="S'abonner pour 6 mois !"></a> 
+                  <a href="./confirmSubscription.php?abonnement=6mo"><input type="button" value="S'abonner pour 6 mois !"></a>
                   <span>Au prix de 29.99€ (soit 4.99 par mois) !</span> <br>
                   </div>
                 <?php }
