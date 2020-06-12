@@ -185,8 +185,8 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
     $donneeBis[$i] = explode("|",$donnee[$i]);
     $i++;
     }
-
 }
+$j++;
 }
 /*$content =  $_SESSION['pseudo']
   . "§" . $_SESSION['LieuRes']
@@ -206,8 +206,8 @@ while (($j<count($nbrUser)-1)&&(!$fin)){
 //  file_put_contents('./data/userList.txt', $content, FILE_APPEND);
 ?>
 <script>//en rapport avec les box à cocher
-  updateCheckBoxOnload('enfants', 'nbEnfants');
-  updateCheckBoxOnload('chiens', 'nbChiens');
+/*  updateCheckBoxOnload('enfants', 'nbEnfants');
+  updateCheckBoxOnload('chiens', 'nbChiens');*/
 </script>
 
 </body>
