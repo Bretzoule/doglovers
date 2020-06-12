@@ -92,7 +92,6 @@ while (($j<count($nbrUser)-1)&&(!$fin)) {
           $detailUtilisateur = explode("§",$utilisateurEnLigne[$a]);
           //trim permet de supprimer les espaces en début et en fin de chaîne -- Louve adooooooooore cette fonction <3 
           if (trim($detailUtilisateur[0]) == trim($user)) {
-            print_r($detailUtilisateur);
             //on initialise les variables
             $profilTrouve = true;
             $i=1;
@@ -122,7 +121,6 @@ while (($j<count($nbrUser)-1)&&(!$fin)) {
             }
             if ($profilTrouve) {
               //str_replace cherche ca $utilisateurEnLigne[$a] dans $contentBis et le remplace pas $tmpUtilisateurEnLigne
-              echo "#" . $tmpUtilisateurEnLigne . "# == #" . $utilisateurEnLigne[$a] . "# <br>";
               $contentBis = str_replace(trim($utilisateurEnLigne[$a]),$tmpUtilisateurEnLigne,$contentBis);
             //on met le contenu dans le fichier
               file_put_contents("../register/data/matchs.txt",$contentBis);
