@@ -192,9 +192,9 @@ ou jusqu'à la fin du tableau*/
               <ul>
                 <?php if (afficher($donneeBis, 7, 0)) { ?>
                   <li>Message d'accueil : <?php echo ($donnee[7]);?></li>
-                  <?php} if (afficher($donneeBis,8,0)){ ?>
+                  <?php } if (afficher($donneeBis,8,0)){ ?>
                   <li>Citation : <?php echo ($donnee[8]);?></li>
-                  <?php} if (afficher($donneeBis,9,0)){ ?>
+                  <?php } if (afficher($donneeBis,9,0)){ ?>
                   <li>Interets : <?php echo ($donnee[9]);?></li>
                 <?php }
                 if ($donnee[10] == "on") { ?>
