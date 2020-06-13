@@ -1,55 +1,73 @@
 <?php
-/*
-    $path = "./../../register/data/userList.txt"; // chemin fichier utilisateur
+    session_start();
+    function phpAlert($msg)
+{
+  echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+
+    function remplacementData(array $userData, string $nbrEnfants, $nbrDoggos, $infosChiens):array
+    {
+      $userData[1] = $_SESSION["lieuRes"];
+      $userData[2] = $_SESSION["sexe"];
+      $userData[4] = $_SESSION["profession"];
+      $userData[5] = $_SESSION["situation"] . "|" . $nbrEnfants;
+      $userData[6] = $_SESSION['poids'] . "|" . $_SESSION['taille'] . "|" . $_SESSION['couleurCheveux'] . "|" . $_SESSION['couleurYeux'];
+      $userData[7] = $_SESSION['msgAcc'] ;
+      $userData[8] = $_SESSION['citation'];
+      $userData[9] = $_SESSION['interets'] ;
+      $userData[10] = $_SESSION['fumeur'];
+      $userData[11] = $nbrDoggos . "|" . $infosChiens;
+      $userData[16] = $_SESSION['nom'] . "|" . $_SESSION['prenom'];
+      return $userData;
+    }
+
+if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
+    if ($_SESSION['enfants'] == "on") {
+      $nbrEnfants = $_SESSION['nombreEnf'];
+      unset($_SESSION['enfants']);
+    } else {
+      $nbrEnfants = "0";
+    }
+    if ($_SESSION['chiens'] == "on") {
+      unset($_SESSION['chiens']);
+      $nbrDoggos = $_SESSION['nbDoggos'];
+      $infosChiens = $_SESSION['infoschiens'];
+    } else {
+      $nbrDoggos = "0";
+      $infosChiens = "";
+    }
+    $lastvalue = true;
+    $path = "./../register/data/userList.txt"; // chemin fichier utilisateur
     $file = fopen($path, 'r'); // ouverture du fichier
     if ($file) { // si le fichier est bien ouvert alors
-        $lastvalue = true;
+        
         while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
             $userData = explode("§", $line); // séparation des données de la ligne utilisateur
+            if ((password_verify(trim($_SESSION["password"]), trim($userData[sizeof($userData) - 1])) && (trim($_SESSION["Pseudo"]) == trim($userData[0])))) {
             //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
-          $contents = file_get_contents($path);
-                $userData[sizeof($userData)-1] = password_hash($_SESSION['Newpassword'],PASSWORD_DEFAULT);
+                $contents = file_get_contents($path);
+                $userData = remplacementData($userData, $nbrEnfants, $nbrDoggos, $infosChiens);
                 $userData = implode("§",$userData);
-                $contents = str_replace($line,$userData . "\r\n",$contents);
+                $contents = str_replace($line,$userData,$contents);
                 file_put_contents($path, $contents);
                 $lastvalue = false;
+            }
         }
-        fclose($file);*/
-        ?>
-        <?php
-        //on récupère les contenus des fichiers prof et élèves
-        $contenu_du_fichierUserList = file_get_contents('../register/data/userList.txt');
-        //on met chaque ligne dans un tableau
-        $nbrUser = explode("\n", $contenu_du_fichierUserList);
-        $j = 0;
-        $i = 0;
-        $fin = false;
-        while (($j < count($nbrUser) - 1) && (!$fin)) {
-          /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
-      récupérer les différentes données présentes dans chaque ligne*/
-          $donnee = explode("§", $nbrUser[$j]);
-          /*on regarde si l'identifiant dans la ligne en cour est le bon ainsi que le mdp*/
-          if ($donnee[0] == $_SESSION['pseudo']) {
-            /*si c'est le cas on passe fin a true pour arréter la recherche*/
-            $fin = true;
-            //on cherche dans le fichier si l'utilisateur en ligne y est
-            $content =  $_POST['pseudo']
-          . "§" . $_SESSION['LieuRes']
-          . "§" . $_SESSION['Sexe'] . "§" . $_SESSION['DateNaissance'] . "§" . $_SESSION['Profession']
-          . "§" . $_SESSION['Situation'] . "|" . $nbrEnfants
-          . "§" . $_SESSION['poids'] . "|" . $_SESSION['taille'] . "|" . $_SESSION['couleurCheveux'] . "|" . $_SESSION['couleurYeux']
-          . "§" . $_SESSION['MsgAcc'] . "§" . $_SESSION['citation'] . "§" . $_SESSION['interets'] . "§" . $_SESSION['fumeur']
-          . "§" . $nbrDoggos . "|" . $infosChiens
-          . "§" . $_SESSION['photos']
-          . "§" . "free" // [sizeof(userData)-6]
-          . "§" . date("Y-m-d")
-          . "§" . uniqid($prefix = "user_")
-          . "§" . $_POST['nom'] . "|" . $_SESSION['prenom']
-          . "§" . $_SESSION['adresse']
-          . "§" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "\r\n";
-$contents = str_replace($donnee,$userData . "\r\n",$content);
-              file_put_contents('./data/userList.txt', $contents);
-          }
-          $j++;
+        fclose($file);
+      } else {
+        phpAlert("Une erreur s'est produite lors de l'ouverture de la base de données.");
+      }
+      unset($_SESSION["lieuRes"]);unset($_SESSION["sexe"]);unset($_SESSION["situation"]);unset($_SESSION["poids"]);
+        unset($_SESSION["taille"]);unset($_SESSION["couleurCheveux"]);unset($_SESSION["couleurYeux"]);unset($_SESSION["msgAcc"]);
+        unset($_SESSION["citation"]);unset($_SESSION["interets"]);unset($_SESSION["fumeur"]);unset($_SESSION["nom"]);unset($_SESSION["prenom"]);
+        unset($_SESSION["dataPassed"]);unset($_SESSION["password"]);
+        if ($lastvalue) {
+         $_SESSION["erreur"] = "Mot de passe incorrect.";
+        } else {
+          $_SESSION["modifie"] = "Données modifiées avec succès.";
         }
-        ?>
+        header("Location: /profil/MonProfil.php");
+    } else {
+        header("Location: /errors/erreur403.php");
+    }
+?>

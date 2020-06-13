@@ -187,7 +187,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         $_SESSION["msgAcc"] = test_input($_POST["msgAcc"]);
         if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["msgAcc"])) {
           $erreurMsgAcc = "Le message d'accueil est invalide.";
-          !$msgAccFilled;
+          $msgAccFilled = false;
         }
       }
 
@@ -286,16 +286,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
             <h3>Informations générales :</h3>
             <label for="nom">Nom</label><br>
-            <input name="nom" type="text" pattern="[^§]+" value="<?php echo $_SESSION['Nom'] ?>" placeholder="<?php echo $_SESSION['Nom'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurNom; ?> </span><br>
+            <input name="nom" type="text" pattern="[^§]+" value="<?php echo $_SESSION['nom'] ?>" placeholder="<?php echo $_SESSION['nom'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurNom; ?> </span><br>
 
             <label for="prenom">Prénom</label><br>
-            <input name="prenom" pattern="[^§]+" type="text" value="<?php echo $_SESSION['Prénom'] ?>" placeholder="<?php echo $_SESSION['Prénom'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurPrenom; ?> </span><br>
+            <input name="prenom" pattern="[^§]+" type="text" value="<?php echo $_SESSION['prenom'] ?>" placeholder="<?php echo $_SESSION['prenom'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurPrenom; ?> </span><br>
 
             <label for="adresse">Adresse Mail, cette information sera privée.</label><br>
-            <input name="adresse" pattern="[^§]+" type="text" value="<?php echo $_SESSION['Adresse'] ?>" placeholder="<?php echo $_SESSION['Adresse'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurAdresse; ?> </span><br>
+            <input name="adresse" pattern="[^§]+" type="text" value="<?php echo $_SESSION['adresse'] ?>" placeholder="<?php echo $_SESSION['adresse'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurAdresse; ?> </span><br>
 
             <label for="lieures">Lieu de résidence, cette adresse sera publique.</label><br>
-            <input name="lieures" pattern="[^§]+" type="text" value="<?php echo $_SESSION['LieuRes'] ?>" placeholder="<?php echo $_SESSION['LieuRes'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurLieuRes; ?> <br>
+            <input name="lieures" pattern="[^§]+" type="text" value="<?php echo $_SESSION['lieuRes'] ?>" placeholder="<?php echo $_SESSION['lieuRes'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurLieuRes; ?> <br>
 
             <label for="sexe">Sexe</label><br>
             <label><input checked="checked" name="sexe" type="radio" id="Homme" value="Homme" /> Homme </label>
@@ -304,7 +304,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <?php echo $erreurSexe; ?> <br>
 
             <br><label for="profession">Profession</label> <br>
-            <input name="profession" pattern="[^§]+" type="text" value="<?php echo $_SESSION['Profession'] ?>" placeholder="<?php echo $_SESSION['Profession'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurProfession; ?> <br>
+            <input name="profession" pattern="[^§]+" type="text" value="<?php echo $_SESSION['profession'] ?>" placeholder="<?php echo $_SESSION['profession'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurProfession; ?> <br>
 
             <label for="situation">Situation amoureuse</label> <span>* <?php echo $erreurSituation ?> </span><br>
             <label><input checked="checked" name="situation" type="radio" value="Célibataire" id="Célibataire" required /> Célibataire</label> /
@@ -330,10 +330,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <h3>Informations physique :</h3>
 
             <label for="poids">Poids</label><br>
-            <label><input type="number" name="poids" id="poids" min="0" value="<?php echo $_SESSION["Poids"] ?>" placeholder="<?php echo $_SESSION["Poids"] ?>" required>kg</label> <span>* <?php echo $erreurPoids; ?> </span><br>
+            <label><input type="number" name="poids" id="poids" min="0" value="<?php echo $_SESSION["poids"] ?>" placeholder="<?php echo $_SESSION["poids"] ?>" required>kg</label> <span>* <?php echo $erreurPoids; ?> </span><br>
 
             <label for="poids">Taille</label><br>
-            <label><input type="number" name="taille" id="taille" min="0" value="<?php echo $_SESSION["Taille"] ?>" placeholder="<?php echo $_SESSION["Taille"] ?>" required>cm</label> <span>* <?php echo $erreurTaille; ?> </span><br>
+            <label><input type="number" name="taille" id="taille" min="0" value="<?php echo $_SESSION["taille"] ?>" placeholder="<?php echo $_SESSION["taille"] ?>" required>cm</label> <span>* <?php echo $erreurTaille; ?> </span><br>
 
             <label for="couleurCheveux">Couleur de vos cheveux</label> <span>* <?php echo $erreurCouleurCheveux; ?> </span> <br>
             <select name="couleurCheveux" id="couleurCheveux">
@@ -374,13 +374,13 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <h3>Informations profil :</h3>
 
             <label for="msgAcc">Message d'accueil</label><br>
-            <input name="msgAcc" pattern="[^§]+" type="text" value="<?php  if(isset($_SESSION['MsgAcc'])) echo $_SESSION['MsgAcc']; ?>" placeholder="<?php  if(isset($_SESSION['MsgAcc'])) echo $_SESSION['MsgAcc']; ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurMsgAcc; ?> <br>
+            <input name="msgAcc" pattern="[^§]+" type="text" value="<?php  if(isset($_SESSION['msgAcc'])) echo $_SESSION['msgAcc']; ?>" placeholder="<?php  if(isset($_SESSION['msgAcc'])) echo $_SESSION['msgAcc']; ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurMsgAcc; ?> <br>
 
             <label for="citation">Citation</label><br>
-            <input name="citation" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['Citation'])) echo $_SESSION['Citation'];?>" placeholder="<?php if(isset($_SESSION['Citation'])) echo $_SESSION['Citation'];?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurCitation; ?> <br>
+            <input name="citation" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['citation'])) echo $_SESSION['citation'];?>" placeholder="<?php if(isset($_SESSION['citation'])) echo $_SESSION['citation'];?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurCitation; ?> <br>
 
             <label for="interets">Interets</label><br>
-            <input name="interets" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['Interets'])) echo $_SESSION['Interets']; ?>" placeholder="<?php if(isset($_SESSION['Interets'])) echo $_SESSION['Interets']; ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurInterets; ?> <br>
+            <input name="interets" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['interets'])) echo $_SESSION['interets']; ?>" placeholder="<?php if(isset($_SESSION['interets'])) echo $_SESSION['interets']; ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurInterets; ?> <br>
             <label><input type="checkbox" name="fumeur" id="fumeur" <?php if (isset($_SESSION['fumeur'])) echo "checked='checked'"; ?>>Fumeur ?</label><br>
             <label><input name="chiens" id="chiens" type="checkbox" onclick="changeVisibility('nbChiens')" <?php if (isset($_SESSION['chiens'])) echo "checked='checked'"; ?> /> Je possède un ami à 4 pattes !</label><br>
             <div id="nbChiens"> <span>* <?php echo $erreurNbDoggos; ?> </span>
@@ -389,7 +389,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                 <option <?php if (isset($_SESSION['nbDoggos']) && ($_SESSION['nbDoggos'] == '2')) { ?>selected="true" <?php }; ?> value="2">2 Chiens</option>
                 <option <?php if (isset($_SESSION['nbDoggos']) && ($_SESSION['nbDoggos'] == '3+')) { ?>selected="true" <?php }; ?> value="3+">3 Chiens ou plus</option>
               </select>
-              <input name="infoschiens" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['InfosChiens'])) echo $_SESSION['InfosChiens'] ?>" placeholder="<?php if(isset($_SESSION['InfosChiens'])) echo $_SESSION['InfosChiens'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <br> <?php echo $erreurInfoschiens; ?> <br>
+              <input name="infoschiens" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['infosChiens'])) echo $_SESSION['infosChiens'] ?>" placeholder="<?php if(isset($_SESSION['infosChiens'])) echo $_SESSION['infosChiens'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <br> <?php echo $erreurInfoschiens; ?> <br>
             </div>
           </div>
           <!--fin bloc informations profil-->
@@ -413,11 +413,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           </div>
           <!--fin partie boutons-->
           <?php
-          if (isset($_SESSION["erreur"]) && ($_SESSION["erreur"] == "login_existant")) {
+          if (isset($_SESSION["erreur"])) {
             $_SESSION["dataPassed"] = "false";
-            echo '<span id="loginError"> Utilisateur déjà enregistré ( Mail ou Pseudo déjà utilisé...)</span>';
+            echo '<span id="loginError">'. $_SESSION["erreur"] . '</span>';
             unset($_SESSION["erreur"]);
-          }
+            }
           ?>
         </div>
         <!--fin float right-->

@@ -55,6 +55,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     } else {
       echo "<div> Si vous étiez abonné(e), vous pourriez voir qui visite votre profil !</div>";
     }
+    if (isset($_SESSION["modifie"])) {
+      $_SESSION["dataPassed"] = "false";
+      echo '<span>'. $_SESSION["modifie"] . '</span>';
+      unset($_SESSION["modifie"]);
+    }
     ?>
     <?php
     function afficher($donneeBis, $i, $j)
@@ -123,21 +128,21 @@ ou jusqu'à la fin du tableau*/
                             $_SESSION["Pseudo"] = $donnee[0] ?></li>
               <?php if (afficher($donneeBis, 1, 0)) { ?>
                 <li>Lieu de résidence : <?php echo ($donnee[1]);
-                                        $_SESSION["LieuRes"] = $donnee[1]; ?></li>
+                                        $_SESSION["lieuRes"] = $donnee[1]; ?></li>
               <?php } ?>
               <li>Sexe : <?php echo ($donnee[2]);
-                          $_SESSION["Sexe"] = $donnee[2]; ?></li>
-              <li>Date de naissance : <?php echo ($donnee[3]);
-                                      $_SESSION["DateNaissance"] = $donnee[3]; ?></li>
+                          $_SESSION["sexe"] = $donnee[2]; ?></li>
+              <li>Date de naissance : <?php echo ($donnee[3]); ?></li>
               <?php if (afficher($donneeBis, 4, 0)) { ?>
                 <li>Profession : <?php echo ($donnee[4]);
-                                  $_SESSION["Profession"] = $donnee[4]; ?></li>
+                                  $_SESSION["profession"] = $donnee[4]; ?></li>
               <?php } ?>
               <li>Situation amoureuse : <?php echo ($donneeBis[5][0]);
-                                        $_SESSION["Situation"] = $donneeBis[5][0]; ?></li>
+                                        $_SESSION["situation"] = $donneeBis[5][0]; ?></li>
               <?php if (($donneeBis[5][1] == "1") || ($donneeBis[5][1] == "2") || ($donneeBis[5][1] == "3-5") || ($donneeBis[5][1] == "5+")) { ?>
                 <li>Nombre d'enfants : <?php echo ($donneeBis[5][1]);
-                                        $_SESSION["NbrEnfants"] = $donneeBis[5][1]; ?></li>
+                                        $_SESSION["enfants"] = "on";
+                                        $_SESSION["nombreEnf"] = $donneeBis[5][1]; ?></li>
               <?php } ?>
             </ul>
           </div>
@@ -145,13 +150,13 @@ ou jusqu'à la fin du tableau*/
             <h2>Informations physiques :</h2>
             <ul>
               <li>Poids : <?php echo ($donneeBis[6][0]);
-                          $_SESSION["Poids"] = $donneeBis[6][0]; ?> kg</li>
+                          $_SESSION["poids"] = $donneeBis[6][0]; ?> kg</li>
               <li>Taille : <?php echo ($donneeBis[6][1]);
-                            $_SESSION["Taille"] = $donneeBis[6][1]; ?> cm</li>
+                            $_SESSION["taille"] = $donneeBis[6][1]; ?> cm</li>
               <li>Couleur des cheveux : <?php echo ($donneeBis[6][2]);
-                                        $_SESSION["CouleurCheveux"] = $donneeBis[6][2]; ?></li>
+                                        $_SESSION["couleurCheveux"] = $donneeBis[6][2]; ?></li>
               <li>Couleur des yeux : <?php echo ($donneeBis[6][3]);
-                                      $_SESSION["CouleurYeux"] = $donneeBis[6][3]; ?></li>
+                                      $_SESSION["couleurYeux"] = $donneeBis[6][3]; ?></li>
             </ul>
           </div>
           <div id="BlocInfo">
@@ -159,23 +164,25 @@ ou jusqu'à la fin du tableau*/
             <ul>
               <?php if (afficher($donneeBis, 7, 0)) { ?>
                 <li>Message d'accueil : <?php echo ($donnee[7]);
-                                        $_SESSION["MsgAcc"] = $donnee[7]; ?></li>
-                <?php} if (afficher($donneeBis,8,0)){ ?>
+                                        $_SESSION["msgAcc"] = $donnee[7]; ?></li>
+                <?php } if (afficher($donneeBis,8,0)) { ?>
                 <li>Citation : <?php echo ($donnee[8]);
-                                $_SESSION["Citation"] = $donnee[8]; ?></li>
-                <?php} if (afficher($donneeBis,9,0)){ ?>
+                                $_SESSION["citation"] = $donnee[8]; ?></li>
+                <?php } if (afficher($donneeBis,9,0)){ ?>
                 <li>Interets : <?php echo ($donnee[9]);
-                                $_SESSION["Interets"] = $donnee[9]; ?></li>
+                                $_SESSION["interets"] = $donnee[9]; ?></li>
               <?php }
               if ($donnee[10] == "on") { ?>
                 <li>Fumeur ? : <?php echo ("oui");
-                                $_SESSION["Fumeur"] = $donnee[10]; ?></li>
+                                $_SESSION["fumeur"] = $donnee[10]; ?></li>
               <?php }
               if (($donnee[11][0] == "1") || ($donnee[11][0] == "2") || ($donnee[11][0] == "3+")) { ?>
                 <li>Nombre de chiens : <?php echo ($donneeBis[11][0]);
-                                        $_SESSION["NombreChiens"] = $donneeBis[11][0]; ?></li>
+                                        $_SESSION["chiens"] = "on";
+                                        $_SESSION["nombreChiens"] = $donneeBis[11][0]; ?></li>
+                                        <?php } if (afficher($donneeBis,11,1)){ ?>
                 <li>Infos chiens : <?php echo ($donneeBis[11][1]);
-                                    $_SESSION["InfosChiens"] = $donneeBis[11][1]; ?></li>
+                                    $_SESSION["infosChiens"] = $donneeBis[11][1]; ?></li>
               <?php } ?>
 
             </ul>
@@ -187,11 +194,11 @@ ou jusqu'à la fin du tableau*/
               <h2>Informations privées</h2>
               <ul>
                 <li>Nom : <?php echo ($donneeBis[16][0]);
-                          $_SESSION["Nom"] = $donneeBis[16][0]; ?></li>
+                          $_SESSION["nom"] = $donneeBis[16][0]; ?></li>
                 <li>Prénom : <?php echo ($donneeBis[16][1]);
-                              $_SESSION["Prénom"] = $donneeBis[16][1]; ?></li>
+                              $_SESSION["prenom"] = $donneeBis[16][1]; ?></li>
                 <li>Adresse : <?php echo ($donnee[17]);
-                              $_SESSION["Adresse"] = $donnee[17]; ?></li>
+                              $_SESSION["adresse"] = $donnee[17]; ?></li>
               </ul>
             </div>
           </div>
