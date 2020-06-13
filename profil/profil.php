@@ -14,15 +14,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
   <body>
     <?php
-    function afficher($donneeBis, $i, $j)
-    {
-      if ($donneeBis[$i][$j] == "") {
-        $afficher = false;
-      } else {
-        $afficher = true;
-      }
-      return ($afficher);
-    }
+     function afficher($donneeBis, $i, $j)
+     {
+       if (!isset($donneeBis[$i][$j]) || ($donneeBis[$i][$j]) == "") {
+         $afficher = false;
+       } else {
+         $afficher = true;
+       }
+       return ($afficher);
+     }
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
       $user = $_GET["user"];
@@ -103,7 +103,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               $k++;
             }
             $contentBis = implode("\n", $utilisateurEnLigne);
-            echo $contentBis;
             // echo $a;
             // //str_replace cherche ca $utilisateurEnLigne[$a] dans $contentBis et le remplace pas $tmpUtilisateurEnLigne
             // echo "#" . $tmpUtilisateurEnLigne . "# == #" . $utilisateurEnLigne[$a] . "# <br>";
@@ -148,8 +147,15 @@ ou jusqu'à la fin du tableau*/
             <div id="BlocInfo">
               <h2>Photos !</h2>
               <ul>
-                <li>Photos : <img src="<?php echo ($donnee[12]); ?>"></img></li>
-              </ul>
+              <li><img src="<?php echo ($donneeBis[12][0]); ?>"></img></li>
+                <?php if (afficher($donneeBis, 12, 1)) { ?>
+              <li><img src="<?php echo ($donneeBis[12][1]); ?>"></img></li>
+            <?php }if (afficher($donneeBis, 12, 2)) { ?>
+              <li><img src="<?php echo ($donneeBis[12][2]); ?>"></img></li>
+            <?php }if (afficher($donneeBis, 12, 3)) { ?>
+              <li><img src="<?php echo ($donneeBis[12][3]); ?>"></img></li>
+            <?php } ?>
+            </ul>
             </div>
             <div id="BlocInfo">
               <h2>Informations Générales :</h2>
