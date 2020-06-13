@@ -72,12 +72,8 @@ if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success") { ?>
                   <?php
                   if((isset($_SESSION['error'])) && ($_SESSION['error']=='error')){
                     echo '<div id="loginError"> Identifiant ou mot de passe incorrect.</div>';
-                    session_unset();
-                    session_destroy();
                   } else if ((isset($_SESSION['logout'])) && ($_SESSION['logout']=='success')) {
                     echo '<div id="logoutSuccess">Déconnecté avec succès !</div>';
-                    session_unset();
-                    session_destroy();
                   }
                   ?>
                 </div><!--fin message d'erreur ou déconnexion-->
@@ -132,7 +128,10 @@ if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success") { ?>
   </body>
 
 </html>
+
 <?php 
+session_destroy();
+session_unset();
 } else {
   header('Location: ./../home/accueil.php');
 } ?>
