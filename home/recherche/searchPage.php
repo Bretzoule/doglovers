@@ -27,13 +27,18 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       </ul>
     </div>
     <div id="page">
-      <h2 id='titreTab'> Bonjour !</h2>
-      <div id="BlocInfo">
+
+      <div class="part_recherche">
         <span id="titreInfo">Recherche :</span><br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
           <!-- -->
           <input id="searchbar" name="recherche" type="text" value="<?php if (isset($_GET["recherche"])) { echo htmlspecialchars($_GET["recherche"]);} ?>" placeholder="(Recherche.....)" />
         </form>
+      </div>
+
+
+      <div id="BlocInfo">
+
       <?php
       $default = "/ressources/logo.png";
       function checkFumeur(string $field): string
@@ -86,7 +91,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             } else {
               phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
             }
-            $usercount = 0; // compteur pour le numéro de l'utilisateur dans la liste de recherche 
+            $usercount = 0; // compteur pour le numéro de l'utilisateur dans la liste de recherche
             foreach ($data as $utilisateur) {
               foreach ($elementsRecherche as $keyword) {
                 if (!empty($keyword)) {
@@ -95,7 +100,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                   while ($i < sizeof($utilisateur) && !$found && (strpos($response, $utilisateur[0]) === false)) { // permet de vérifier tout les données de l'utilisateur
                     if (stristr($utilisateur[$i], $keyword)) { // , tant que rien de cohérent n'a été trouvé et que l'utilisateur ne matche pas déjà avec un keyword
                       $link = (empty($photoArray[$usercount])) ? $default : $photoArray[$usercount];
-                      $response .= '<div><a href="/profil/profil.php?user=' . $utilisateur[0] . '"><img alt="image utilisateur" src="'. $link .'"></a><br>' . $utilisateur[0] .'</div>'; // ajoute l'utilisateur aux résultats 
+                      $response .= '<div class="divUtilisateur"><a href="/profil/profil.php?user=' . $utilisateur[0] . '"><img alt="image utilisateur" src="'. $link .'"></a><br>' . $utilisateur[0] .'</div>'; // ajoute l'utilisateur aux résultats
                       $found = true;
                     }
                     $i++;
