@@ -19,7 +19,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     </div>
     <!--Fin partie logo-->
 
-    <form accept-charset="UTF-8" action="profil.php" method="POST">
+    <form accept-charset="UTF-8" action="modificationBis.php" method="POST">
       <div class="page">
         <!--page-->
 
@@ -46,9 +46,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <label><input name="sexe" type="radio" value="Femme" id="Femme" /> Femme </label> <br>
             <label><input name="sexe" type="radio" value="Autre" id="Autre" /> Autre </label>
             <?php echo $erreurSexe; ?> <br>
-
-            <br><label for="birthday">Date de Naissance</label><br>
-            <input type="date" name="dateNaissance" value="<?php echo $_SESSION['DateNaissance'] ?>" placeholder="<?php echo $_SESSION['DateNaissance'] ?>" required> <span>* <?php echo $erreurDateNaissance; ?> </span><br>
 
             <br><label for="profession">Profession</label> <br>
             <input name="profession" pattern="[^§]+" type="text" value="<?php echo $_SESSION['Profession'] ?>" placeholder="<?php echo $_SESSION['Profession'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurProfession; ?> <br>
@@ -158,11 +155,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <!--bloc identifiants-->
             <h3>Identifiants :</h3>
 
-            <label for="pseudo">Pseudo</label><br>
-            <input disabled name="pseudo" type="text" pattern="[^\s§]+" value="<?php echo $_SESSION['pseudo'] ?>" placeholder="<?php echo $_SESSION['pseudo'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurPseudo; ?> </span><br>
-
             <label for="password">Mot de Passe</label><br>
-            <input disabled name="password" type="password" pattern="[^\s]+" value="" placeholder="******" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <span>* <?php echo '<span>' . $erreurPassword . '</span>'; ?><br>
+            <input  name="password" type="password" pattern="[^\s]+" value="" placeholder="******" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <span>* <?php echo '<span>' . $erreurPassword . '</span>'; ?><br>
           </div>
           <!--fin bloc identifiants-->
 
@@ -187,47 +181,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       <!--fin page-->
 
     </form>
-    <?php
-    //on récupère les contenus des fichiers prof et élèves
-    $contenu_du_fichierUserList = file_get_contents('../register/data/userList.txt');
-    //on met chaque ligne dans un tableau
-    $nbrUser = explode("\n", $contenu_du_fichierUserList);
-    $j = 0;
-    $i = 0;
-    $fin = false;
-    while (($j < count($nbrUser) - 1) && (!$fin)) {
-      /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
-  récupérer les différentes données présentes dans chaque ligne*/
-      $donnee = explode("§", $nbrUser[$j]);
-      /*on regarde si l'identifiant dans la ligne en cour est le bon ainsi que le mdp*/
-      if ($donnee[0] == $_SESSION['pseudo']) {
-        /*si c'est le cas on passe fin a true pour arréter la recherche*/
-        $fin = true;
-
-        while (($i < count($donnee) - 1)) {
-          $donneeBis[$i] = explode("|", $donnee[$i]);
-          $i++;
-        }
-      }
-      $j++;
-    }
-    /*$content =  $_SESSION['pseudo']
-  . "§" . $_SESSION['LieuRes']
-  . "§" . $_SESSION['Sexe'] . "§" . $_SESSION['DateNaissance'] . "§" . $_SESSION['Profession']
-  . "§" . $_SESSION['Situation'] . "|" . $nbrEnfants
-  . "§" . $_SESSION['poids'] . "|" . $_SESSION['taille'] . "|" . $_SESSION['couleurCheveux'] . "|" . $_SESSION['couleurYeux']
-  . "§" . $_SESSION['MsgAcc'] . "§" . $_SESSION['citation'] . "§" . $_SESSION['interets'] . "§" . $_SESSION['fumeur']
-  . "§" . $nbrDoggos . "|" . $infosChiens
-  . "§" . $_SESSION['photos']
-  . "§" . "free" // [sizeof(userData)-6]
-  . "§" . date("Y-m-d")
-  . "§" . uniqid($prefix = "user_")
-  . "§" . $_SESSION['nom'] . "|" . $_SESSION['prenom']
-  . "§" . $_SESSION['adresse']
-  . "§" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "\r\n";*/
-
-    //  file_put_contents('./data/userList.txt', $content, FILE_APPEND);
-    ?>
     <script>
       //en rapport avec les box à cocher
       updateCheckBoxOnload('enfants', 'nbEnfants');

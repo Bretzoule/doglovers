@@ -22,7 +22,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       <ul>
         <li><a href="../home/accueil.php">Accueil</a></li>
         <li><a class="active" href="">Infos Publiques</a></li>
-        <li><a href="./infosPrivees.php">Infos Privées</a></li>
         <li><a href="./modification.php">Modifier mon profil</a></li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
       </ul>
@@ -37,7 +36,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     while (($a < count($utilisateurEnLigne) - 1) && !$profilTrouve) {
       //on met les diférents noms de visiteurs ainsi que leur nombre de visites dans des cases
       $detailUtilisateur = explode("§", $utilisateurEnLigne[$a]);
-      //trim permet de supprimer les espaces en début et en fin de chaîne -- Louve adooooooooore cette fonction <3 
+      //trim permet de supprimer les espaces en début et en fin de chaîne -- Louve adooooooooore cette fonction <3
       if (trim($detailUtilisateur[0]) == trim($_SESSION['pseudo'])) {
         //on initialise les variables
         $profilTrouve = true;
@@ -98,7 +97,14 @@ ou jusqu'à la fin du tableau*/
           <div id="BlocInfo">
             <h2>Photos !</h2>
             <ul>
-              <li>Photos : <img src="<?php echo ($donnee[12]); ?>"></img></li>
+              <li><img src="<?php echo ($donneeBis[12][0]); ?>"></img></li>
+                <?php if (afficher($donneeBis, 12, 1)) { ?>
+              <li><img src="<?php echo ($donneeBis[12][1]); ?>"></img></li>
+            <?php }if (afficher($donneeBis, 12, 2)) { ?>
+              <li><img src="<?php echo ($donneeBis[12][2]); ?>"></img></li>
+            <?php }if (afficher($donneeBis, 12, 3)) { ?>
+              <li><img src="<?php echo ($donneeBis[12][3]); ?>"></img></li>
+            <?php } ?>
             </ul>
             <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span>
             <input type="file" id="photos" name="photos" placeholder="Ajouter une photo" accept="image/png, image/jpeg" multiple />
@@ -167,9 +173,24 @@ ou jusqu'à la fin du tableau*/
                 <li>Infos chiens : <?php echo ($donneeBis[11][1]);
                                     $_SESSION["InfosChiens"] = $donneeBis[11][1]; ?></li>
               <?php } ?>
+
             </ul>
           </div>
-        </div>
+          </div>
+              <br>
+          <div id="Infos">
+            <div id="BlocInfo">
+              <h2>Informations privées</h2>
+              <ul>
+                <li>Nom : <?php echo ($donneeBis[16][0]);
+                          $_SESSION["Nom"] = $donneeBis[16][0]; ?></li>
+                <li>Prénom : <?php echo ($donneeBis[16][1]);
+                              $_SESSION["Prénom"] = $donneeBis[16][1]; ?></li>
+                <li>Adresse : <?php echo ($donnee[17]);
+                              $_SESSION["Adresse"] = $donnee[17]; ?></li>
+              </ul>
+            </div>
+          </div>
 
     <?php
       }
