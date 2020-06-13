@@ -59,7 +59,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <?php
     function afficher($donneeBis, $i, $j)
     {
-      if ($donneeBis[$i][$j] == "") {
+      if (!isset($donneeBis[$i][$j]) || ($donneeBis[$i][$j]) == "") {
         $afficher = false;
       } else {
         $afficher = true;
