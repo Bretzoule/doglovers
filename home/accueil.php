@@ -62,6 +62,13 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       <h2 id='titreTab'> Bonjour !</h2>
       <div id="BlocInfo">
         <span id="titreInfo">Hey hey hey hey hey</span> <br>
+        <?php 
+        if (isset($_SESSION["memberShipExpired"]) && ($_SESSION["memberShipExpired"] == "true")) {
+          echo "<span id='memberShipExpired'> Votre abonnement à expiré, pour vous réabonner, cliquez ici : </span>";
+          echo "<br> <a href='/home/subscribe/subscribe.php'><input type='button' value='Se réabonner !'></a>";
+          unset($_SESSION["memberShipExpired"]);
+        }
+        ?>
       </div>
     </div>
   </body>
