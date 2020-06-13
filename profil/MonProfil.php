@@ -28,30 +28,34 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       </ul>
     </div>
     <?php
-    $contenu_du_fichierVisiteurs = file_get_contents('../register/data/matchs.txt');
-    $utilisateurEnLigne = explode("\n", $contenu_du_fichierVisiteurs);
-    $profilTrouve = false;
-    $informationsVisiteurs = "";
-    $a = 0;
-    //on cherche dans le fichier si l'utilisateur en ligne y est
-    while (($a < count($utilisateurEnLigne) - 1) && !$profilTrouve) {
-      //on met les diférents noms de visiteurs ainsi que leur nombre de visites dans des cases
-      $detailUtilisateur = explode("§", $utilisateurEnLigne[$a]);
-      //trim permet de supprimer les espaces en début et en fin de chaîne -- Louve adooooooooore cette fonction <3 
-      if (trim($detailUtilisateur[0]) == trim($_SESSION['pseudo'])) {
-        //on initialise les variables
-        $profilTrouve = true;
-        $i = 1;
-        $visiteurTrouve = false;
-        while (($i <= count($detailUtilisateur) - 1)) {
-          $sousDetails = explode("|", $detailUtilisateur[$i]);
-          $informationsVisiteurs .= "<span><a href='/profil/profil.php?user=" . $sousDetails[0] . "'>" . $sousDetails[0] . "</a> à visité votre profil " . $sousDetails[1] . " fois ! </span> <br>";
-          $i++;
+    if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) {
+      $contenu_du_fichierVisiteurs = file_get_contents('../register/data/matchs.txt');
+      $utilisateurEnLigne = explode("\n", $contenu_du_fichierVisiteurs);
+      $profilTrouve = false;
+      $informationsVisiteurs = "";
+      $a = 0;
+      //on cherche dans le fichier si l'utilisateur en ligne y est
+      while (($a < count($utilisateurEnLigne) - 1) && !$profilTrouve) {
+        //on met les diférents noms de visiteurs ainsi que leur nombre de visites dans des cases
+        $detailUtilisateur = explode("§", $utilisateurEnLigne[$a]);
+        //trim permet de supprimer les espaces en début et en fin de chaîne -- Louve adooooooooore cette fonction <3 
+        if (trim($detailUtilisateur[0]) == trim($_SESSION['pseudo'])) {
+          //on initialise les variables
+          $profilTrouve = true;
+          $i = 1;
+          $visiteurTrouve = false;
+          while (($i <= count($detailUtilisateur) - 1)) {
+            $sousDetails = explode("|", $detailUtilisateur[$i]);
+            $informationsVisiteurs .= "<span><a href='/profil/profil.php?user=" . $sousDetails[0] . "'>" . $sousDetails[0] . "</a> à visité votre profil " . $sousDetails[1] . " fois ! </span> <br>";
+            $i++;
+          }
         }
+        $a++;
       }
-      $a++;
+      echo "<div>" . $informationsVisiteurs . "</div>";
+    } else {
+      echo "<div> Si vous étiez abonné(e), vous pourriez voir qui visite votre profil !</div>";
     }
-    echo "<div>" . $informationsVisiteurs . "</div>"
     ?>
     <?php
     function afficher($donneeBis, $i, $j)
