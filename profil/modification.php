@@ -209,6 +209,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           $i++;
         }
       }
+      $j++;
     }
     /*$content =  $_SESSION['pseudo']
   . "§" . $_SESSION['LieuRes']
