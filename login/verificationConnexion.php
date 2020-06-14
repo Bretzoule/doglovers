@@ -14,7 +14,7 @@ function changeMemberShip($user)
     $userTmp = $user; // duplication ligne de l'utilisateur concerné
     $userTmp[sizeof($userTmp) - 6] = "free"; // modification du type d'abonnement
     $userTmp = implode("§", $userTmp); // rassemblement ligne utilisateur 
-    $contents = str_replace(implode("§", $user), $userTmp . "\r\n", $contents); // remplacement ligne dans le contenu total
+    $contents = str_replace(implode("§", $user), $userTmp, $contents); // remplacement ligne dans le contenu total
     file_put_contents($GLOBALS["path"], $contents); // réinjection du contenu dans le fichier 
 }
 
