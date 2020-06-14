@@ -59,7 +59,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       </ul>
     </div>
     <div id="page">
-      <h2 id='titreTab'> Bonjour !</h2>
+      <h2 id='titreTab'> Bonjour <?php echo htmlspecialchars($_SESSION["pseudo"]); ?> !</h2>
       <div id="BlocInfo">
         <span id="titreInfo">Hey hey hey hey hey</span> <br>
         <?php 
