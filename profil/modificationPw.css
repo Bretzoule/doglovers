@@ -20,7 +20,7 @@ body,html {
     background-color: white;
   }
 
-  #bloc_Image{
+  #bloc_Image {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,4 +50,12 @@ body,html {
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
+  }
+
+  #bloc_ImageTitre {
+    flex-direction: column;
+    width:fit-content;
+    border-radius: 12px;
+    border: 3px solid #908CB1;
+    background-color: white;
   }
