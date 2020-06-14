@@ -23,6 +23,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <li><a href="../home/accueil.php">Accueil</a></li>
         <li><a class="active" href="">Infos Publiques</a></li>
         <li><a href="./modification.php">Modifier mon profil</a></li>
+        <li><a href="./modificationPw.php">Modifier mon Mot de Passe</a></li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
       </ul>
     </div>
@@ -124,8 +125,7 @@ ou jusqu'à la fin du tableau*/
               <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
         contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
       Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
-              <li>Pseudo : <?php echo ($donnee[0]);
-                            $_SESSION["Pseudo"] = $donnee[0] ?></li>
+              <li>Pseudo : <?php echo ($donnee[0]);?></li>
               <?php if (afficher($donneeBis, 1, 0)) { ?>
                 <li>Lieu de résidence : <?php echo ($donnee[1]);
                                         $_SESSION["lieuRes"] = $donnee[1]; ?></li>
