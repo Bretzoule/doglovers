@@ -43,7 +43,7 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
         
         while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
             $userData = explode("§", $line); // séparation des données de la ligne utilisateur
-            if ((password_verify(trim($_SESSION["password"]), trim($userData[sizeof($userData) - 1])) && (trim($_SESSION["Pseudo"]) == trim($userData[0])))) {
+            if ((password_verify(trim($_SESSION["password"]), trim($userData[sizeof($userData) - 1])) && (trim($_SESSION["pseudo"]) == trim($userData[0])))) {
             //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
                 $contents = file_get_contents($path);
                 $userData = remplacementData($userData, $nbrEnfants, $nbrDoggos, $infosChiens);
