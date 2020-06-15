@@ -23,7 +23,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <li><a href="/home/accueil.php">Accueil</a></li>
         <li><a class="active" href="">Infos Publiques</a></li>
         <li><a href="./../changementInfos/modification.php">Modifier mon profil</a></li>
-        <li><a href="./modificationPw.php">Modifier mon Mot de Passe</a></li>
+        <li><a href="./changementPw/modificationPw.php">Modifier mon Mot de Passe</a></li>
         <li class="deconnexion"><a href="./../../login/logout.php">Deconnexion</a></li>
       </ul>
     </div>

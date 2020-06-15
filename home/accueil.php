@@ -40,7 +40,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <div class="menu">
       <ul>
         <li><a class="active" href="./accueil.php">Accueil</a></li>
-        <li><a  href="../profil/MonProfil.php">Mon profil</a></li>
+        <li><a  href="../profil/monProfil/MonProfil.php">Mon profil</a></li>
         <li><a  href="/home/subscribe/subscribe.php">Gérer l'abonnement</a></li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <input type="checkbox" name="r" id="r1">
