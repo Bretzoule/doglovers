@@ -54,7 +54,7 @@ if ($file) {
         }
     }
     fclose($file);
-} else {
+}else{
     phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
 }
 // $file = fopen('./../register/data/adminList.txt', 'r'); // ouverture du fichier pour le administrateurs
