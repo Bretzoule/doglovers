@@ -129,7 +129,10 @@ if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success") { ?>
 
 </html>
 
-<?php 
+<?php
+if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 0)) {
+  echo("vous avez été banni");
+}
 session_destroy();
 session_unset();
 } else {
