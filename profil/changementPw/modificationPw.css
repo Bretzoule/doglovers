@@ -59,3 +59,9 @@ body,html {
     border: 3px solid #908CB1;
     background-color: white;
   }
+
+
+  #modeligneSAH {
+    display: inline;
+    list-style: none;
+  }
