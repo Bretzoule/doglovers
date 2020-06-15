@@ -99,14 +99,11 @@ body,html {
 }
 
 #BlocInfo {
-    padding: 2%;
-    display: flex;
-    flex-direction: column;
+    padding: 2% 2% 0 2%;
     justify-content: space-evenly;
     border-radius: 5px;
-    margin-left: 5%;
     background-color: #908CB1;
-    margin-top: 40px;
+    margin: 40px 15% 0 15%;
     width:fit-content;
     border-radius: 30px;
     box-shadow: 0px 10px 25px 0px gray;
@@ -126,8 +123,72 @@ h2 {
 }
 #titreInfo{
     font-weight: bold;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
 }
 
  #listeabonnements {
      display: none;
  }
+
+ .partieGauche{
+   width: 45%;
+   float: left;
+   /*background: gold;*/
+   padding: 20px 10px 10px 10px;
+ }
+
+.partieDroite{
+  width:45%;
+  float: left;
+  /*background: green;*/
+  padding: 20px 10px 10px 10px;
+}
+
+#textGratuit, #textAbonne{
+  padding-top: 25px;
+}
+
+#bouton1{
+  position: relative;
+  margin:8px 0;
+  width: 350px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: #908CB1;
+  border: solid 1px gold;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+#bouton2{
+  position: relative;
+  margin:8px 0;
+  width: 200px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: #908CB1;
+  border: solid 1px gold;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+#bouton3{
+  position: relative;
+  margin:4px 0;
+  width: 170px;
+  height: 25px;
+  border-radius: 18px;
+  background-color: #908CB1;
+  border: solid 1px #b85985;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
