@@ -11,7 +11,9 @@
         $tmp = explode(':',$memberType);
         $currentDate = (empty($tmp[1])) ? new DateTime(date("Y-m-d")) : new DateTime($tmp[1]); // génération de la date
         $currentDate -> add(new DateInterval($toAdd));
-        $tmp[0] = "member";
+        if ($tmp[0] == "free") {
+            $tmp[0] = "member";
+        }
         $tmp[1] = $currentDate->format('Y-m-d');
         $data = implode(":", $tmp);
         return($data);
