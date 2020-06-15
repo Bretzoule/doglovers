@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success") { ?>
+if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success" || $_SESSION['banned']=="true") { ?>
 <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
 <html>
 
@@ -75,7 +75,7 @@ if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success") { ?>
                   } else if ((isset($_SESSION['logout'])) && ($_SESSION['logout']=='success')) {
                     echo '<div id="logoutSuccess">Déconnecté avec succès !</div>';
                   }else if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 0)) {
-                    echo'<div id="logoutSuccess">Vous avez été banni !</div>';
+                    echo'<div id="loginError">Vous avez été banni !</div>';
                   }
                   ?>
                 </div><!--fin message d'erreur ou déconnexion-->
