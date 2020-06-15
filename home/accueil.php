@@ -68,9 +68,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           echo "<br> <a href='/home/subscribe/subscribe.php'><input type='button' value='Se réabonner !'></a>";
           unset($_SESSION["memberShipExpired"]);
         }
-        if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 0)) {
-  header('Location: ./../login/login.php');
-        }
         ?>
       </div>
     </div>
@@ -78,7 +75,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
   </html>
 <?php
-} else {
+
+}else{
   header('Location: ./../errors/erreur403.php');
 }
 ?>

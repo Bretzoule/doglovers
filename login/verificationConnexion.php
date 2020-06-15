@@ -34,9 +34,9 @@ function getMemberShipType(array $memberString)
         }
     } else if ($infoMS[0] == "admin") {
         return "3"; // mode admin
-    } else {
+    } else if ($infoMS[0] == "banned"){
+      $_SESSION["banned"] = "true";
         return "0";
-        $_SESSION["banned"] = "true";
     }
 }
 
@@ -48,13 +48,17 @@ if ($file) {
             // $_SESSION["udata"] = array();
             // $_SESSION["udata"] = array_slice($userData,0,sizeof($userData)-2);
             $_SESSION["login_Type"] = getMemberShipType($userData); // récupération type utilisateur
+            if ($_SESSION["banned"] == "true" ){
+              header('Location: /login/login.php');
+            }else{
             header('Location: ./../home/accueil.php'); // redirection
+          }
             fclose($file); // fermeture fichier
             exit(); // arrêt fonction
         }
     }
     fclose($file);
-} else {
+}else{
     phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
 }
 // $file = fopen('./../register/data/adminList.txt', 'r'); // ouverture du fichier pour le administrateurs

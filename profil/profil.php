@@ -1,4 +1,5 @@
 <?php
+//on démarre une session
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
   <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
@@ -23,9 +24,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
        }
        return ($afficher);
      }
-
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
       $user = $_GET["user"];
+      $_SESSION["user"]=$user;
     ?>
       <div id="blocTitre"></div>
       <div id="Titre">
@@ -41,6 +42,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <li><a href="">Envoyer un message à <?php echo ($user); ?></a></li>
           <?php } ?>
           <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
+          <?php if(intval($_SESSION['login_Type']) === 3){ ?>
+            <li><a href="../bannir/bannir.php">Bannir <?php echo ($user); ?></a></li>
+            <?php } ?>
         </ul>
       </div>
       <?php
@@ -114,14 +118,13 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         }
         $a++; // on incrémente
       }
-      //on récupère les contenus des fichiers prof et élèves
+      //on récupère les contenus des utilisateurs
       $contenu_du_fichierUserList = file_get_contents('../register/data/userList.txt');
       //on met chaque ligne dans un tableau
       $nbrUser = explode("\n", $contenu_du_fichierUserList);
       $j = 0;
       $i = 0;
       $fin = false;
-      //on démarre une session
       /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
