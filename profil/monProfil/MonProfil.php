@@ -9,7 +9,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
     <link rel="stylesheet" type="text/css" href="MonProfil.css">
-    <link rel="shortcut icon" href="./../ressources/favicon.ico" />
+    <link rel="shortcut icon" href="./../../ressources/favicon.ico" />
   </head>
 
   <body>
@@ -20,16 +20,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     </div>
     <div class="menu">
       <ul>
-        <li><a href="../home/accueil.php">Accueil</a></li>
+        <li><a href="/home/accueil.php">Accueil</a></li>
         <li><a class="active" href="">Infos Publiques</a></li>
-        <li><a href="./modification.php">Modifier mon profil</a></li>
+        <li><a href="./../changementInfos/modification.php">Modifier mon profil</a></li>
         <li><a href="./modificationPw.php">Modifier mon Mot de Passe</a></li>
-        <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
+        <li class="deconnexion"><a href="./../../login/logout.php">Deconnexion</a></li>
       </ul>
     </div>
     <?php
     if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) {
-      $contenu_du_fichierVisiteurs = file_get_contents('../register/data/matchs.txt');
+      $contenu_du_fichierVisiteurs = file_get_contents('../../register/data/matchs.txt');
       $utilisateurEnLigne = explode("\n", $contenu_du_fichierVisiteurs);
       $profilTrouve = false;
       $informationsVisiteurs = "";
@@ -73,7 +73,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       return ($afficher);
     }
     //on récupère les contenus des fichiers prof et élèves
-    $contenu_du_fichierUserList = file_get_contents('../register/data/userList.txt');
+    $contenu_du_fichierUserList = file_get_contents('../../register/data/userList.txt');
 
 
     //on met chaque ligne dans un tableau

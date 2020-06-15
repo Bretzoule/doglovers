@@ -10,7 +10,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
     <link rel="stylesheet" type="text/css" href="modification.css">
     <script type="text/javascript" src="modification.js"></script>
-    <link rel="shortcut icon" href="./../ressources/favicon.ico" />
+    <link rel="shortcut icon" href="./../../ressources/favicon.ico" />
   </head>
   <body>
     
@@ -271,7 +271,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     ?>  
     <div id="part_logo">
       <!--Partie logo-->
-      <a href="./../login/login.php"><img src="./../ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
+      <a href="/login/login.php"><img src="/ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
     </div>
     <!--Fin partie logo-->
 
