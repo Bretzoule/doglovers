@@ -117,7 +117,7 @@ ou jusqu'à la fin du tableau*/
             <?php } ?>
             </ul>
             <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span>
-            <a href="./changePictures.php"><input type="button" value="Changer les photos !"></a>
+            <a href="./../changePicture/changePicture.php"><input type="button" value="Changer les photos !"></a>
           </div>
           <div id="BlocInfo">
             <h2>Informations Générales :</h2>
