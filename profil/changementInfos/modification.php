@@ -13,7 +13,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <link rel="shortcut icon" href="./../../ressources/favicon.ico" />
   </head>
   <body>
-    
+
   <?php
     setlocale(LC_ALL,'fr_FR.UTF-8');
     function phpAlert($msg)
@@ -268,12 +268,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       $_SESSION["dataPassed"] = "true";
       header('Location: ./modificationBis.php');
     }
-    ?>  
+    ?>
     <div id="part_logo">
       <!--Partie logo-->
       <a href="/login/login.php"><img src="/ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
     </div>
     <!--Fin partie logo-->
+
+    <div class="textModif">
+      Vous pouvez ici modifier vos informations personnelles.
+    </div>
 
     <form accept-charset="UTF-8" action="modification.php" method="POST">
       <div class="page">
