@@ -125,6 +125,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       $j = 0;
       $i = 0;
       $fin = false;
+      $banni = true;
       /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
@@ -136,7 +137,8 @@ ou jusqu'à la fin du tableau*/
         if ($donnee[0] == $user) {
           /*si c'est le cas on passe fin a true pour arréter la recherche*/
           $fin = true;
-
+          if($donnee[13]!="banned"){
+$banni = false;
           while (($i < count($donnee) - 1)) {
             /*on fait un tableau de tableau : on reprend le tableau séparer selon
     les § et on le sépare à nouveaux selon les | on pourra donc
@@ -213,11 +215,14 @@ ou jusqu'à la fin du tableau*/
 
     <?php
         }
+      }
         //on passe à la ligne suivante
         $j++;
       }
       if (!$fin) {
         echo ("<h1>Une erreur s'est produite, ce profil n'existe pas.</h1>");
+      }elseif ($banni) {
+        echo ("<h1>Cet utilisateur a été banni.</h1>");
       }
     } else {
       echo ("Une erreur s'est produite, ce profil n'existe pas.");
