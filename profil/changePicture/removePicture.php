@@ -6,31 +6,16 @@ function phpAlert($msg)
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 
-function reorgPhotos(array $photo):array {
-    $j = 0;
-    while($j < sizeof($photo)) {
-    for ($i=0; $i < 3; $i++) {
-        $iplus1 = $i+1;
-        if (empty($photo[$i])) {
-
-            $photo[$i] = $photo[$i+1];
-            $photo[$i+1] = "";
-        }
-    }
-    $j++;
-  }
-    return $photo;
-}
-
-
 function removePic(string $photo, int $indice):string
 {
     $photo = explode("|",$photo);
     if (!empty($photo[$indice])) {
-        $photo[$indice] = "";
         $response = unlink("./../../".$photo[$indice]);
-        reorgPhotos($photo);
+        $photo[$indice] = "";
+        $photo = array_filter($photo);
+        unset($photo[sizeof($photo)-1]);
     }
+    
     $photo = implode("|",$photo);
     return $photo;
 }
