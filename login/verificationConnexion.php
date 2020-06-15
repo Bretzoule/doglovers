@@ -13,9 +13,9 @@ function changeMemberShip($user)
     $contents = file_get_contents($GLOBALS["path"]); //récupération contenu fichier utilisateur
     $userTmp = $user; // duplication ligne de l'utilisateur concerné
     $userTmp[sizeof($userTmp) - 6] = "free"; // modification du type d'abonnement
-    $userTmp = implode("§", $userTmp); // rassemblement ligne utilisateur 
+    $userTmp = implode("§", $userTmp); // rassemblement ligne utilisateur
     $contents = str_replace(implode("§", $user), $userTmp, $contents); // remplacement ligne dans le contenu total
-    file_put_contents($GLOBALS["path"], $contents); // réinjection du contenu dans le fichier 
+    file_put_contents($GLOBALS["path"], $contents); // réinjection du contenu dans le fichier
 }
 
 function getMemberShipType(array $memberString)
@@ -25,7 +25,7 @@ function getMemberShipType(array $memberString)
     if ($infoMS[0] == "free") { // test si abonnement gratuit
         return "1"; // mode 1
     } else if ($infoMS[0] == "member") { // test si membre
-        if (date("Y-m-d") > $infoMS[1]) { // comparaison date actuelle et date expiration 
+        if (date("Y-m-d") > $infoMS[1]) { // comparaison date actuelle et date expiration
             changeMemberShip($memberString); // mise à jour de l'abonnement (expiré)
             $_SESSION["memberShipExpired"] = "true"; // abonnement expiré
             return "1"; // mode 1
@@ -43,13 +43,13 @@ function getMemberShipType(array $memberString)
 $file = fopen($path, 'r'); // ouverture du fichier
 if ($file) {
     while (($line = fgets($file)) !== false) { // récupération de la ligne
-        $userData = explode("§", $line); // séparation de la ligne 
+        $userData = explode("§", $line); // séparation de la ligne
         if ((password_verify(trim($_POST["password"]), trim($userData[sizeof($userData) - 1])) && (trim($_POST["pseudo"]) == trim($userData[0])))) { // vérification ID/PW pour chaque ligne
             // $_SESSION["udata"] = array();
             // $_SESSION["udata"] = array_slice($userData,0,sizeof($userData)-2);
             $_SESSION["login_Type"] = getMemberShipType($userData); // récupération type utilisateur
             header('Location: ./../home/accueil.php'); // redirection
-            fclose($file); // fermeture fichier 
+            fclose($file); // fermeture fichier
             exit(); // arrêt fonction
         }
     }
