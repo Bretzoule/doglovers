@@ -66,7 +66,7 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
         } else {
           $_SESSION["modifie"] = "Données modifiées avec succès.";
         }
-        header("Location: /profil/MonProfil.php");
+        header("Location: /profil/monProfil/MonProfil.php");
     } else {
         header("Location: /errors/erreur403.php");
     }
