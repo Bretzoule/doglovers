@@ -21,21 +21,21 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         {
           echo '<script type="text/javascript">alert("' . $msg . '")</script>';
         }
-        
+
         $photosFilled = true;
         $_SESSION["photo1"] = $_SESSION["photo2"] = $_SESSION["photo3"] = $_SESSION["photo4"] = "";
 
         function testImages($photosFilled, &$erreurPhotos, $numPhoto)
         {
-          if (empty($_FILES["photos".$numPhoto]["name"]) && $_FILES["photos".$numPhoto]["error"] == 0) {
+          if (empty($_FILES["photos" . $numPhoto]["name"]) && $_FILES["photos" . $numPhoto]["error"] == 0) {
             $_SESSION["photo" . $numPhoto] = "";
           } else {
             $target_dir = "./../../register/data/uploads/";
             $target_toWrite = "/register/data/uploads/";
-            if ($_FILES["photos".$numPhoto]["error"] == 0) {
-              $target_file = $target_dir . basename($_FILES["photos".$numPhoto]["tmp_name"]);
-              $imageFileType = strtolower(pathinfo(basename($_FILES["photos".$numPhoto]["name"]), PATHINFO_EXTENSION));
-              $check = getimagesize($_FILES["photos".$numPhoto]["tmp_name"]);
+            if ($_FILES["photos" . $numPhoto]["error"] == 0) {
+              $target_file = $target_dir . basename($_FILES["photos" . $numPhoto]["tmp_name"]);
+              $imageFileType = strtolower(pathinfo(basename($_FILES["photos" . $numPhoto]["name"]), PATHINFO_EXTENSION));
+              $check = getimagesize($_FILES["photos" . $numPhoto]["tmp_name"]);
               if ($check === false) {
                 $photosFilled = false;
                 $erreurPhotos = "Le fichier ne semble pas être une image";
@@ -44,7 +44,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                 $photosFilled = false;
                 $erreurPhotos = "Un fichier portant le même nom existe déjà...";
               } else
-                if ($_FILES["photos".$numPhoto]["size"] > 10000000) {
+                if ($_FILES["photos" . $numPhoto]["size"] > 10000000) {
                 $photosFilled = false;
                 $erreurPhotos = "Le fichier est trop volumineux !";
               } else
@@ -54,7 +54,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               }
               if ($photosFilled) {
                 $file_name = uniqid($prefix = "photo_") . "." . $imageFileType;
-                if (move_uploaded_file($_FILES["photos".$numPhoto]["tmp_name"], $target_dir . $file_name)) {
+                if (move_uploaded_file($_FILES["photos" . $numPhoto]["tmp_name"], $target_dir . $file_name)) {
                   $_SESSION["photo" . $numPhoto] = $target_toWrite . $file_name;
                 } else {
                   phpAlert("Une erreur s'est produite lors de l'envoi du fichier.");
@@ -111,47 +111,53 @@ ou jusqu'à la fin du tableau*/
               $i++;
             }
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-              
-              if (testImages($photosFilled,$erreurPhotos,0) && testImages($photosFilled,$erreurPhotos,1) && testImages($photosFilled,$erreurPhotos,2) && testImages($photosFilled,$erreurPhotos,3)) {
+
+              if (testImages($photosFilled, $erreurPhotos, 0) && testImages($photosFilled, $erreurPhotos, 1) && testImages($photosFilled, $erreurPhotos, 2) && testImages($photosFilled, $erreurPhotos, 3)) {
                 $_SESSION["picChange"] = "true";
                 header('Location: ./confirmChangePicture.php');
-                }
+              }
             }
 
         ?>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data" >
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
               <ul id="modeligneSAH">
                 <li>
                   <a href="./removePicture.php?numero=0"><input type="button" value="Supprimer la photo !"></a>
                   <img src="<?php if (afficher($donneeBis, 12, 0)) {
-                                echo ($donneeBis[12][0]);
-                              } else echo "/ressources/logo.png" ?>"></img> <br>
+                              echo ($donneeBis[12][0]);
+                            } else echo "/ressources/logo.png" ?>"></img> <br>
                   <input type="file" id="photo0" name="photos0" accept="image/png, image/jpeg, image/jpg, image/gif"> <br>
                 </li>
                 <li>
-                <a href="./removePicture.php?numero=0"><input type="button" value="Supprimer la photo !"></a>
+                  <a href="./removePicture.php?numero=1"><input type="button" value="Supprimer la photo !"></a>
                   <img src="<?php if (afficher($donneeBis, 12, 1)) {
-                                echo ($donneeBis[12][1]);
-                              } else echo "/ressources/logo.png" ?>"></img> <br>
+                              echo ($donneeBis[12][1]);
+                            } else echo "/ressources/logo.png" ?>"></img> <br>
                   <input type="file" id="photo1" name="photos1" accept="image/png, image/jpeg, image/jpg, image/gif">
                 </li>
                 <li>
-                <a href="./removePicture.php?numero=0"><input type="button" value="Supprimer la photo !"></a>
+                  <a href="./removePicture.php?numero=2"><input type="button" value="Supprimer la photo !"></a>
                   <img src="<?php if (afficher($donneeBis, 12, 2)) {
-                                echo ($donneeBis[12][2]);
-                              } else echo "/ressources/logo.png" ?>"></img> <br>
+                              echo ($donneeBis[12][2]);
+                            } else echo "/ressources/logo.png" ?>"></img> <br>
                   <input type="file" id="photo2" name="photos2" accept="image/png, image/jpeg, image/jpg, image/gif">
                 </li>
                 <li>
-                <a href="./removePicture.php?numero=0"><input type="button" value="Supprimer la photo !"></a>
+                  <a href="./removePicture.php?numero=3"><input type="button" value="Supprimer la photo !"></a>
                   <img src="<?php if (afficher($donneeBis, 12, 3)) {
-                                echo ($donneeBis[12][3]);
-                              } else echo "/ressources/logo.png" ?>"></img> <br>
+                              echo ($donneeBis[12][3]);
+                            } else echo "/ressources/logo.png" ?>"></img> <br>
                   <input type="file" id="photo3" name="photos3" accept="image/png, image/jpeg, image/jpg, image/gif">
                 </li>
               </ul>
               <input type="submit" value="Modifier !"></input>
             </form>
+            <?php
+            if (isset($_SESSION["erreur"])) {
+              echo "<span>" . $_SESSION["erreur"] . "</span>";
+              unset($_SESSION["erreur"]);
+            }
+            ?>
       </div>
   </body>
 
