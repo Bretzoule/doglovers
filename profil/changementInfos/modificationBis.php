@@ -37,7 +37,7 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
       $infosChiens = "";
     }
     $lastvalue = true;
-    $path = "./../register/data/userList.txt"; // chemin fichier utilisateur
+    $path = "./../../register/data/userList.txt"; // chemin fichier utilisateur
     $file = fopen($path, 'r'); // ouverture du fichier
     if ($file) { // si le fichier est bien ouvert alors
         
@@ -66,7 +66,7 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
         } else {
           $_SESSION["modifie"] = "Données modifiées avec succès.";
         }
-        header("Location: /profil/MonProfil.php");
+        header("Location: /profil/monProfil/MonProfil.php");
     } else {
         header("Location: /errors/erreur403.php");
     }

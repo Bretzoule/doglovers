@@ -59,7 +59,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
     <body>
         <div id="bloc_Image_reset">
-            <a href="./MonProfil.php"><img id="bloc_ImageTitre" src="/ressources/logoBis.png" alt="logo"></img></a>
+            <a href="./../monProfil/MonProfil.php"><img id="bloc_ImageTitre" src="/ressources/logoBis.png" alt="logo"></img></a>
             <div id="oubliage">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <label for="OldPw">Ancien mot de passe</label><br>

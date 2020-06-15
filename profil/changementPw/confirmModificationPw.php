@@ -6,7 +6,7 @@ function phpAlert($msg) {
 }
 
 if (isset($_SESSION["changePw"]) && ($_SESSION["changePw"] == "true")) { // vérification demande de réinitilisation de pw
-    $path = "./../register/data/userList.txt"; // chemin fichier utilisateur
+    $path = "./../../register/data/userList.txt"; // chemin fichier utilisateur
     $file = fopen($path, 'r'); // ouverture du fichier
     if ($file) { // si le fichier est bien ouvert alors
         $lastvalue = true; 
