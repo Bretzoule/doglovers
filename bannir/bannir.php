@@ -9,11 +9,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
-  <!--  <link rel="stylesheet" type="text/css" href="./monProfil/MonProfil.css">-->
+    <link rel="stylesheet" type="text/css" href="./bannir.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
 
   <body>
+    <div id="blocTitre"></div>
+    <div id="Titre">
+      <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
+      <h1>Banned</h1>
+    </div>
 
     <?php
     function remplacementData(array $userData):array
@@ -37,7 +42,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           }
     }
     fclose($file);
-header("Location: /profil/MonProfil.php");
+    ?>
+    <div class="menu">
+      <ul>
+        <li><a href="../home/accueil.php">Retour à l'accueil</a></li>
+      </ul>
+    </div>
+<h1>Vous avez banni <?php echo($_SESSION["user"]); ?>!</h1>
+
+    <?php
   }
 
   ?>
