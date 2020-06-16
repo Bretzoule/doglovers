@@ -4,7 +4,7 @@
   <head>
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
+    <title>Dog Lovers - Liste des Utilisateurs</title>
     <link rel="stylesheet" type="text/css" href="./../../profil/monProfil/MonProfil.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
@@ -13,7 +13,7 @@
     <div id="blocTitre"></div>
     <div id="Titre">
       <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
-      <h1>Mon Profil</h1>
+      <h1>Liste des Membres</h1>
     </div>
     <div class="menu">
       <ul>
@@ -55,7 +55,7 @@ ou jusqu'à la fin du tableau*/
     récupérer les différentes données en faisant $donneeBis[$i][$j]*/
           $donneeBis[$i] = explode("|", $donnee[$i]);
           $i++;
-        }
+        } 
         ?>
         <div id="Infos">
           <div id="BlocInfo">
