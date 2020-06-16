@@ -60,7 +60,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <?php
             if (intval($_SESSION["login_Type"]) == 1) {
               echo "Vous avez actuellement un compte gratuit.";
-            } else {
+            } else if ($_SESSION["login_Type"] != 3) {
               echo ' <a href="./confirmSubscription.php?abonnement=cancel"><input type="button" id="bouton2" value="Se désabonner !"></a>';
              }
             ?> </div> <br>
@@ -68,9 +68,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
         <div class="partieDroite">
           <span id="titreInfo"> Abonné </span> <br>
-          <div id="textAbonne"> <?php if (intval($_SESSION["login_Type"] >= 2)) {
+          <div id="textAbonne"> <?php if (intval($_SESSION["login_Type"] == 2)) {
                     echo "Vous êtes abonné(e) jusqu'au " . getDateFinAbonnement($_SESSION["pseudo"]) . " !";
-                  } else { ?>
+                  } else if ($_SESSION["login_Type"] != 3) { ?>
                     <input type="button" id="bouton1" value="Consulter les formules d'abonnement !" onclick ="displaySubMode()"> <br>
                     <div id="listeabonnements">
                     <a href="./confirmSubscription.php?abonnement=48h"><input type="button" id="bouton3" value="S'abonner pour 48hrs !"></a>
@@ -80,7 +80,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                     <a href="./confirmSubscription.php?abonnement=6mo"><input type="button" id="bouton3" value="S'abonner pour 6 mois !"></a>
                     <span>Au prix de 29.99€ (soit 4.99 par mois) !</span> <br>
                     </div>
-                  <?php }
+                  <?php } else {
+                    echo "En tant qu'administrateur vous êtes abonné à vie.";
+                  }
                   ?> </div> <br>
         </div>
       </div>

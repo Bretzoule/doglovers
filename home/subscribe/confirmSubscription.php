@@ -67,7 +67,7 @@
             }
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && ($_SESSION["login_Type"] > 0)) {
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && ($_SESSION["login_Type"] > 0) && (($_SESSION["login_Type"] !=3))) {
     $typeAbo = $_GET["abonnement"];
     switch ($typeAbo) {
         case '48h':
