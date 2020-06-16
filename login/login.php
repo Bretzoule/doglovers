@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success" || $_SESSION['banned']=="true") { ?>
+if (!(isset($_SESSION["login_Type"])) || ((isset($_SESSION["logout"])) && ($_SESSION["logout"] == "success")) || ((isset($_SESSION['banned'])) && ($_SESSION['banned']=="true"))) { ?>
 <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
 <html>
 
@@ -32,18 +32,34 @@ if (!(isset($_SESSION["login_Type"])) || $_SESSION["logout"] == "success" || $_S
           $(function(){
             setInterval(function(){
               $(".slideshow ul").animate({marginLeft:-200},800,function(){
-              $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first"));
+              $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first")); 
               })
             }, 3500);
           });
         </script>
 
+          <?php
+          $path = "./../register/data/userList.txt"; // chemin du fichier des utilisateurs
+          $content = file_get_contents($path); // récupère les données du fichier
+          $user = array(); 
+          $usersrc = array();
+          $content = explode("\n",$content); // récupère les données user
+          $content = array_filter($content); // efface les champs vides (le explode \n génère une dernière case d'array vide.)
+          for ($i=1; $i < 5; $i++) { 
+            $tmp = explode("§",$content[sizeof($content)-$i]);  // séparation données de l'utilisateur 
+            $tmptmp = explode("|",$tmp[sizeof($tmp)-7]); // récupération images 
+            array_push($user,$tmp[0]); // ajout du pseudo de l'utilsiateur à la liste des données
+            $yee = !empty($tmptmp[0]) ? $tmptmp[0] : "/ressources/dogloverslogo.png" ; // assigne la référence d'une image ou une image par défaut selon si l'utilisateur possède un image de profil ou non
+            array_push($usersrc,$yee); // ajout de la source de l'image de l'utilsiateur à la liste des données
+          }
+          ?>
+
         <div class="slideshow"> <!--liste des images-->
           <ul>
-            <li><div class="Colonne">Nom 1<img src="/ressources/dogloverslogo.png" alt="Nom 1" width="200" height="200" /></div></li>
-            <li><div class="Colonne">Nom 2<img src="/ressources/dogloverslogo.png" alt="Nom 2" width="200" height="200" /></div></li>
-  		      <li><div class="Colonne">Nom 3<img src="/ressources/dogloverslogo.png" alt="Nom 3" width="200" height="200" /></div></li>
-            <li><div class="Colonne">Nom 4<img src="/ressources/dogloverslogo.png" alt="Nom 4" width="200" height="200" /></div></li>
+            <li><div class="Colonne"><?php echo $user[0]; ?><img src="<?php echo $usersrc[0]; ?>" alt="Nom 1" width="200" height="200" /></div></li>
+            <li><div class="Colonne"><?php echo $user[1]; ?><img src="<?php echo $usersrc[1]; ?>" alt="Nom 2" width="200" height="200" /></div></li>
+  		      <li><div class="Colonne"><?php echo $user[2]; ?><img src="<?php echo $usersrc[2]; ?>" alt="Nom 3" width="200" height="200" /></div></li>
+            <li><div class="Colonne"><?php echo $user[3]; ?><img src="<?php echo $usersrc[3]; ?>" alt="Nom 4" width="200" height="200" /></div></li>
           </ul>
         </div><!--fin liste images-->
 
