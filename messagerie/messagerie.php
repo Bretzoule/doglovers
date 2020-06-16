@@ -76,6 +76,7 @@ file_put_contents($nomFichier[0].'_'.$nomFichier[1].'.txt', $content, FILE_APPEN
 
   </html>
 <?php
+unset($_POST['message']);
 /*} else {
   header("Location: /home/accueil.php");
 }*/
