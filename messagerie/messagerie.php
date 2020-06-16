@@ -23,7 +23,8 @@ session_start();
     <div class="menu">
       <ul>
         <li><a href="../home/accueil.php">Accueil</a></li>
-        <li><a class="active" href="">Infos <?php echo ($_SESSION["user"]); ?></a></li>
+        <li><a href="./../profil/profil.php?user=<?php echo ($_SESSION["user"]);?>">Infos <?php echo ($_SESSION["user"]); ?></a></li>
+        <li><a class="active" href="">Conversation</a></li>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <?php if(intval($_SESSION['login_Type']) === 3){ ?>
           <li><a href="../admin/bannir/bannir.php">Bannir <?php echo ($_SESSION["user"]); ?></a></li>
@@ -40,22 +41,35 @@ usort($nomFichier, "strnatcmp");
 //on écrit le tableau pour vérifier
 //print_r($nomFichier);
 //on met dans content ce qu'on veut écrire dans le fichier
-$content = "";
+$heure = date("H:i");
+if(!empty($_POST['message'])){
+$content = $heure." ".$_SESSION['pseudo']." : ".$_POST['message']. "\r\n";
 //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
 //le fichier est créé s'il n'éxiste pas
-file_put_contents($nomFichier[0].'_'.$nomFichier[1].'.txt',$content);
-
-
-//on récupère le contenu du fichier à savoir la conversation
- $conversation = file_get_contents($nomFichier[0].'_'.$nomFichier[1].'.txt',$content);
+file_put_contents($nomFichier[0].'_'.$nomFichier[1].'.txt', $content, FILE_APPEND);
+}
 ?>
  <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 
          <h3>Conversation :</h3>
+         <?php
+         //on récupère le contenu du fichier à savoir la conversation
+          $conversation = file_get_contents($nomFichier[0].'_'.$nomFichier[1].'.txt');
+         $nbrMsg = explode("\n", $conversation);
+         $j = 0;
+         while (($j < count($nbrMsg) - 1)) {
+           /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
+     récupérer les différentes données présentes dans chaque ligne*/
+     echo $nbrMsg[$j]."</br>";
+             $j++;
+           }
+             ?>
 
-         <label for="nom">ici je sais pas quoi</label><br>
-         <input name="nom" type="text" pattern="[^§]+" value="" placeholder="écrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
-
+         <!--<label for="message">ici je sais pas quoi</label><br>-->
+         <input name="message" type="text" pattern="[^§]+" value="" placeholder="écrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
+         <div class="part_boutons"><!--partie boutons-->
+           <input type="submit" value="Envoyer "></input>
+         </div><!--fin partie boutons-->
 </form>
 
   </body>
