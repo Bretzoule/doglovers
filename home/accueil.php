@@ -42,6 +42,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <li><a class="active" href="./accueil.php">Accueil</a></li>
         <li><a  href="../profil/monProfil/MonProfil.php">Mon profil</a></li>
         <li><a  href="/home/subscribe/subscribe.php">Gérer l'abonnement</a></li>
+        <?php if ($_SESSION["login_Type"] == 3) { echo '<li><a  href="/admin/membres.php">Liste des utilisateurs</a></li>'; }?>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <input type="checkbox" name="r" id="r1">
         <label for="r1" class="bar"><img src="./../ressources/loupe.png" alt="img_loupe" class="rounded-corners" onclick="changeVisibility('resultats')"></label>
