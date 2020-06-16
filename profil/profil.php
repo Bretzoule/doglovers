@@ -39,7 +39,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           <li><a class="active" href="">Infos <?php echo ($user); ?></a></li>
           <?php
           if (intval($_SESSION["login_Type"]) >= 2) { ?>
-            <li><a href="">Envoyer un message à <?php echo ($user); ?></a></li>
+            <li><a href="./../messagerie/messagerie.php">Envoyer un message à <?php echo ($user); ?></a></li>
           <?php } ?>
           <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
           <?php if(intval($_SESSION['login_Type']) === 3){ ?>
