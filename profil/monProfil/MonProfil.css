@@ -110,3 +110,16 @@ h2 {
 #titreInfo{
     font-weight: bold;
 }
+
+
+#autoResize {
+    overflow-x: auto;
+}
+
+.tg-wa5c { 
+    background-color:#ffffff;text-align:left;vertical-align:top;
+}
+
+.tg-ycr8 {
+    background-color:#ff70bf;text-align:left;vertical-align:top;
+}
