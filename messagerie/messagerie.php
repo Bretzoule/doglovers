@@ -12,7 +12,11 @@ session_start();
     <link rel="stylesheet" type="text/css" href="./../profil/monProfil/MonProfil.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
-
+  <script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
+  </script>
   <body>
     <!--Début bloc de présentation-->
     <div id="blocTitre"></div>
@@ -71,7 +75,6 @@ file_put_contents($nomFichier[0].'_'.$nomFichier[1].'.txt', $content, FILE_APPEN
            <input type="submit" value="Envoyer "></input>
          </div><!--fin partie boutons-->
 </form>
-
   </body>
 
   </html>
