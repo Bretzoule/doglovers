@@ -63,9 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && (
             $_SESSION["erreur"] = "Erreur, image inconnue.";
             break;
     }
-    //header("Location: ./changePicture.php");
+    header("Location: ./changePicture.php");
 } else {
-    //header("Location: /home/accueil.php");
+    header("Location: /home/accueil.php");
 }
 
 ?>

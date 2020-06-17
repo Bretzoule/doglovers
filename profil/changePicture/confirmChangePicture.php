@@ -5,40 +5,44 @@ function phpAlert($msg)
 {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
-// permet de trier les photos si jamais la personne a voulu mettre qqch dans la photo 3 et rien en photo 1 et 2
-function triPhoto() 
-{
-    $j = 0;
-    while($j < 4) {
-    for ($i=0; $i < 3; $i++) {
-        $iplus1 = $i+1;
-        if (empty($_SESSION["photo".$i])) {
+// // permet de trier les photos si jamais la personne a voulu mettre qqch dans la photo 3 et rien en photo 1 et 2
+// function triPhoto() 
+// {
+//     $j = 0;
+//     while($j < 4) {
+//     for ($i=0; $i < 3; $i++) {
+//         $iplus1 = $i+1;
+//         if (empty($_SESSION["photo".$i])) {
 
-            $_SESSION["photo".$i] = $_SESSION["photo" . $iplus1];
-            $_SESSION["photo" . $iplus1] = "";
-        }
-    }
-    $j++;
-  }
-}
+//             $_SESSION["photo".$i] = $_SESSION["photo" . $iplus1];
+//             $_SESSION["photo" . $iplus1] = "";
+//         }
+//     }
+//     $j++;
+//   }
+// }
+
 // permet de changer les images
+
 function changePic(string $photos): string
 {
-    echo $_SESSION["photo"."0"];
-    triPhoto();
-    $photos = explode("|", $photos);
+    //triPhoto(); // provisoire qui permettait de trier les images
+    $photos = explode("|", $photos); // on isole chaque adresse d'image
     $i = 0;
-    while (($i < 4) && !empty($_SESSION["photo" . $i])) {
-        if (!isset($photos[$i])) {
-            array_push($photos, $_SESSION["photo" . $i]);
-        } else {
-            if (!empty($photos[$i])) {
-                $response = unlink("./../../".$photos[$i]);
+    while (($i < 4)) { // pour traverser toute la liste d'images
+        if (!empty($_SESSION["photo" . $i])) {  // si l'image en cours n'est pas vide
+        if (!isset($photos[$i])) { // si dans la liste des photos déjà uploadées, la photo"i" existe
+            array_push($photos, $_SESSION["photo" . $i]); // on ajoute la photo à la fin de ce que existe déjà 
+        } else { 
+            if (!empty($photos[$i])) { // si dans la liste des photos déjà uploadées il supprime l'ancienne image 
+                $response = unlink("./../..".$photos[$i]); // suppression image
             }
-            $photos[$i] = $_SESSION["photo".$i];
+            $photos[$i] = $_SESSION["photo".$i]; // mise en place de la nouvelle image
         }
-        $i++;
     }
+    $i++;
+    }
+    $photos = array_filter($photos);
    $photos = implode("|", $photos);
     return $photos;
 }
