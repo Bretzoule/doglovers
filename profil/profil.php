@@ -96,7 +96,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           if (!$visiteurTrouve) {
             $tmpUtilisateurEnLigne = trim($tmpUtilisateurEnLigne) . "§" . trim($_SESSION["pseudo"]) . "|1";
           }
-          if ($profilTrouve) { 
+          if ($profilTrouve) {
             $k = 0;
             $lineFound = false;
             while (($k < count($utilisateurEnLigne)) && (!$lineFound)) { // empêche le conflit de remplacement en début de ligne
@@ -143,69 +143,84 @@ ou jusqu'à la fin du tableau*/
           //Données modifiables :
       ?>
           <div id="Infos">
-            <div id="BlocInfo">
+
+            <div id="partGauche">
+              <div id="BlocInfo"> <!--photo-->
               <h2>Photos !</h2>
               <ul>
               <li><img src="<?php echo ($donneeBis[12][0]); ?>"></img></li>
                 <?php if (afficher($donneeBis, 12, 1)) { ?>
               <li><img src="<?php echo ($donneeBis[12][1]); ?>"></img></li>
             <?php }if (afficher($donneeBis, 12, 2)) { ?>
+              <div class="clear"></div>
               <li><img src="<?php echo ($donneeBis[12][2]); ?>"></img></li>
             <?php }if (afficher($donneeBis, 12, 3)) { ?>
               <li><img src="<?php echo ($donneeBis[12][3]); ?>"></img></li>
             <?php } ?>
             </ul>
+            <div class="clear">
+
             </div>
-            <div id="BlocInfo">
-              <h2>Informations Générales :</h2>
-              <ul>
-                <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
-        contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
-      Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
-                <li>Pseudo : <?php echo ($donnee[0]);?></li>
-                <?php if (afficher($donneeBis, 1, 0)) { ?>
-                  <li>Lieu de résidence : <?php echo ($donnee[1]);?></li>
-                <?php } ?>
-                <li>Sexe : <?php echo ($donnee[2]);?></li>
-                <li>Date de naissance : <?php echo ($donnee[3]);?></li>
-                <?php if (afficher($donneeBis, 4, 0)) { ?>
-                  <li>Profession : <?php echo ($donnee[4]);?></li>
-                <?php } ?>
-                <li>Situation amoureuse : <?php echo ($donneeBis[5][0]);?></li>
-                <?php if (($donneeBis[5][1] == "1") || ($donneeBis[5][1] == "2") || ($donneeBis[5][1] == "3-5") || ($donneeBis[5][1] == "5+")) { ?>
-                  <li>Nombre d'enfants : <?php echo ($donneeBis[5][1]);?></li>
-                <?php } ?>
-              </ul>
+          </div> <!--fin photo-->
+
             </div>
-            <div id="BlocInfo">
-              <h2>Informations physiques :</h2>
-              <ul>
-                <li>Poids : <?php echo ($donneeBis[6][0]);?> kg</li>
-                <li>Taille : <?php echo ($donneeBis[6][1]);?> cm</li>
-                <li>Couleur des cheveux : <?php echo ($donneeBis[6][2]);?></li>
-                <li>Couleur des yeux : <?php echo ($donneeBis[6][3]);?></li>
-              </ul>
+
+            <div id="partDroite">
+              <div id="BlocInfo"> <!--info générales-->
+                <h2>Informations Générales :</h2>
+                <ul>
+                  <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
+          contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
+        Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
+                  <li>Pseudo : <?php echo ($donnee[0]);?></li>
+                  <?php if (afficher($donneeBis, 1, 0)) { ?>
+                    <li>Lieu de résidence : <?php echo ($donnee[1]);?></li>
+                  <?php } ?>
+                  <li>Sexe : <?php echo ($donnee[2]);?></li>
+                  <li>Date de naissance : <?php echo ($donnee[3]);?></li>
+                  <?php if (afficher($donneeBis, 4, 0)) { ?>
+                    <li>Profession : <?php echo ($donnee[4]);?></li>
+                  <?php } ?>
+                  <li>Situation amoureuse : <?php echo ($donneeBis[5][0]);?></li>
+                  <?php if (($donneeBis[5][1] == "1") || ($donneeBis[5][1] == "2") || ($donneeBis[5][1] == "3-5") || ($donneeBis[5][1] == "5+")) { ?>
+                    <li>Nombre d'enfants : <?php echo ($donneeBis[5][1]);?></li>
+                  <?php } ?>
+                </ul>
+              </div>
+
+              <div id="BlocInfo"> <!--info physiques-->
+                <h2>Informations physiques :</h2>
+                <ul>
+                  <li>Poids : <?php echo ($donneeBis[6][0]);?> kg</li>
+                  <li>Taille : <?php echo ($donneeBis[6][1]);?> cm</li>
+                  <li>Couleur des cheveux : <?php echo ($donneeBis[6][2]);?></li>
+                  <li>Couleur des yeux : <?php echo ($donneeBis[6][3]);?></li>
+                </ul>
+              </div> <!--fin info physique-->
+
+
+              <div id="BlocInfo"> <!--info profil-->
+                <h2>Informations profil :</h2>
+                <ul>
+                  <?php if (afficher($donneeBis, 7, 0)) { ?>
+                    <li>Message d'accueil : <?php echo ($donnee[7]);?></li>
+                    <?php } if (afficher($donneeBis,8,0)){ ?>
+                    <li>Citation : <?php echo ($donnee[8]);?></li>
+                    <?php } if (afficher($donneeBis,9,0)){ ?>
+                    <li>Interets : <?php echo ($donnee[9]);?></li>
+                  <?php }
+                  if ($donnee[10] == "on") { ?>
+                    <li>Fumeur ? : <?php echo ("oui");?></li>
+                  <?php }
+                  if (($donnee[11][0] == "1") || ($donnee[11][0] == "2") || ($donnee[11][0] == "3+")) { ?>
+                    <li>Nombre de chiens : <?php echo ($donneeBis[11][0]);?></li>
+                    <li>Infos chiens : <?php echo ($donneeBis[11][1]);?></li>
+                  <?php } ?>
+                </ul>
+              </div>
+            </div> <!--fin info profil-->
             </div>
-            <div id="BlocInfo">
-              <h2>Informations profil :</h2>
-              <ul>
-                <?php if (afficher($donneeBis, 7, 0)) { ?>
-                  <li>Message d'accueil : <?php echo ($donnee[7]);?></li>
-                  <?php } if (afficher($donneeBis,8,0)){ ?>
-                  <li>Citation : <?php echo ($donnee[8]);?></li>
-                  <?php } if (afficher($donneeBis,9,0)){ ?>
-                  <li>Interets : <?php echo ($donnee[9]);?></li>
-                <?php }
-                if ($donnee[10] == "on") { ?>
-                  <li>Fumeur ? : <?php echo ("oui");?></li>
-                <?php }
-                if (($donnee[11][0] == "1") || ($donnee[11][0] == "2") || ($donnee[11][0] == "3+")) { ?>
-                  <li>Nombre de chiens : <?php echo ($donneeBis[11][0]);?></li>
-                  <li>Infos chiens : <?php echo ($donneeBis[11][1]);?></li>
-                <?php } ?>
-              </ul>
-            </div>
-          </div>
+
 
     <?php
         }
