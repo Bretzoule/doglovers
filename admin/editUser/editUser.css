@@ -1,0 +1,67 @@
+body,html {
+    height:100%;
+    margin: 0;
+    border: 3px solid #908CB1;
+    background-color: #BBC6D9;/*aliceblue?*/
+}
+#page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#oubliage {
+    flex-direction: column;
+    padding: 15px;
+    width:fit-content;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px 0px #908CB1;
+    border: 3px solid #908CB1;
+    background-color: white;
+  }
+
+  #bloc_Image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+    width: 150px;
+  height: 200px;
+  }
+
+  input[type=button], input[type=submit], input[type=reset] {
+    background-color:#5D3B78;
+    border: none;
+    color: white;
+    margin-left: 50%;
+    padding: 16px;
+    margin-top: 5px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  input[type=submit]:hover {
+    background-color:#908CB1 ;
+  }
+  input[type=text],input[type=date],input[type=number],input[type=password], select {
+    padding: 12px 20px;
+    margin: 4px 0;
+    margin-left: 30px;
+    margin-right: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  #bloc_ImageTitre {
+    flex-direction: column;
+    width:fit-content;
+    border-radius: 12px;
+    border: 3px solid #908CB1;
+    background-color: white;
+  }
+
+
+  #modeligneSAH {
+    display: inline;
+    list-style: none;
+  }
