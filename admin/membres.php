@@ -33,6 +33,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
           <tr>
               <th class='tg-ycr8'>Bannir</th>
               <th class='tg-ycr8'>Supprimer Profil</th>
+              <th class='tg-ycr8'>Modifier le Profil</th>
               <th class='tg-ycr8'>Pseudo</th>
               <th class='tg-ycr8'>Lieu de résidence</th>
               <th class='tg-ycr8'>Sexe</th>
