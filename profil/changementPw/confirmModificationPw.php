@@ -17,7 +17,7 @@ if (isset($_SESSION["changePw"]) && ($_SESSION["changePw"] == "true")) { // vér
                 $contents = file_get_contents($path);
                 $userData[sizeof($userData)-1] = password_hash($_SESSION['Newpassword'],PASSWORD_DEFAULT);
                 $userData = implode("§",$userData);
-                $contents = str_replace($line,$userData . "\r\n",$contents);
+                $contents = str_replace($line,$userData . "\r",$contents);
                 file_put_contents($path, $contents);
                 $lastvalue = false;
             }
