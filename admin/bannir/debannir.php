@@ -17,7 +17,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     <div id="blocTitre"></div>
     <div id="Titre">
       <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
-      <h1>Banned</h1>
+      <h1>Unban</h1>
     </div>
 
     <?php
@@ -25,7 +25,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     $user = $_GET["user"];
     function remplacementData(array $userData): array
     {
-      $userData[13] = "banned";
+      $userData[13] = "free";
       return $userData;
     }
     $lastvalue = true;
@@ -58,7 +58,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     if (!$lastvalue) { ?>
       <h1>Vous avez banni <?php echo $user; ?>!</h1>
     <?php } else { ?>
-      <h1>Vous ne pouvez pas bannir <?php echo $user; ?> ou cet utilisateur n'existe pas !</h1>
+      <h1>L'utilisateur <?php echo $user; ?> n'existe pas !</h1>
     <?php } ?>
   </body>
 

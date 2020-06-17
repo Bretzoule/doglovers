@@ -4,9 +4,7 @@ session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
   <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
   <html>
-
   <head>
-
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
     <link rel="stylesheet" type="text/css" href="./monProfil/MonProfil.css">
@@ -43,7 +41,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           <?php } ?>
           <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
           <?php if(intval($_SESSION['login_Type']) === 3){ ?>
-            <li><a <?php echo "href='../admin/bannir/bannir?user=". $user .".php'"?>>Bannir <?php echo ($user); ?></a></li>
+            <li><a <?php echo "href='../admin/bannir/bannir?user=". $user .".php'"?>>Bannir<?php echo ($user); ?></a></li>
               <li><a href="../admin/supprimerCompte.php">Supprimer <?php echo ($user); ?></a></li>
             <?php } ?>
         </ul>
@@ -97,10 +95,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           if (!$visiteurTrouve) {
             $tmpUtilisateurEnLigne = trim($tmpUtilisateurEnLigne) . "§" . trim($_SESSION["pseudo"]) . "|1";
           }
-          if ($profilTrouve) {
+          if ($profilTrouve) { 
             $k = 0;
             $lineFound = false;
-            while (($k < count($utilisateurEnLigne)) && (!$lineFound)) {
+            while (($k < count($utilisateurEnLigne)) && (!$lineFound)) { // empêche le conflit de remplacement en début de ligne
               if (startsWith($utilisateurEnLigne[$k], $user)) {
                 $utilisateurEnLigne[$k] = $tmpUtilisateurEnLigne;
                 $lineFound = true;
@@ -108,12 +106,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               $k++;
             }
             $contentBis = implode("\n", $utilisateurEnLigne);
-            // echo $a;
-            // //str_replace cherche ca $utilisateurEnLigne[$a] dans $contentBis et le remplace pas $tmpUtilisateurEnLigne
-            // echo "#" . $tmpUtilisateurEnLigne . "# == #" . $utilisateurEnLigne[$a] . "# <br>";
-            // $pattern = "/\b" . $tmpUtilisateurEnLigne . "\b.*\n/ui";
-            // $contentBis = preg_replace($pattern, $tmpUtilisateurEnLigne, $contentBis);
-            // //on met le contenu dans le fichier
             file_put_contents("../register/data/matchs.txt", $contentBis);
           }
         }

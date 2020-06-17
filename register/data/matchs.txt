@@ -4,11 +4,11 @@ test§lebato|1
 lebroneclo§lolo|2§lebato|8
 TheTest
 yuee
-titi§titi|1§lebato|6
+titi§titi|1§lebato|6§Tilted|1
 thorgal
 lebato§Tilted|11§zebi|13§lebato|3§titi|7
 testooo
-lolo§Tilted|4§lebato|14
+lolo§Tilted|5§lebato|14
 zebi§lebato|20
 dzadaz
 cacaTestationneur

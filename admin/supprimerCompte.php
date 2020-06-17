@@ -4,6 +4,7 @@ session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) { ?>
   <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
   <html>
+
   <head>
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -19,45 +20,42 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
       <h1>Supprimer</h1>
     </div>
     <?php
-    function remplacementData(array $userData):array
-    {
-      $userData[13] = "banned";
-      return $userData;
-    }
+    $user = $_GET["user"];
     $lastvalue = true;
-    $path = "./../register/data/userList.txt"; // chemin fichier utilisateur
-    $file = fopen($path, 'r'); // ouverture du fichier
-    if ($file) { // si le fichier est bien ouvert alors
-    while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
-        $userData = explode("§", $line); // séparation des données de la ligne utilisateur
-        if($userData[0]==$_SESSION["user"]){
+    if (trim($user) != trim($_SESSION["pseudo"])) {
+      $path = "./../register/data/userList.txt"; // chemin fichier utilisateur
+      $file = fopen($path, 'r'); // ouverture du fichier
+      if ($file) { // si le fichier est bien ouvert alors
+        while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
+          $userData = explode("§", $line); // séparation des données de la ligne utilisateur
+          if ($userData[0] == $user) {
             $contents = file_get_contents($path);
-            $userData = remplacementData($userData);
             $userData = "";
-            $contents = str_replace($line,$userData,$contents);
+            $contents = str_replace($line, $userData, $contents);
             file_put_contents($path, $contents);
             $lastvalue = false;
           }
+        }
+        fclose($file);
+      }
     }
-    fclose($file);
-        //Données modifiables :
-        ?>
+    //Données modifiables :
+    ?>
     <div class="menu">
       <ul>
         <li><a href="../home/accueil.php">Retour à l'accueil</a></li>
       </ul>
     </div>
-<h1>Vous avez supprimé le compte de <?php echo($_SESSION["user"]); ?>!</h1>
-
     <?php
-  }
+    if (!$lastvalue) { ?>
+      <h1>Vous avez supprimé le compte de <?php echo $user; ?>!</h1>
+    <?php } else { ?>
+      <h1>Vous ne pouvez pas supprimer le compte de <?php echo $user; ?> ou cet utilisateur n'existe pas !</h1>
+    <?php } ?>
 
-  ?>
-</body>
-
-</html>
+  </html>
 <?php
 } else {
-header("Location: /home/accueil.php");
+  header("Location: /home/accueil.php");
 }
 ?>
