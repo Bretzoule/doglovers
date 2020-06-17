@@ -17,7 +17,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     <div id="blocTitre"></div>
     <div id="Titre">
       <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
-      <h1>Liste des Membres</h1>
+      <h1>Liste des Utilisateurs</h1>
     </div>
     <div class="menu">
       <ul>
