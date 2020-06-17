@@ -41,8 +41,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           <?php } ?>
           <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
           <?php if(intval($_SESSION['login_Type']) === 3){ ?>
-            <li><a <?php echo "href='../admin/bannir/bannir?user=". $user .".php'"?>>Bannir <?php echo ($user); ?></a></li>
-            <li><a <?php echo "href='../admin/bannir/debannir?user=". $user .".php'"?>>Debannir <?php echo ($user); ?></a></li>
+            <li><a <?php echo "href='../admin/bannir/bannir.php?user=". $user ."'"?>>Bannir <?php echo ($user); ?></a></li>
+            <li><a <?php echo "href='../admin/bannir/debannir.php?user=". $user ."'"?>>Debannir <?php echo ($user); ?></a></li>
               <li><a href="../admin/supprimerCompte.php">Supprimer <?php echo ($user); ?></a></li>
             <?php } ?>
         </ul>
