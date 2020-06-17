@@ -63,11 +63,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <div id="oubliage">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <label for="OldPw">Ancien mot de passe</label><br>
-                    <input name="OldPw" type="password" pattern="[^\s§]+" value="" placeholder="Ancien mot de passe." oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /> <br>
+                    <input name="OldPw" type="password" pattern="[^\s§]+" value="" placeholder="Ancien mot de passe." oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et §")' oninput="setCustomValidity('')" required /> <br>
                     <span> <?php echo $erreurOldPw; ?></span> 
                     <br>
                 <label for="Newpassword">Nouveau mot de passe</label><br>
-                    <input name="Newpassword" type="password" pattern="[^\s§]+" value="" placeholder="Nouveau mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /> <br>
+                    <input name="Newpassword" type="password" pattern="[^\s§]+" value="" placeholder="Nouveau mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et §")' oninput="setCustomValidity('')" required /> <br>
                     <span> <?php echo $erreurNewPassword ?></span> 
                     <label for="confirmNewPassword">Mot de Passe</label><br>
                     <input name="confirmNewPassword" type="password" pattern="[^\s§]+" value="" placeholder="Confirmez le mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <br>
