@@ -30,7 +30,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       return $data;
     }
     function testImages($photosFilled,&$erreurPhotos) {
-    if (empty($_FILES["photos"]["name"][0]) && $_FILES["photos"]["error"] == 0) {
+    if (empty($_FILES["photos"]["name"][0])) {
       $_SESSION["photos"] = "";
     } else {
       $files = array_filter($_FILES['photos']['name']);

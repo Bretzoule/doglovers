@@ -80,7 +80,7 @@ function afficher($donneeBis, $i, $j)
     /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
-    while ($j < count($nbrUser)) {
+    while ($j < count($nbrUser)-1) {
       /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
   récupérer les différentes données présentes dans chaque ligne*/
       $donnee = explode("§", $nbrUser[$j]);

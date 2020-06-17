@@ -10,7 +10,7 @@ function removePic(string $photo, int $indice):string
 {
     $photo = explode("|",$photo);
     if (!empty($photo[$indice])) {
-        $response = unlink("./../../".$photo[$indice]);
+        $response = unlink("./../..".$photo[$indice]);
         $photo[$indice] = "";
         $photo = array_filter($photo);
         unset($photo[sizeof($photo)-1]);
