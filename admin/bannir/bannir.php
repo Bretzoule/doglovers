@@ -21,18 +21,21 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     </div>
 
     <?php
+
+    $user = $_GET["user"];
     function remplacementData(array $userData):array
     {
       $userData[13] = "banned";
       return $userData;
     }
     $lastvalue = true;
+    if (trim($user) != trim($_SESSION["pseudo"])) {
     $path = "./../register/data/userList.txt"; // chemin fichier utilisateur
     $file = fopen($path, 'r'); // ouverture du fichier
     if ($file) { // si le fichier est bien ouvert alors
     while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
         $userData = explode("§", $line); // séparation des données de la ligne utilisateur
-        if($userData[0]==$_SESSION["user"]){
+        if($userData[0]==$user){
             $contents = file_get_contents($path);
             $userData = remplacementData($userData);
             $userData = implode("§",$userData);
@@ -42,18 +45,20 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
           }
     }
     fclose($file);
+  }
+}
     ?>
     <div class="menu">
       <ul>
         <li><a href="../home/accueil.php">Retour à l'accueil</a></li>
       </ul>
     </div>
-<h1>Vous avez banni <?php echo($_SESSION["user"]); ?>!</h1>
-
     <?php
-  }
-  unset($_SESSION['user']);
-  ?>
+    if (!$lastvalue) { ?>
+      <h1>Vous avez banni <?php echo $user; ?>!</h1>      
+    <?php } else { ?>
+      <h1>Vous ne pouvez pas bannir <?php echo $user; ?> ou cet utilisateur n'existe pas !</h1>  
+    <?php } ?>
 </body>
 
 </html>

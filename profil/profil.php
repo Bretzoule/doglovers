@@ -43,7 +43,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           <?php } ?>
           <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
           <?php if(intval($_SESSION['login_Type']) === 3){ ?>
-            <li><a href="../admin/bannir/bannir.php">Bannir <?php echo ($user); ?></a></li>
+            <li><a <?php echo "href='../admin/bannir/bannir?user=". $user .".php'"?>>Bannir <?php echo ($user); ?></a></li>
               <li><a href="../admin/supprimerCompte.php">Supprimer <?php echo ($user); ?></a></li>
             <?php } ?>
         </ul>
@@ -130,7 +130,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
-      while (($j < count($nbrUser) - 1) && (!$fin)) {
+      while (($j < count($nbrUser)) && (!$fin)) {
         /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
   récupérer les différentes données présentes dans chaque ligne*/
         $donnee = explode("§", $nbrUser[$j]);
@@ -139,7 +139,7 @@ ou jusqu'à la fin du tableau*/
           /*si c'est le cas on passe fin a true pour arréter la recherche*/
           $fin = true;
           if($donnee[13]!="banned"){
-$banni = false;
+          $banni = false;
           while (($i < count($donnee) - 1)) {
             /*on fait un tableau de tableau : on reprend le tableau séparer selon
     les § et on le sépare à nouveaux selon les | on pourra donc
