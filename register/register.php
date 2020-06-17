@@ -278,7 +278,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["msgAcc"] = test_input($_POST["msgAcc"]);
         if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["msgAcc"])) {
           $erreurMsgAcc = "Le message d'accueil est invalide.";
-          !$msgAccFilled;
+          $msgAccFilled = false;
         }
       }
 
@@ -332,7 +332,6 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           }
         }
       }
-
       if (empty($_POST["infoschiens"])) {
         $_SESSION["infoschiens"]  = "";
       } else {
