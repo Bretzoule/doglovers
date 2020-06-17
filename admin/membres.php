@@ -32,6 +32,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
           echo "<table>
           <tr>
               <th class='tg-ycr8'>Bannir / Debannir</th>
+              <th class='tg-ycr8'>Promote/Demote</th>
               <th class='tg-ycr8'>Supprimer Profil</th>
               <th class='tg-ycr8'>Modifier le Profil</th>
               <th class='tg-ycr8'>Pseudo</th>
@@ -100,6 +101,11 @@ ou jusqu'à la fin du tableau*/
                       echo "<td class='tg-wa5c'><a href='./bannir/bannir.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Bannir'></a></td>";
                     } else {
                       echo "<td class='tg-wa5c'><a href='./bannir/debannir.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Débannir'></a></td>";
+                    }
+                    if (strpos($donnee[13],"admin") === false) {
+                      echo "<td class='tg-wa5c'><a href='./promote/promote.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Promouvoir'></a></td>";
+                    } else {
+                      echo "<td class='tg-wa5c'><a href='./promote/demote.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Rétrograder'></a></td>";
                     }
                     echo "<td class='tg-wa5c'><a href='./supprimerCompte.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Supprimer'></a></td>
                     <td class='tg-wa5c'><a href='./editUser/editUser.php?userToEdit=". $donnee[0] ."'><input type='button' id='bouton2' value='Modifier'></a></td>
