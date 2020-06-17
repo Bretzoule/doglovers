@@ -102,7 +102,7 @@ ou jusqu'à la fin du tableau*/
                       echo "<td class='tg-wa5c'><a href='./bannir/debannir.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Débannir'></a></td>";
                     }
                     echo "<td class='tg-wa5c'><a href='./supprimerCompte.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Supprimer'></a></td>
-                    <td class='tg-wa5c'><a href='./editUser.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Modifier'></a></td>
+                    <td class='tg-wa5c'><a href='./editUser/editUser.php?userToEdit=". $donnee[0] ."'><input type='button' id='bouton2' value='Modifier'></a></td>
                     <td class='tg-wa5c'>" . $donnee[0] ."</td>
                     <td class='tg-wa5c'>" . $donnee[1] . "</td>
                     <td class='tg-wa5c'>" . $donnee[2] . "</td>
