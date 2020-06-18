@@ -40,9 +40,8 @@ session_start();
          <?php
          $conversation = file_get_contents('destinataires_'.$_SESSION['pseudo'].'.txt');
          $destinataire = explode("|",$conversation);
-
-         for ($i=0; $i < 5; $i++) {
-
+         $i = 0;
+         while($i < sizeof($destinataire)-1) {
            $nomFichier = array($_SESSION['pseudo'], $destinataire[$i]);
            //on les tri par ordre alphabétique
            usort($nomFichier, "strnatcmp");
@@ -53,6 +52,7 @@ session_start();
           <?php
           //$dernierMessage = array_filter($dernierMessage);
           echo($dernierMessage[sizeof($dernierMessage)]);
+          $i++;
          }
              ?>
 </form>
