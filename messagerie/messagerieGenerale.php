@@ -40,10 +40,19 @@ session_start();
          <?php
          $conversation = file_get_contents('destinataires_'.$_SESSION['pseudo'].'.txt');
          $destinataire = explode("|",$conversation);
+
          for ($i=0; $i < 5; $i++) {
+
+           $nomFichier = array($_SESSION['pseudo'], $destinataire[$i]);
+           //on les tri par ordre alphabétique
+           usort($nomFichier, "strnatcmp");
+           $messages = file_get_contents($nomFichier[0].'_'.$nomFichier[1].'.txt');
+           $dernierMessage = explode("\n",$messages);
            ?>
           <a href="./../messagerie/messagerie.php?user=".<?php echo($destinataire[$i]);?>><?php echo($destinataire[$i])?></a>
           <?php
+          //$dernierMessage = array_filter($dernierMessage);
+          echo($dernierMessage[sizeof($dernierMessage)]);
          }
              ?>
 </form>
