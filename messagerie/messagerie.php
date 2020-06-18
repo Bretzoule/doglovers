@@ -51,7 +51,6 @@ if ( window.history.replaceState ) {
   <!--Fin bloc de présentation-->
   <?php
 if (isset($_SESSION["user"])) {
-echo('coucouuuuuuuuuu');
   //on recupère les deux pseudos
   $nomFichier = array($_SESSION['pseudo'], $_SESSION['user']);
   //on les tri par ordre alphabétique
