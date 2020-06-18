@@ -8,7 +8,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
   <head>
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <title>Dog Lovers - Bannir un utilisateur.</title>
+    <title>Dog Lovers - Rétrograder un utilisateur.</title>
     <link rel="stylesheet" type="text/css" href="./bannir.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
@@ -17,7 +17,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     <div id="blocTitre"></div>
     <div id="Titre">
       <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
-      <h1>Banned</h1>
+      <h1>Rétrograder</h1>
     </div>
 
     <?php
@@ -25,7 +25,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     $user = $_GET["user"];
     function remplacementData(array $userData): array
     {
-      $userData[13] = "banned";
+      $userData[13] = "free";
       return $userData;
     }
     $lastvalue = true;
@@ -56,9 +56,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     </div>
     <?php
     if (!$lastvalue) { ?>
-      <h1>Vous avez banni <?php echo $user; ?>!</h1>
+      <h1>Vous avez rétrogradé <?php echo $user; ?>!</h1>
     <?php } else { ?>
-      <h1>Vous ne pouvez pas bannir <?php echo $user; ?> ou cet utilisateur n'existe pas !</h1>
+      <h1>L'utilisateur <?php echo $user; ?> n'existe pas ou ne peut être rétrogradé !</h1>
     <?php } ?>
   </body>
 

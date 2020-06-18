@@ -52,9 +52,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         }
         $a++;
       }
-      echo "<div>" . $informationsVisiteurs . "</div>";
+      echo "<div id=\"textAbo\">" . $informationsVisiteurs . "</div>";
     } else {
-      echo "<div> Si vous étiez abonné(e), vous pourriez voir qui visite votre profil !</div>";
+      echo "<div id=\"textAbo\"> Si vous étiez abonné(e), vous pourriez voir qui visite votre profil !</div>";
     }
     if (isset($_SESSION["modifie"])) {
       $_SESSION["dataPassed"] = "false";
@@ -104,104 +104,114 @@ ou jusqu'à la fin du tableau*/
         //Données modifiables :
     ?>
         <div id="Infos">
-          <div id="BlocInfo">
-            <h2>Photos !</h2>
-            <ul>
-              <li><img src="<?php echo ($donneeBis[12][0]); ?>"></img></li>
-                <?php if (afficher($donneeBis, 12, 1)) { ?>
-              <li><img src="<?php echo ($donneeBis[12][1]); ?>"></img></li>
-            <?php }if (afficher($donneeBis, 12, 2)) { ?>
-              <li><img src="<?php echo ($donneeBis[12][2]); ?>"></img></li>
-            <?php }if (afficher($donneeBis, 12, 3)) { ?>
-              <li><img src="<?php echo ($donneeBis[12][3]); ?>"></img></li>
-            <?php } ?>
-            </ul>
-            <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span>
-            <a href="./../changePicture/changePicture.php"><input type="button" value="Changer les photos !"></a>
-          </div>
-          <div id="BlocInfo">
-            <h2>Informations Générales :</h2>
-            <ul>
-              <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
-        contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
-      Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
-              <li>Pseudo : <?php echo ($donnee[0]);?></li>
-              <?php if (afficher($donneeBis, 1, 0)) { ?>
-                <li>Lieu de résidence : <?php echo ($donnee[1]);
-                                        $_SESSION["lieuRes"] = $donnee[1]; ?></li>
-              <?php } ?>
-              <li>Sexe : <?php echo ($donnee[2]);
-                          $_SESSION["sexe"] = $donnee[2]; ?></li>
-              <li>Date de naissance : <?php echo ($donnee[3]); ?></li>
-              <?php if (afficher($donneeBis, 4, 0)) { ?>
-                <li>Profession : <?php echo ($donnee[4]);
-                                  $_SESSION["profession"] = $donnee[4]; ?></li>
-              <?php } ?>
-              <li>Situation amoureuse : <?php echo ($donneeBis[5][0]);
-                                        $_SESSION["situation"] = $donneeBis[5][0]; ?></li>
-              <?php if (($donneeBis[5][1] == "1") || ($donneeBis[5][1] == "2") || ($donneeBis[5][1] == "3-5") || ($donneeBis[5][1] == "5+")) { ?>
-                <li>Nombre d'enfants : <?php echo ($donneeBis[5][1]);
-                                        $_SESSION["enfants"] = "on";
-                                        $_SESSION["nombreEnf"] = $donneeBis[5][1]; ?></li>
-              <?php } ?>
-            </ul>
-          </div>
-          <div id="BlocInfo">
-            <h2>Informations physiques :</h2>
-            <ul>
-              <li>Poids : <?php echo ($donneeBis[6][0]);
-                          $_SESSION["poids"] = $donneeBis[6][0]; ?> kg</li>
-              <li>Taille : <?php echo ($donneeBis[6][1]);
-                            $_SESSION["taille"] = $donneeBis[6][1]; ?> cm</li>
-              <li>Couleur des cheveux : <?php echo ($donneeBis[6][2]);
-                                        $_SESSION["couleurCheveux"] = $donneeBis[6][2]; ?></li>
-              <li>Couleur des yeux : <?php echo ($donneeBis[6][3]);
-                                      $_SESSION["couleurYeux"] = $donneeBis[6][3]; ?></li>
-            </ul>
-          </div>
-          <div id="BlocInfo">
-            <h2>Informations profil :</h2>
-            <ul>
-              <?php if (afficher($donneeBis, 7, 0)) { ?>
-                <li>Message d'accueil : <?php echo ($donnee[7]);
-                                        $_SESSION["msgAcc"] = $donnee[7]; ?></li>
-                <?php } if (afficher($donneeBis,8,0)) { ?>
-                <li>Citation : <?php echo ($donnee[8]);
-                                $_SESSION["citation"] = $donnee[8]; ?></li>
-                <?php } if (afficher($donneeBis,9,0)){ ?>
-                <li>Interets : <?php echo ($donnee[9]);
-                                $_SESSION["interets"] = $donnee[9]; ?></li>
-              <?php }
-              if ($donnee[10] == "on") { ?>
-                <li>Fumeur ? : <?php echo ("oui");
-                                $_SESSION["fumeur"] = $donnee[10]; ?></li>
-              <?php }
-              if (($donnee[11][0] == "1") || ($donnee[11][0] == "2") || ($donnee[11][0] == "3+")) { ?>
-                <li>Nombre de chiens : <?php echo ($donneeBis[11][0]);
-                                        $_SESSION["chiens"] = "on";
-                                        $_SESSION["nombreChiens"] = $donneeBis[11][0]; ?></li>
-                                        <?php } if (afficher($donneeBis,11,1)){ ?>
-                <li>Infos chiens : <?php echo ($donneeBis[11][1]);
-                                    $_SESSION["infosChiens"] = $donneeBis[11][1]; ?></li>
-              <?php } ?>
-
-            </ul>
-          </div>
-          </div>
-              <br>
-          <div id="Infos">
+          <div id="partGauche">
             <div id="BlocInfo">
-              <h2>Informations privées</h2>
+              <h2>Photos !</h2>
               <ul>
-                <li>Nom : <?php echo ($donneeBis[16][0]);
-                          $_SESSION["nom"] = $donneeBis[16][0]; ?></li>
-                <li>Prénom : <?php echo ($donneeBis[16][1]);
-                              $_SESSION["prenom"] = $donneeBis[16][1]; ?></li>
-                <li>Adresse : <?php echo ($donnee[17]);
-                              $_SESSION["adresse"] = $donnee[17]; ?></li>
+                <li><img src="<?php echo ($donneeBis[12][0]); ?>"></img></li>
+                  <?php if (afficher($donneeBis, 12, 1)) { ?>
+                <li><img src="<?php echo ($donneeBis[12][1]); ?>"></img></li>
+              <?php }if (afficher($donneeBis, 12, 2)) { ?>
+                <div class="clear"></div>
+                <li><img src="<?php echo ($donneeBis[12][2]); ?>"></img></li>
+              <?php }if (afficher($donneeBis, 12, 3)) { ?>
+                <li><img src="<?php echo ($donneeBis[12][3]); ?>"></img></li>
+              <?php } ?>
+              </ul>
+              <div class="clear">Vous pouvez mettre en ligne jusqu'à 4 photos !</div>
+              <a href="./../changePicture/changePicture.php"><input type="button" id="bouton1" value="Changer les photos !"></a>
+            </div>
+            </div>
+
+
+          <div id="partDroite">
+            <div id="BlocInfo">
+              <h2>Informations Générales :</h2>
+              <ul>
+                <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
+          contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
+        Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
+                <li>Pseudo : <?php echo ($donnee[0]);?></li>
+                <?php if (afficher($donneeBis, 1, 0)) { ?>
+                  <li>Lieu de résidence : <?php echo ($donnee[1]);
+                                          $_SESSION["lieuRes"] = $donnee[1]; ?></li>
+                <?php } ?>
+                <li>Sexe : <?php echo ($donnee[2]);
+                            $_SESSION["sexe"] = $donnee[2]; ?></li>
+                <li>Date de naissance : <?php echo ($donnee[3]); ?></li>
+                <?php if (afficher($donneeBis, 4, 0)) { ?>
+                  <li>Profession : <?php echo ($donnee[4]);
+                                    $_SESSION["profession"] = $donnee[4]; ?></li>
+                <?php } ?>
+                <li>Situation amoureuse : <?php echo ($donneeBis[5][0]);
+                                          $_SESSION["situation"] = $donneeBis[5][0]; ?></li>
+                <?php if (($donneeBis[5][1] == "1") || ($donneeBis[5][1] == "2") || ($donneeBis[5][1] == "3-5") || ($donneeBis[5][1] == "5+")) { ?>
+                  <li>Nombre d'enfants : <?php echo ($donneeBis[5][1]);
+                                          $_SESSION["enfants"] = "on";
+                                          $_SESSION["nombreEnf"] = $donneeBis[5][1]; ?></li>
+                <?php } ?>
               </ul>
             </div>
+            <div id="BlocInfo">
+              <h2>Informations physiques :</h2>
+              <ul>
+                <li>Poids : <?php echo ($donneeBis[6][0]);
+                            $_SESSION["poids"] = $donneeBis[6][0]; ?> kg</li>
+                <li>Taille : <?php echo ($donneeBis[6][1]);
+                              $_SESSION["taille"] = $donneeBis[6][1]; ?> cm</li>
+                <li>Couleur des cheveux : <?php echo ($donneeBis[6][2]);
+                                          $_SESSION["couleurCheveux"] = $donneeBis[6][2]; ?></li>
+                <li>Couleur des yeux : <?php echo ($donneeBis[6][3]);
+                                        $_SESSION["couleurYeux"] = $donneeBis[6][3]; ?></li>
+              </ul>
+            </div>
+            <div id="BlocInfo">
+              <h2>Informations profil :</h2>
+              <ul>
+                <?php if (afficher($donneeBis, 7, 0)) { ?>
+                  <li>Message d'accueil : <?php echo ($donnee[7]);
+                                          $_SESSION["msgAcc"] = $donnee[7]; ?></li>
+                  <?php } if (afficher($donneeBis,8,0)) { ?>
+                  <li>Citation : <?php echo ($donnee[8]);
+                                  $_SESSION["citation"] = $donnee[8]; ?></li>
+                  <?php } if (afficher($donneeBis,9,0)){ ?>
+                  <li>Interets : <?php echo ($donnee[9]);
+                                  $_SESSION["interets"] = $donnee[9]; ?></li>
+                <?php }
+                if ($donnee[10] == "on") { ?>
+                  <li>Fumeur ? : <?php echo ("oui");
+                                  $_SESSION["fumeur"] = $donnee[10]; ?></li>
+                <?php }
+                if (($donnee[11][0] == "1") || ($donnee[11][0] == "2") || ($donnee[11][0] == "3+")) { ?>
+                  <li>Nombre de chiens : <?php echo ($donneeBis[11][0]);
+                                          $_SESSION["chiens"] = "on";
+                                          $_SESSION["nombreChiens"] = $donneeBis[11][0]; ?></li>
+                                          <?php } if (afficher($donneeBis,11,1)){ ?>
+                  <li>Infos chiens : <?php echo ($donneeBis[11][1]);
+                                      $_SESSION["infosChiens"] = $donneeBis[11][1]; ?></li>
+                <?php } ?>
+
+              </ul>
+            </div>
+
+            <div id="Infos">
+              <div id="BlocInfo">
+                <h2>Informations privées</h2>
+                <ul>
+                  <li>Nom : <?php echo ($donneeBis[16][0]);
+                            $_SESSION["nom"] = $donneeBis[16][0]; ?></li>
+                  <li>Prénom : <?php echo ($donneeBis[16][1]);
+                                $_SESSION["prenom"] = $donneeBis[16][1]; ?></li>
+                  <li>Adresse : <?php echo ($donnee[17]);
+                                $_SESSION["adresse"] = $donnee[17]; ?></li>
+                </ul>
+              </div>
+            </div>
+            </div>
+                <br>
+
           </div>
+
 
     <?php
       }

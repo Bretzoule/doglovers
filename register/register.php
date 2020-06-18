@@ -16,41 +16,41 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
   <body>
 
   <?php
-    setlocale(LC_ALL,'fr_FR.UTF-8');
-    function phpAlert($msg)
+    setlocale(LC_ALL,'fr_FR.UTF-8'); 
+    function phpAlert($msg) // fonction qui permet de débugguer en affichant une alerte JS
     {
       echo '<script type="text/javascript">alert("' . $msg . '")</script>';
     }
-
-    function test_input($data)
+    //fonction de test de conformité des données
+    function test_input($data) 
     {
       $data = trim($data);
       $data = stripslashes($data);
       $data = htmlspecialchars($data);
       return $data;
     }
-    function testImages($photosFilled,&$erreurPhotos) {
-    if (empty($_FILES["photos"]["name"][0]) && $_FILES["photos"]["error"] == 0) {
+    function testImages($photosFilled,&$erreurPhotos) { 
+    if (empty($_FILES["photos"]["name"][0])) { // vérifie si une image à été upload
       $_SESSION["photos"] = "";
     } else {
-      $files = array_filter($_FILES['photos']['name']);
-      $total = count($_FILES['photos']['name']);
-      $target_dir = "data/uploads/";
+      $files = array_filter($_FILES['photos']['name']); // retire les images "vides" 
+      $total = count($_FILES['photos']['name']); 
+      $target_dir = "data/uploads/"; 
       $i = 0;
-      while (($i < $total) && ($photosFilled)) {
+      while (($i < $total) && ($photosFilled)) { // tant qu'il y a des images dans la queue
         if ($_FILES["photos"]["error"][$i] == 0) {
         $target_file = $target_dir . basename($_FILES["photos"]["tmp_name"][$i]);
-        $imageFileType = strtolower(pathinfo(basename($_FILES["photos"]["name"][$i]), PATHINFO_EXTENSION));
-        $check = getimagesize($_FILES["photos"]["tmp_name"][$i]);
+        $imageFileType = strtolower(pathinfo(basename($_FILES["photos"]["name"][$i]), PATHINFO_EXTENSION)); // récupération de l'extension de fichier
+        $check = getimagesize($_FILES["photos"]["tmp_name"][$i]); 
         if ($check === false) {
-          $photosFilled = false;
+          $photosFilled = false; 
           $erreurPhotos = "Le fichier ne semble pas être une image";
         } else
         if (file_exists($target_file)) {
           $photosFilled = false;
           $erreurPhotos = "Un fichier portant le même nom existe déjà...";
         } else
-        if ($_FILES["photos"]["size"][$i] > 10000000) {
+        if ($_FILES["photos"]["size"][$i] > 10000000) { // la taille est determinée dans le fichier php.ini dans tout les cas
           $photosFilled = false;
           $erreurPhotos = "Le fichier est trop volumineux !";
         } else
@@ -61,8 +61,8 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         }
         if ($photosFilled) {
           $file_name = $target_dir . uniqid($prefix = "photo_") . "." . $imageFileType;
-          if (move_uploaded_file($_FILES["photos"]["tmp_name"][$i], $file_name)) {
-            $_SESSION["photos"] .= "/register/" . $file_name;
+          if (move_uploaded_file($_FILES["photos"]["tmp_name"][$i], $file_name)) { // écriture du fichier définitif
+            $_SESSION["photos"] .= "/register/" . $file_name; // /register ajouté au nom du fichier pour faciliter l'affichage sur les autres pages
             if ($i != ($total - 1)) {
               $_SESSION["photos"] .= "|";
             }
@@ -82,7 +82,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     return($photosFilled);
   }
 
-  function checkAlreadyRegistered()
+  function checkAlreadyRegistered() // vérifie si un utilisateur est déjà enregistré 
 {
   $lastvalue = true;
   $file = fopen('./data/userList.txt', 'r');
@@ -90,7 +90,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     while ((($line = fgets($file)) !== false) && $lastvalue) {
       $userData = explode("§", $line);
       //echo "|" . trim($_SESSION["adresse"]) . "| == |" . trim($userData[1]) . "|";
-      if ((trim($_SESSION["pseudo"]) == trim($userData[0])) || (trim($_SESSION["adresse"]) == trim($userData[sizeof($userData) - 2]))) {
+      if ((trim($_SESSION["pseudo"]) == trim($userData[0])) || (trim($_SESSION["adresse"]) == trim($userData[sizeof($userData) - 2]))) { // compare les mail/pseudo en BDD 
         $lastvalue = false;
         $_SESSION["erreur"] = "login_existant";
       }
@@ -101,6 +101,8 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
   }
 }
+
+/* ****************************  ENSEMBLE DES FONCTIONS DE VERIFICATION DES DONNEES **************************** */
 
     $nomOk = $prenomOk = $adresseOk = $sexeOk = $dateNaissanceOk = $situationOk = $tailleOk = $poidsOk = $CouleurCheveuxOk = $CouleurYeuxOk = $pseudoOk = $passwordOk = false;
 
@@ -276,7 +278,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["msgAcc"] = test_input($_POST["msgAcc"]);
         if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["msgAcc"])) {
           $erreurMsgAcc = "Le message d'accueil est invalide.";
-          !$msgAccFilled;
+          $msgAccFilled = false;
         }
       }
 
@@ -330,7 +332,6 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
           }
         }
       }
-
       if (empty($_POST["infoschiens"])) {
         $_SESSION["infoschiens"]  = "";
       } else {
@@ -363,11 +364,11 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         }
       }
     }
-
+            /* **************************** TEST DE REDIRECTION **************************** */   
     if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $dateNaissanceOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $pseudoOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled && (checkAlreadyRegistered())) {
-      if (testImages($photosFilled,$erreurPhotos)) {
-      $_SESSION["dataPassed"] = "true";
-      header('Location: ./confirmRegistration.php');
+      if (testImages($photosFilled,$erreurPhotos)) { // si toutes les données sont bien remplies (et légales) et que les images le sont aussi 
+      $_SESSION["dataPassed"] = "true"; 
+      header('Location: ./confirmRegistration.php'); // on inscrit 
       }
     }
     ?>

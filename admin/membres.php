@@ -1,3 +1,7 @@
+<?php
+//on démarre une session
+session_start();
+if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) { ?>
   <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
   <html>
 
@@ -13,7 +17,7 @@
     <div id="blocTitre"></div>
     <div id="Titre">
       <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
-      <h1>Liste des Membres</h1>
+      <h1>Liste des Utilisateurs</h1>
     </div>
     <div class="menu">
       <ul>
@@ -22,6 +26,40 @@
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
       </ul>
     </div>
+    <div id="Infos">
+      <div id="autoResize">
+          <?php 
+          echo "<table>
+          <tr>
+              <th class='tg-ycr8'>Bannir / Debannir</th>
+              <th class='tg-ycr8'>Promote/Demote</th>
+              <th class='tg-ycr8'>Supprimer Profil</th>
+              <th class='tg-ycr8'>Modifier le Profil</th>
+              <th class='tg-ycr8'>Pseudo</th>
+              <th class='tg-ycr8'>Lieu de résidence</th>
+              <th class='tg-ycr8'>Sexe</th>
+              <th class='tg-ycr8'>Date de Naissance</th>
+              <th class='tg-ycr8'>Profession</th>
+              <th class='tg-ycr8'>Sitatuation</th>
+              <th class='tg-ycr8'>Nombre d'enfants</th> 
+              <th class='tg-ycr8'>Taille</th>
+              <th class='tg-ycr8'>Poids</th>
+              <th class='tg-ycr8'>Couleur Cheveux</th>
+              <th class='tg-ycr8'>Couleur Yeux</th>
+              <th class='tg-ycr8'>Message Accueil</th>
+              <th class='tg-ycr8'>Citation</th>
+              <th class='tg-ycr8'>Interets</th>
+              <th class='tg-ycr8'>Fumeur</th>
+              <th class='tg-ycr8'>Nombre de Chiens</th>
+              <th class='tg-ycr8'>Informations Chiens</th>
+              <th class='tg-ycr8'>Statut</th>
+              <th class='tg-ycr8'>Date Inscription</th>
+              <th class='tg-ycr8'>UID</th>
+              <th class='tg-ycr8'>Nom</th>
+              <th class='tg-ycr8'>Prénom</th>
+              <th class='tg-ycr8'>Adresse Mail</th>
+              </tr>\n";
+              ?>
 <?php
 function afficher($donneeBis, $i, $j)
 {
@@ -34,8 +72,7 @@ function afficher($donneeBis, $i, $j)
 }
     //on récupère les contenus des fichiers prof et élèves
     $contenu_du_fichierUserList = file_get_contents('./../register/data/userList.txt');
-
-
+    
     //on met chaque ligne dans un tableau
     $nbrUser = explode("\n", $contenu_du_fichierUserList);
     $j = 0;
@@ -44,7 +81,7 @@ function afficher($donneeBis, $i, $j)
     /*on lit le tableau (donc le fichier text ligne par ligne)
 jusqu'à ce qu'on ait trouvé un identifiant correspondant
 ou jusqu'à la fin du tableau*/
-    while ($j < count($nbrUser) - 1) {
+    while ($j < count($nbrUser)-1) {
       /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
   récupérer les différentes données présentes dans chaque ligne*/
       $donnee = explode("§", $nbrUser[$j]);
@@ -57,110 +94,58 @@ ou jusqu'à la fin du tableau*/
           $i++;
         } 
         ?>
-        <div id="Infos">
-          <div id="BlocInfo">
-            <h2>Photos !</h2>
-            <ul>
-              <li><img src="<?php echo ($donneeBis[12][0]); ?>"></img></li>
-                <?php if (afficher($donneeBis, 12, 1)) { ?>
-              <li><img src="<?php echo ($donneeBis[12][1]); ?>"></img></li>
-            <?php }if (afficher($donneeBis, 12, 2)) { ?>
-              <li><img src="<?php echo ($donneeBis[12][2]); ?>"></img></li>
-            <?php }if (afficher($donneeBis, 12, 3)) { ?>
-              <li><img src="<?php echo ($donneeBis[12][3]); ?>"></img></li>
-            <?php } ?>
-            </ul>
-            <span>Vous pouvez mettre en ligne jusqu'à 4 photos !</span>
-            <a href="./changePictures.php"><input type="button" value="Changer les photos !"></a>
-          </div>
-          <div id="BlocInfo">
-            <h2>Informations Générales :</h2>
-            <ul>
-              <!--On ecrit chaque donnée avec soit donnee[$i] si la donnée de
-        contient pas de | soit avec donneeBis[$i][$j] si elle en contient.
-        Puis on stock la donnée dans une variable de session pour pouvoir la réutiliser-->
-              <li>Pseudo : <?php echo ($donnee[0]);?></li>
-              <?php if (afficher($donneeBis, 1, 0)) { ?>
-                <li>Lieu de résidence : <?php echo ($donnee[1]);
-                                        $_SESSION["lieuRes"] = $donnee[1]; ?></li>
-              <?php } ?>
-              <li>Sexe : <?php echo ($donnee[2]);
-                          $_SESSION["sexe"] = $donnee[2]; ?></li>
-              <li>Date de naissance : <?php echo ($donnee[3]); ?></li>
-              <?php if (afficher($donneeBis, 4, 0)) { ?>
-                <li>Profession : <?php echo ($donnee[4]);
-                                  $_SESSION["profession"] = $donnee[4]; ?></li>
-              <?php } ?>
-              <li>Situation amoureuse : <?php echo ($donneeBis[5][0]);
-                                        $_SESSION["situation"] = $donneeBis[5][0]; ?></li>
-              <?php if (($donneeBis[5][1] == "1") || ($donneeBis[5][1] == "2") || ($donneeBis[5][1] == "3-5") || ($donneeBis[5][1] == "5+")) { ?>
-                <li>Nombre d'enfants : <?php echo ($donneeBis[5][1]);
-                                        $_SESSION["enfants"] = "on";
-                                        $_SESSION["nombreEnf"] = $donneeBis[5][1]; ?></li>
-              <?php } ?>
-            </ul>
-          </div>
-          <div id="BlocInfo">
-            <h2>Informations physiques :</h2>
-            <ul>
-              <li>Poids : <?php echo ($donneeBis[6][0]);
-                          $_SESSION["poids"] = $donneeBis[6][0]; ?> kg</li>
-              <li>Taille : <?php echo ($donneeBis[6][1]);
-                            $_SESSION["taille"] = $donneeBis[6][1]; ?> cm</li>
-              <li>Couleur des cheveux : <?php echo ($donneeBis[6][2]);
-                                        $_SESSION["couleurCheveux"] = $donneeBis[6][2]; ?></li>
-              <li>Couleur des yeux : <?php echo ($donneeBis[6][3]);
-                                      $_SESSION["couleurYeux"] = $donneeBis[6][3]; ?></li>
-            </ul>
-          </div>
-          <div id="BlocInfo">
-            <h2>Informations profil :</h2>
-            <ul>
-              <?php if (afficher($donneeBis, 7, 0)) { ?>
-                <li>Message d'accueil : <?php echo ($donnee[7]);
-                                        $_SESSION["msgAcc"] = $donnee[7]; ?></li>
-                <?php } if (afficher($donneeBis,8,0)) { ?>
-                <li>Citation : <?php echo ($donnee[8]);
-                                $_SESSION["citation"] = $donnee[8]; ?></li>
-                <?php } if (afficher($donneeBis,9,0)){ ?>
-                <li>Interets : <?php echo ($donnee[9]);
-                                $_SESSION["interets"] = $donnee[9]; ?></li>
-              <?php }
-              if ($donnee[10] == "on") { ?>
-                <li>Fumeur ? : <?php echo ("oui");
-                                $_SESSION["fumeur"] = $donnee[10]; ?></li>
-              <?php }
-              if (($donnee[11][0] == "1") || ($donnee[11][0] == "2") || ($donnee[11][0] == "3+")) { ?>
-                <li>Nombre de chiens : <?php echo ($donneeBis[11][0]);
-                                        $_SESSION["chiens"] = "on";
-                                        $_SESSION["nombreChiens"] = $donneeBis[11][0]; ?></li>
-                                        <?php } if (afficher($donneeBis,11,1)){ ?>
-                <li>Infos chiens : <?php echo ($donneeBis[11][1]);
-                                    $_SESSION["infosChiens"] = $donneeBis[11][1]; ?></li>
-              <?php } ?>
-
-            </ul>
-          </div>
-          </div>
-              <br>
-          <div id="Infos">
-            <div id="BlocInfo">
-              <h2>Informations privées</h2>
-              <ul>
-                <li>Nom : <?php echo ($donneeBis[16][0]);
-                          $_SESSION["nom"] = $donneeBis[16][0]; ?></li>
-                <li>Prénom : <?php echo ($donneeBis[16][1]);
-                              $_SESSION["prenom"] = $donneeBis[16][1]; ?></li>
-                <li>Adresse : <?php echo ($donnee[17]);
-                              $_SESSION["adresse"] = $donnee[17]; ?></li>
-              </ul>
-            </div>
-    </div>
-  <?php
+              <?php
+                  echo "<tr>
+                    ";
+                    if (strpos($donnee[13],"banned") === false) {
+                      echo "<td class='tg-wa5c'><a href='./bannir/bannir.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Bannir'></a></td>";
+                    } else {
+                      echo "<td class='tg-wa5c'><a href='./bannir/debannir.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Débannir'></a></td>";
+                    }
+                    if (strpos($donnee[13],"admin") === false) {
+                      echo "<td class='tg-wa5c'><a href='./promote/promote.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Promouvoir'></a></td>";
+                    } else {
+                      echo "<td class='tg-wa5c'><a href='./promote/demote.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Rétrograder'></a></td>";
+                    }
+                    echo "<td class='tg-wa5c'><a href='./supprimerCompte.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Supprimer'></a></td>
+                    <td class='tg-wa5c'><a href='./editUser/editUser.php?userToEdit=". $donnee[0] ."'><input type='button' id='bouton2' value='Modifier'></a></td>
+                    <td class='tg-wa5c'>" . $donnee[0] ."</td>
+                    <td class='tg-wa5c'>" . $donnee[1] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[2] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[3] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[4] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[5][0] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[5][1] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[6][0] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[6][1] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[6][2] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[6][3] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[7] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[8] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[9] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[10] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[11][0] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[11][1] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[13] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[14] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[15] . "</td>
+                    <td class='tg-wa5c'>" . $donneeBis[16][0] . "</td>  
+                    <td class='tg-wa5c'>" . $donneeBis[16][1] . "</td>
+                    <td class='tg-wa5c'>" . $donnee[17] . "</td>
+                    </tr> \n\r";
       //on passe à la ligne suivante
       $j++;
+      $i = 0;
     }
+    echo "</table>"
 ?>
+        </div>
+        </div>
   </body>
 
   </html>
+  <?php
+} else {
+header("Location: /home/accueil.php");
+}
+?>

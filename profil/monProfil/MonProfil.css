@@ -1,9 +1,3 @@
-#Infos{
-  display: flex;
-  flex-direction: row;
-}
-
-
 body,html {
     height:100%;
     margin: 0;
@@ -81,19 +75,57 @@ body,html {
     background-color:#B85985;
 }
 
-#BlocInfo {
+ #partGauche #BlocInfo{
     padding: 2%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
     border-radius: 5px;
-    margin-left: 2%;
     background-color: #908CB1;
-    margin-top: 40px;
-    width:fit-content;
     border-radius: 30px;
     box-shadow: 0px 10px 25px 0px gray;
+    margin: 50px 5% 50px 40%;
+}
 
+#partDroite #BlocInfo{
+   padding: 2%;
+   display: flex;
+   flex-direction:column;
+   border-radius: 5px;
+   background-color: #908CB1;
+   border-radius: 30px;
+   box-shadow: 0px 10px 25px 0px gray;
+   margin: 50px 40% 50px 5%;
+   text-align: center;
+}
+
+.clear{
+  clear: both;
+}
+
+#partGauche li{
+  width: 40%;
+  margin: 0 5% 5% 5%;
+  display: flex;
+  float: left;
+}
+
+#partGauche img{
+  width: 100%;
+}
+
+#partGauche ul{
+  list-style-type: none;
+  margin-left:0;
+  padding-left:0;
+  margin-bottom: 50px;
+}
+
+#partGauche{
+  float:left;
+  width:50%;
+}
+
+#partDroite{
+  float: right;
+  width:50%;
 }
 
 #titreTab {
@@ -109,4 +141,39 @@ h2 {
 }
 #titreInfo{
     font-weight: bold;
+}
+
+
+#autoResize {
+    overflow-x: auto;
+}
+
+.tg-wa5c {
+    background-color:#ffffff;text-align:left;vertical-align:top;
+}
+
+.tg-ycr8 {
+    background-color:#ff70bf;text-align:left;vertical-align:top;
+}
+
+#textAbo{
+  width:350px;
+  border: 3px solid #b85985;
+  border-radius: 30px;
+  margin: 50px 0 0 100px;
+  padding: 10px;
+}
+
+#bouton1{
+  position: relative;
+  margin:8px 0;
+  width: 200px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: #908CB1;
+  border: solid 1px gold;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
 }

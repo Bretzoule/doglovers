@@ -10,7 +10,7 @@ function removePic(string $photo, int $indice):string
 {
     $photo = explode("|",$photo);
     if (!empty($photo[$indice])) {
-        $response = unlink("./../../".$photo[$indice]);
+        $response = unlink("./../..".$photo[$indice]);
         $photo[$indice] = "";
         $photo = array_filter($photo);
         unset($photo[sizeof($photo)-1]);
@@ -63,9 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && (
             $_SESSION["erreur"] = "Erreur, image inconnue.";
             break;
     }
-    //header("Location: ./changePicture.php");
+    header("Location: ./changePicture.php");
 } else {
-    //header("Location: /home/accueil.php");
+    header("Location: /home/accueil.php");
 }
 
 ?>
