@@ -126,6 +126,7 @@ h2 {
 }
 #titreInfo{
     font-weight: bold;
+    margin-bottom: 50px;
 }
 
 #resultats{
@@ -176,7 +177,9 @@ img.rounded-corners{
 }
 
 .divUtilisateur{
+    text-decoration: none;
     height: 197px;
+    text-align: center  ;
     width:157px;
     float:left;
     margin: 10px;
@@ -185,5 +188,16 @@ img.rounded-corners{
   .divUtilisateur img{
     width: 100%;
     height: 90%;
+    border-radius: 15px;
+  }
+
+  .divUtilisateur a{
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+  .nomPersonne{
+      text-decoration: none;
+      font:bold italic 1.5em/1.1 "Droid Serif", serif;
   }
   
