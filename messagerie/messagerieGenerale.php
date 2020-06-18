@@ -1,7 +1,7 @@
 <?php
 //on démarre une session
 session_start();
-//if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
+if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) { ?>
   <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
   <html>
 
@@ -38,6 +38,7 @@ session_start();
 
          <h3>Conversation :</h3>
          <?php
+         if(file_exists('destinataires_'.$_SESSION['pseudo'].'.txt')){
          $conversation = file_get_contents('destinataires_'.$_SESSION['pseudo'].'.txt');
          $destinataire = explode("|",$conversation);
          $i = 0;
@@ -50,10 +51,14 @@ session_start();
            ?>
           <a <?php echo "href='../messagerie/messagerie.php?user=". $destinataire[$i] ."'"?>><?php echo($destinataire[$i])?></a>
           <?php
+          //echo sizeof($dernierMessage);
           //$dernierMessage = array_filter($dernierMessage);
-          echo($dernierMessage[sizeof($dernierMessage)-1]);
+          echo($dernierMessage[sizeof($dernierMessage)-2]);
           $i++;
          }
+        }else{
+          echo("Pour démarrer une conversation avec quelqu'un, rendez-vous sur son profil !");
+        }
              ?>
 </form>
   </body>
@@ -61,7 +66,7 @@ session_start();
   </html>
 <?php
 unset($_POST['message']);
-/*} else {
+} else {
   header("Location: /home/accueil.php");
-}*/
+}
 ?>

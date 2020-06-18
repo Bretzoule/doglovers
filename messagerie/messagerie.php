@@ -1,7 +1,7 @@
 <?php
 //on démarre une session
 session_start();
-//if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
+if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) { ?>
 <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
 <html>
 
@@ -12,6 +12,17 @@ session_start();
   <link rel="stylesheet" type="text/css" href="./../profil/monProfil/MonProfil.css">
   <link rel="shortcut icon" href="./../ressources/favicon.ico" />
 </head>
+
+  <?php
+    $erreur = false;
+    if (($_SERVER["REQUEST_METHOD"] == "GET") && (isset($_GET["user"]))) {
+     $_SESSION["user"] = $_GET["user"];
+     $user = $_SESSION["user"];
+    } else if (!isset($_SESSION["user"])) {
+      echo "ALED";
+    }
+  ?>
+
 <script>
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
@@ -27,7 +38,7 @@ if ( window.history.replaceState ) {
   <div class="menu">
     <ul>
       <li><a href="../home/accueil.php">Accueil</a></li>
-      <li><a href="./../profil/profil.php?user=<?php echo ($_SESSION["user"]);?>">Infos <?php echo ($_SESSION["user"]); ?></a></li>
+      <li><a href="./../profil/profil.php?user=<?php echo $_SESSION["user"];?>">Infos <?php echo ($_SESSION["user"]); ?></a></li>
       <li><a class="active" href="">Conversation</a></li>
       <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
       <?php if(intval($_SESSION['login_Type']) === 3){ ?>
@@ -38,15 +49,6 @@ if ( window.history.replaceState ) {
   </div>
   <!--Fin bloc de présentation-->
   <?php
-  echo('iciiiiiii111111111');
-  if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    echo('iciiiiiii22222222');
-    if(isset($_GET["user"])){
-      echo('iciiiiiii');
-    $user = $_GET["user"];
-    $_SESSION["user"]=$user;
-  }
-}
 if (isset($_SESSION["user"])) {
 echo('coucouuuuuuuuuu');
   //on recupère les deux pseudos
@@ -64,30 +66,25 @@ echo('coucouuuuuuuuuu');
     file_put_contents($nomFichier[0].'_'.$nomFichier[1].'.txt', $content, FILE_APPEND);
   }
     if(file_exists('destinataires_'.$_SESSION['pseudo'].'.txt')){
-      echo("coucouuuuuuuuuu \n");
+     
       //on gere le fichier destinataires
       $contenu = file_get_contents('destinataires_'.$_SESSION['pseudo'].'.txt');
       $nomDestinataire = explode('|',$contenu);
       $i = 0;
       $destinataireTrouve = false;
       $destinataire = $_SESSION['user'];
-      echo("destinataire = ".$destinataire."\n");
-      echo("sizeof(contenu)-1) = ".(sizeof($nomDestinataire)-1)."\n");
-      echo("destinataireTrouve = ".$destinataireTrouve."\n");
       while (($i < sizeof($nomDestinataire)-1) && !$destinataireTrouve) {
-        echo("ahhhhhhhhhhhhhh \n");
         if($nomDestinataire[$i]==$destinataire){
-          echo("biiiiiiiiiiiiiiiiiii \n");
+          
           $destinataireTrouve = true;
         }
+        $i++;
       }
       if(!$destinataireTrouve){
-        echo("oooooooooooooooooo \n");
         $destinataire = $_SESSION['user'].'|';
         file_put_contents('destinataires_'.$_SESSION['pseudo'].'.txt', $destinataire, FILE_APPEND);
       }
-    }else{
-      echo("eeeeeeeeeeeeeeeeee\n");
+    } else {
       $destinataire = $_SESSION['user'].'|';
       file_put_contents('destinataires_'.$_SESSION['pseudo'].'.txt', $destinataire, FILE_APPEND);
     }
@@ -96,15 +93,19 @@ echo('coucouuuuuuuuuu');
 
     <h3>Conversation :</h3>
     <?php
-    //on récupère le contenu du fichier à savoir la conversation
-    $conversation = file_get_contents($nomFichier[0].'_'.$nomFichier[1].'.txt');
-    $nbrMsg = explode("\n", $conversation);
-    $j = 0;
-    while (($j < count($nbrMsg) - 1)) {
-      /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
+    if (file_exists($nomFichier[0] . '_' . $nomFichier[1] . '.txt')) {
+      //on récupère le contenu du fichier à savoir la conversation
+      $conversation = file_get_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt');
+      $nbrMsg = explode("\n", $conversation);
+      $j = 0;
+      while (($j < count($nbrMsg) - 1)) {
+        /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
       récupérer les différentes données présentes dans chaque ligne*/
-      echo $nbrMsg[$j]."</br>";
-      $j++;
+        echo $nbrMsg[$j] . "</br>";
+        $j++;
+      }
+    } else {
+      echo ("<span> Pour démarrer la conversation, envoyez un message ! ☺ </span> <br>");
     }
     ?>
 
@@ -123,8 +124,8 @@ echo('coucouuuuuuuuuu');
   echo("erreurrrrrr");
 }*/
 unset($_POST['message']);
-unset($_SESSION['user']);
-/*} else {
+//unset($_SESSION['user']);
+} else {
 header("Location: /home/accueil.php");
-}*/
+}
 ?>
