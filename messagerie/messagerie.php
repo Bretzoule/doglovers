@@ -12,7 +12,11 @@ session_start();
     <link rel="stylesheet" type="text/css" href="./../profil/monProfil/MonProfil.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
-
+  <script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
+  </script>
   <body>
     <!--Début bloc de présentation-->
     <div id="blocTitre"></div>
@@ -47,6 +51,8 @@ $content = $heure." ".$_SESSION['pseudo']." : ".$_POST['message']. "\r\n";
 //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
 //le fichier est créé s'il n'éxiste pas
 file_put_contents($nomFichier[0].'_'.$nomFichier[1].'.txt', $content, FILE_APPEND);
+$destinataire = $_SESSION['user'].'|';
+file_put_contents('destinataires_'.$_SESSION['pseudo'].'.txt', $destinataire, FILE_APPEND);
 }
 ?>
  <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
@@ -71,7 +77,6 @@ file_put_contents($nomFichier[0].'_'.$nomFichier[1].'.txt', $content, FILE_APPEN
            <input type="submit" value="Envoyer "></input>
          </div><!--fin partie boutons-->
 </form>
-
   </body>
 
   </html>
