@@ -20,20 +20,21 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       <h1>Accueil</h1>
     </div>
     <script>
+    // fonction ajax relative à la recherche dynamique
       function showResult(str) {
-        if (str.length == 0) {
+        if (str.length == 0) { 
           document.getElementById("resultats").innerHTML = "";
           document.getElementById("resultats").style.visibility = "hidden";
           return;
         }
-        var xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest(); // création de la requete
         xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("resultats").innerHTML = this.responseText;
+          if (this.readyState == 4 && this.status == 200) { // si la page est prete
+            document.getElementById("resultats").innerHTML = this.responseText; 
             document.getElementById("resultats").style.visibility = "visible";
           }
         }
-        xmlhttp.open("GET", "./recherche/recherche.php?recherche=" + str, true);
+        xmlhttp.open("GET", "./recherche/recherche.php?recherche=" + str, true); // on ouvre la requete
         xmlhttp.send();
       }
     </script>
@@ -62,7 +63,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <div id="page">
       <h2 id='titreTab'> Bonjour <?php echo htmlspecialchars($_SESSION["pseudo"]); ?> !</h2>
       <div id="BlocInfo">
-        <span id="titreInfo">Hey hey hey hey hey</span> <br>
+        <span id="titreInfo">Liste de nos derniers membres :</span><br>
         <?php
         if (isset($_SESSION["memberShipExpired"]) && ($_SESSION["memberShipExpired"] == "true")) {
           echo "<span id='memberShipExpired'> Votre abonnement à expiré, pour vous réabonner, cliquez ici : </span>";
@@ -70,6 +71,25 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           unset($_SESSION["memberShipExpired"]);
         }
         ?>
+          <?php 
+             $path = "./../register/data/userList.txt"; // chemin du fichier des utilisateurs
+             $content = file_get_contents($path); // récupère les données du fichier
+             $user = array(); 
+             $usersrc = array();
+             $content = explode("\n",$content); // récupère les données user
+             $content = array_filter($content); // efface les champs vides (le explode \n génère une dernière case d'array vide.)
+             $size = sizeof($content) > 20 ? 20 : sizeof($content); // permet de générer dynamiquement la liste des personnes
+             for ($i=0; $i < $size; $i++) { 
+               $tmp = explode("§",$content[$i]);  // séparation données de l'utilisateur 
+               $tmptmp = explode("|",$tmp[sizeof($tmp)-7]); // récupération images 
+               array_push($user,$tmp[0]); // ajout du pseudo de l'utilsiateur à la liste des données
+               $yee = !empty($tmptmp[0]) ? $tmptmp[0] : "/ressources/dogloverslogo.png" ; // assigne la référence d'une image ou une image par défaut selon si l'utilisateur possède un image de profil ou non
+               array_push($usersrc,$yee); // ajout de la source de l'image de l'utilsiateur à la liste des données
+             } ?>
+                <?php 
+                for ($i=0; $i < $size-1; $i++) { ?>
+               <div class="divUtilisateur"><a <?php echo 'href="/profil/profil.php?user='. $user[$i] .'">';?><?php echo $user[$i]; ?><img src="<?php echo $usersrc[$i]; ?>" alt="Nom <?php echo $i; ?>" width="200" height="200" /></a></div>
+              <?php } ?>
       </div>
     </div>
   </body>
