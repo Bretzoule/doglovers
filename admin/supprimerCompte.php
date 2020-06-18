@@ -44,17 +44,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     $path = "./../register/data/matchs.txt"; // chemin fichier utilisateur
     $contenu = file_get_contents($path);
     $contenuLigne = explode("\n", $contenu);
-    for ($i=0; $i < (sizeOf($contenuLigne)-1); $i++) { 
+    for ($i=0; $i < (sizeOf($contenuLigne)-2); $i++) {
       if (startsWith($contenuLigne[$i], $nomuser)) {
         $contenuLigne[$i] = "";
-        echo 'lol';
-        $contenuLigne = array_filter($contenuLigne);
       } else if (strrpos($contenuLigne[$i], $nomuser) !== false) {
-        echo 'aya';
         $part2 = explode("§", $contenuLigne[$i]);
-        for ($i=1; $i < sizeOf($part2); $i++) {
-          if (strrpos($part2[$i], $nomuser) !== false) {
-            $part2[$i] = "";
+        for ($j=1; $j < sizeOf($part2); $j++) {
+          print_r($part2);
+          if (strrpos($part2[$j], $nomuser) !== false) {
+            $part2[$j] = "";
+            $part2 = array_filter($part2);
           }
         }
         array_filter($part2);
