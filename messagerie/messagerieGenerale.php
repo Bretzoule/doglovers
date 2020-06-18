@@ -41,7 +41,7 @@ session_start();
          $conversation = file_get_contents('destinataires_'.$_SESSION['pseudo'].'.txt');
          $destinataire = explode("|",$conversation);
          for ($i=0; $i < 5; $i++) {
-?>
+           ?>
           <a href="./../messagerie/messagerie.php?user=".<?php echo($destinataire[$i]);?>><?php echo($destinataire[$i])?></a>
           <?php
          }
