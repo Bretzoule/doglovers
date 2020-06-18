@@ -278,6 +278,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <div class="textModif">
       Vous pouvez ici modifier vos informations personnelles.
     </div>
+    <div id="blocSuppr">
+      Si vous souhaitez supprimer votre compte : <a <?php echo "href='./supprimerCompte.php?user=" . $_SESSION["pseudo"] . "'" ?>><input type='button' id='bouton2' value='Supprimer'></a>
+    </div>
 
     <form accept-charset="UTF-8" action="modification.php" method="POST">
       <div class="page">
