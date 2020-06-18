@@ -38,14 +38,17 @@ if ( window.history.replaceState ) {
   </div>
   <!--Fin bloc de présentation-->
   <?php
+  echo('iciiiiiii111111111');
   if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    echo('iciiiiiii22222222');
     if(isset($_GET["user"])){
+      echo('iciiiiiii');
     $user = $_GET["user"];
     $_SESSION["user"]=$user;
   }
-}elseif (isset($_SESSION['user'])) {
+}
+if (isset($_SESSION["user"])) {
 echo('coucouuuuuuuuuu');
-
   //on recupère les deux pseudos
   $nomFichier = array($_SESSION['pseudo'], $_SESSION['user']);
   //on les tri par ordre alphabétique
@@ -115,10 +118,12 @@ echo('coucouuuuuuuuuu');
 
 </html>
 <?php
-}else{
-  echo("erreur");
 }
+/*}else{
+  echo("erreurrrrrr");
+}*/
 unset($_POST['message']);
+unset($_SESSION['user']);
 /*} else {
 header("Location: /home/accueil.php");
 }*/
