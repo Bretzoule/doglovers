@@ -38,6 +38,10 @@ if ( window.history.replaceState ) {
   </div>
   <!--Fin bloc de présentation-->
   <?php
+  
+    $user = $_GET["user"];
+    $_SESSION["user"]=$user;
+
   //on recupère les deux pseudos
   $nomFichier = array($_SESSION['pseudo'], $_SESSION['user']);
   //on les tri par ordre alphabétique

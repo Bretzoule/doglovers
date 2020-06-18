@@ -48,10 +48,10 @@ session_start();
            $messages = file_get_contents($nomFichier[0].'_'.$nomFichier[1].'.txt');
            $dernierMessage = explode("\n",$messages);
            ?>
-          <a href="./../messagerie/messagerie.php?user=".<?php echo($destinataire[$i]);?>><?php echo($destinataire[$i])?></a>
+          <a <?php echo "href='../messagerie/messagerie.php?user=". $destinataire[$i] ."'"?>><?php echo($destinataire[$i])?></a>
           <?php
           //$dernierMessage = array_filter($dernierMessage);
-          echo($dernierMessage[sizeof($dernierMessage)]);
+          echo($dernierMessage[sizeof($dernierMessage)-1]);
           $i++;
          }
              ?>
