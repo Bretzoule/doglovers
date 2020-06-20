@@ -13,7 +13,6 @@ function removePic(string $photo, int $indice):string
         $response = unlink("./../..".$photo[$indice]);
         $photo[$indice] = "";
         $photo = array_filter($photo);
-        unset($photo[sizeof($photo)-1]);
     }
     
     $photo = implode("|",$photo);
@@ -47,16 +46,16 @@ function getData($indice) {
 if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && ($_SESSION["login_Type"] > 0)) {
     $nbPic = intval($_GET["numero"]);
     switch ($nbPic) {
-        case '0':
+        case 0:
             getData(0);
             break;
-        case '1':
+        case 1:
             getData(1);
             break;
-        case '2':
+        case 2:
             getData(2);
             break;
-        case '3':
+        case 3:
             getData(3);
             break;
         default:
