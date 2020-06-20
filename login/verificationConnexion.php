@@ -1,5 +1,6 @@
 <?php
 session_start();
+if (($_SERVER["REQUEST_METHOD"] == "POST") && (isset($_POST["pseudo"]) && isset($_POST["password"]))) {
 $_SESSION['pseudo'] = $_POST['pseudo']; // sauvegarde du pseudo utilisateur
 $path = "./../register/data/userList.txt"; // chemin du fichier des utilisateurs
 
@@ -80,4 +81,5 @@ if ($file) {
 // }
 $_SESSION["error"] = "error"; // mise en erreur
 header('Location: /login/login.php');  // redirection vers l'accueil
-?>
+} else 
+header('Location: /login/login.php');  // redirection vers l'accueil?>
