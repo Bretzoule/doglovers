@@ -121,7 +121,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         //le fichier est créé s'il n'éxiste pas
         file_put_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt', $content, FILE_APPEND);
       }
-      if (file_exists('destinataires_' . $_SESSION['pseudo'] . '.txt')) {
+      if (file_exists('destinataires_' . $_SESSION['pseudo'] . '.txt') && $messageValide) {
 
         //on gere le fichier destinataires
         $contenu = file_get_contents('destinataires_' . $_SESSION['pseudo'] . '.txt');

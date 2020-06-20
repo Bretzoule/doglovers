@@ -21,8 +21,9 @@
   }
 
   function deleteMsg(msgId,convID) {
-    if (confirm('Voulez-vous vraiment supprimer ce message ?')) {
-      if (msgId.length == 0) {
+    if (confirm('Voulez-vous vraiment signaler ce message ?')) {
+      raison = prompt("Merci de rentrer la raison de votre signalement :");
+      if (raison.length == 0) {
         return;
       }
       var xmlhttp = new XMLHttpRequest(); // création de la requete
@@ -32,7 +33,7 @@
           window.history.replaceState(null, null, window.location.href);
         }
       }
-      xmlhttp.open("GET", "./reportMessage.php?msgID=" + msgId + "&convID=" + convID, true); // on ouvre la requete
+      xmlhttp.open("GET", "./reportMessage.php?msgID=" + msgId + "&convID=" + convID+"&raison="+raison, true); // on ouvre la requete
       xmlhttp.send();
     }
   }

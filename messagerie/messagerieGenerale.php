@@ -12,11 +12,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
     <link rel="stylesheet" type="text/css" href="./../profil/monProfil/MonProfil.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
-  <script>
-      if ( window.history.replaceState ) {
-          window.history.replaceState( null, null, window.location.href );
-      }
-  </script>
   <body>
     <!--Début bloc de présentation-->
     <div id="blocTitre"></div>
@@ -54,7 +49,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
           //echo sizeof($dernierMessage);
           //$dernierMessage = array_filter($dernierMessage);
           $dernierMessageFlat = explode("§",$dernierMessage[sizeof($dernierMessage)-2]);
-          echo($dernierMessageFlat[0]);
+          echo($dernierMessageFlat[0] . "<br>"); 
           $i++;
          }
         }else{
