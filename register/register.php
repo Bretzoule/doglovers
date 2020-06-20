@@ -124,7 +124,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       } else {
         $nomOk = true;
         $_SESSION["nom"] = test_input($_POST["nom"]);
-        if (preg_match("/[^a-zA-Z éàôöîïèç\-]+/", $_SESSION["nom"])) {
+        if (preg_match("/[^a-zA-Z 'éàôöîïèç\-]+/", $_SESSION["nom"])) {
           $erreurNom = "Le nom est invalide.";
           $nomOk = false;
         }
@@ -134,7 +134,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       } else {
         $prenomOk = true;
         $_SESSION["prenom"] = test_input($_POST["prenom"]);
-        if (preg_match("/[^a-zA-Z éàôöîïèç \-]+/", $_SESSION["prenom"])) {
+        if (preg_match("/[^a-zA-Z éàôöîïèç'\-]+/", $_SESSION["prenom"])) {
           $erreurPrenom = "Le prénom est invalide.";
           $prenomOk = false;
         }
@@ -276,7 +276,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["msgAcc"] = "";
       } else {
         $_SESSION["msgAcc"] = test_input($_POST["msgAcc"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["msgAcc"])) {
+        if (preg_match("/[^a-zA-Z ,.'\-!:?éàôöîïèç&#]+/", $_SESSION["msgAcc"])) {
           $erreurMsgAcc = "Le message d'accueil est invalide.";
           $msgAccFilled = false;
         }
@@ -286,7 +286,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["citation"] = "";
       } else {
         $_SESSION["citation"] = test_input($_POST["citation"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]/", $_SESSION["citation"])) {
+        if (preg_match("/[^a-zA-Z ,.'\-!:?éàôöîïèç&#]/", $_SESSION["citation"])) {
           $erreurCitation = "La citation est invalide.";
           $citationFilled = false;
         }
@@ -296,7 +296,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["interets"] = "";
       } else {
         $_SESSION["interets"] = test_input($_POST["interets"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["interets"])) {
+        if (preg_match("/[^a-zA-Z ,.'\-!:?éàôöîïèç&#]+/", $_SESSION["interets"])) {
           $erreurInterets = "Les centres d'interets sont invalides.";
           $interetFilled = false;
         }
@@ -336,7 +336,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["infoschiens"]  = "";
       } else {
         $_SESSION["infoschiens"] = test_input($_POST["infoschiens"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["infoschiens"])) {
+        if (preg_match("/[^a-zA-Z ,.'\-!:?éàôöîïèç&#]+/", $_SESSION["infoschiens"])) {
           $erreurInfoschiens = "Les informations à propos des chiens sont invalides ou contiennent des caractères interdits.";
           $infoschiensFilled = false;
         }
@@ -347,7 +347,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
       } else {
         $pseudoOk = "true";
         $_SESSION["pseudo"] = test_input($_POST["pseudo"]);
-        if (preg_match("/[^a-zA-Z \-éàôöîïè]+/", $_SESSION["pseudo"])) {
+        if (preg_match("/[^a-zA-Z '\-éàôöîïèç&#]+/", $_SESSION["pseudo"])) {
           $erreurPseudo = "Le pseudo est invalide.";
           $pseudoOk = false;
         }
