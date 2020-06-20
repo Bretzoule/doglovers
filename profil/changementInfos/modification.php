@@ -279,7 +279,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       Vous pouvez ici modifier vos informations personnelles.
     </div>
     <div id="blocSuppr">
-      Si vous souhaitez supprimer votre compte : <a <?php echo "href='./supprimerCompte.php?user=" . $_SESSION["pseudo"] . "'" ?>><input type='button' id='bouton2' value='Supprimer'></a>
+      Si vous souhaitez supprimer votre compte : <a <?php echo "href='./supprimerCompteMembre.php'" ?>><input type='button' id='bouton2' value='Supprimer'></a>
     </div>
 
     <form accept-charset="UTF-8" action="modification.php" method="POST">
@@ -302,20 +302,20 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <input name="adresse" pattern="[^§]+" type="text" value="<?php echo $_SESSION['adresse'] ?>" placeholder="<?php echo $_SESSION['adresse'] ?>" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /> <span>* <?php echo $erreurAdresse; ?> </span><br>
 
             <label for="lieures">Lieu de résidence, cette adresse sera publique.</label><br>
-            <input name="lieures" pattern="[^§]+" type="text" value="<?php echo $_SESSION['lieuRes'] ?>" placeholder="<?php echo $_SESSION['lieuRes'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurLieuRes; ?> <br>
+            <input name="lieures" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['lieuRes'])) echo $_SESSION['lieuRes']; ?>" placeholder="<?php if(isset($_SESSION['lieuRes'])) echo $_SESSION['lieuRes']; ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurLieuRes; ?> <br>
 
             <label for="sexe">Sexe</label><br>
-            <label><input checked="checked" name="sexe" type="radio" id="Homme" value="Homme" /> Homme </label>
-            <label><input name="sexe" type="radio" value="Femme" id="Femme" /> Femme </label> <br>
-            <label><input name="sexe" type="radio" value="Autre" id="Autre" /> Autre </label>
+            <label><input <?php if(isset($_SESSION['sexe']) && ($_SESSION['sexe'] == "Homme")) echo "checked='checked'"; ?> name="sexe" type="radio" id="Homme" value="Homme" /> Homme </label>
+            <label><input <?php if(isset($_SESSION['sexe']) && ($_SESSION['sexe'] == "Femme")) echo "checked='checked'"; ?> name="sexe" type="radio" value="Femme" id="Femme" /> Femme </label> <br>
+            <label><input <?php if(isset($_SESSION['sexe']) && ($_SESSION['sexe'] == "Autre")) echo "checked='checked'"; ?> name="sexe" type="radio" value="Autre" id="Autre" /> Autre </label>
             <?php echo $erreurSexe; ?> <br>
 
             <br><label for="profession">Profession</label> <br>
-            <input name="profession" pattern="[^§]+" type="text" value="<?php echo $_SESSION['profession'] ?>" placeholder="<?php echo $_SESSION['profession'] ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurProfession; ?> <br>
+            <input name="profession" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['profession'])) echo $_SESSION['profession']; ?>" placeholder="<?php if(isset($_SESSION['lieuRes'])) echo $_SESSION['lieuRes']; ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurProfession; ?> <br>
 
             <label for="situation">Situation amoureuse</label> <span>* <?php echo $erreurSituation ?> </span><br>
-            <label><input checked="checked" name="situation" type="radio" value="Célibataire" id="Célibataire" required /> Célibataire</label> /
-            <label><input name="situation" type="radio" id="Compliqué" value="Compliqué" /> Compliqué</label>
+            <label><input <?php if(isset($_SESSION['situation']) && ($_SESSION['situation'] == "Célibataire")) echo "checked='checked'"; ?> name="situation" type="radio" value="Célibataire" id="Célibataire" required /> Célibataire</label> /
+            <label><input <?php if(isset($_SESSION['situation']) && ($_SESSION['situation'] == "Compliqué")) echo "checked='checked'"; ?> name="situation" type="radio" id="Compliqué" value="Compliqué" /> Compliqué</label>
             <label><input id="enfants" name="enfants" type="checkbox" onclick="changeVisibility('nbEnfants')" <?php if (isset($_SESSION['enfants'])) echo "checked='checked'"; ?> />avec enfants.</label><br>
             <div id="nbEnfants"> <span>* <?php echo $erreurNombreEnf; ?> </span>
               <select name="nombreEnf" id="nombreEnf">
