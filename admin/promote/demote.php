@@ -9,7 +9,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Rétrograder un utilisateur.</title>
-    <link rel="stylesheet" type="text/css" href="./bannir.css">
+    <link rel="stylesheet" type="text/css" href="../bannir/bannir.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
 
@@ -54,12 +54,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
       </ul>
       </ul>
     </div>
-    <?php
-    if (!$lastvalue) { ?>
-      <h1>Vous avez rétrogradé <?php echo $user; ?>!</h1>
-    <?php } else { ?>
-      <h1>L'utilisateur <?php echo $user; ?> n'existe pas ou ne peut être rétrogradé !</h1>
-    <?php } ?>
+
+    <div class="messBannir">
+      <?php
+      if (!$lastvalue) { ?>
+        <h1>Vous avez rétrogradé <?php echo $user; ?>!</h1>
+      <?php } else { ?>
+        <h1>L'utilisateur <?php echo $user; ?> n'existe pas ou ne peut être rétrogradé !</h1>
+      <?php } ?>
+    </div>
+
   </body>
 
   </html>

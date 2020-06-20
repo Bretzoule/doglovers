@@ -54,12 +54,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
       </ul>
       </ul>
     </div>
-    <?php
-    if (!$lastvalue) { ?>
-      <h1>Vous avez débanni <?php echo $user; ?>!</h1>
-    <?php } else { ?>
-      <h1>L'utilisateur <?php echo $user; ?> n'existe pas !</h1>
-    <?php } ?>
+    <div class="messBannir">
+      <?php
+      if (!$lastvalue) { ?>
+        <h1>Vous avez débanni <?php echo $user; ?>!</h1>
+      <?php } else { ?>
+        <h1>L'utilisateur <?php echo $user; ?> n'existe pas !</h1>
+      <?php } ?>
+    </div>
+
   </body>
 
   </html>
