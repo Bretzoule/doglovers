@@ -59,10 +59,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               $i++;
             }
           } else {
-            echo ("<span> Pour démarrer une conversation avec quelqu'un, rendez-vous sur son profil !</span>");
+            echo ("<div id='messPasAbo'> Pour démarrer une conversation avec quelqu'un, rendez-vous sur son profil !</div>");
           }
         } else {
-          echo "<span>Vous n'êtes pas abonnés... Pour voir vos messages, veuillez-vous abonner !</span>";
+          echo "<div id='messPasAbo'>Vous n'êtes pas abonnés... Pour voir vos messages, veuillez-vous abonner !</div>";
         }
         ?>
       </div>
