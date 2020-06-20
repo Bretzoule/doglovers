@@ -88,7 +88,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                array_push($usersrc,$yee); // ajout de la source de l'image de l'utilsiateur à la liste des données
              } ?>
                 <?php 
-                for ($i=0; $i < $size-1; $i++) { 
+                for ($i=0; $i < $size; $i++) { 
                 if (trim($user[$i]) != $_SESSION["pseudo"]) {?> <!-- Empeche l'affichage de l'utilisateur actuellement connecté dans la liste des derniers membres -->
                <div class="divUtilisateur"><a <?php echo 'href="/profil/profil.php?user='. $user[$i] .'">';?><span class="nomPersonne"><?php echo $user[$i]; ?> </span> <img src="<?php echo $usersrc[$i]; ?>" alt="Nom <?php echo $i; ?>" width="200" height="200" /></a></div>
               <?php } } ?>
