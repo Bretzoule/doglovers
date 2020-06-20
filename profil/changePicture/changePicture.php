@@ -7,14 +7,18 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Recherche</title>
-    <link rel="stylesheet" type="text/css" href="./../changementPw/modificationPw.css">
+    <link rel="stylesheet" type="text/css" href="./changePicture.css">
     <link rel="shortcut icon" href="./../../ressources/favicon.ico" />
+    <script type="text/javascript" src="changePicture.js"></script>
   </head>
 
   <body>
     <div id="bloc_Image_reset">
-      <a href="./../monProfil/MonProfil.php"><img id="bloc_ImageTitre" src="/ressources/logoBis.png" alt="logo"></img></a>
-      <div id="oubliage">
+      <div id="part_logo">
+        <a href="./../monProfil/MonProfil.php"><img src="/ressources/logoBis.png" alt="logo" class="rounded-corners"></img></a>
+      </div>
+
+      <div id="ensemble_photo">
         <?php
 
         function phpAlert($msg)
@@ -122,34 +126,47 @@ ou jusqu'à la fin du tableau*/
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
               <ul id="modeligneSAH">
                 <li>
-                  <a href="./removePicture.php?numero=0"><input type="button" value="Supprimer la photo !"></a>
-                  <img src="<?php if (afficher($donneeBis, 12, 0)) {
-                              echo ($donneeBis[12][0]);
-                            } else echo "/ressources/logo.png" ?>"></img> <br>
-                  <input type="file" id="photo0" name="photos0" accept="image/png, image/jpeg, image/jpg, image/gif"> <br>
+                  <div class="img_1">
+                    <img src="<?php if (afficher($donneeBis, 12, 0)) {
+                                echo ($donneeBis[12][0]);
+                              } else echo "/ressources/logo.png" ?>"></img>
+                    <a href="./removePicture.php?numero=0"><input type="button" value="Supprimer !"></a><br>
+                    <input type="file" id="photo0" name="photos0" accept="image/png, image/jpeg, image/jpg, image/gif">
+                  </div>
                 </li>
+
                 <li>
-                  <a href="./removePicture.php?numero=1"><input type="button" value="Supprimer la photo !"></a>
-                  <img src="<?php if (afficher($donneeBis, 12, 1)) {
-                              echo ($donneeBis[12][1]);
-                            } else echo "/ressources/logo.png" ?>"></img> <br>
-                  <input type="file" id="photo1" name="photos1" accept="image/png, image/jpeg, image/jpg, image/gif">
+                  <div class="img_2">
+                    <img src="<?php if (afficher($donneeBis, 12, 1)) {
+                                echo ($donneeBis[12][1]);
+                              } else echo "/ressources/logo.png" ?>"></img>
+                    <a href="./removePicture.php?numero=1"><input type="button" value="Supprimer !"></a><br>
+                    <input type="file" id="photo1" name="photos1" accept="image/png, image/jpeg, image/jpg, image/gif">
+                  </div>
                 </li>
+                <div class="clear"></div>
                 <li>
-                  <a href="./removePicture.php?numero=2"><input type="button" value="Supprimer la photo !"></a>
-                  <img src="<?php if (afficher($donneeBis, 12, 2)) {
-                              echo ($donneeBis[12][2]);
-                            } else echo "/ressources/logo.png" ?>"></img> <br>
-                  <input type="file" id="photo2" name="photos2" accept="image/png, image/jpeg, image/jpg, image/gif">
+                  <div class="img_3">
+                    <img src="<?php if (afficher($donneeBis, 12, 2)) {
+                                echo ($donneeBis[12][2]);
+                              } else echo "/ressources/logo.png" ?>"></img>
+                    <a href="./removePicture.php?numero=2"><input type="button" value="Supprimer !"></a><br>
+                    <input type="file" id="photo2" name="photos2" accept="image/png, image/jpeg, image/jpg, image/gif">
+                  </div>
                 </li>
+
                 <li>
-                  <a href="./removePicture.php?numero=3"><input type="button" value="Supprimer la photo !"></a>
-                  <img src="<?php if (afficher($donneeBis, 12, 3)) {
-                              echo ($donneeBis[12][3]);
-                            } else echo "/ressources/logo.png" ?>"></img> <br>
-                  <input type="file" id="photo3" name="photos3" accept="image/png, image/jpeg, image/jpg, image/gif">
+                  <div class="img_4">
+                    <img src="<?php if (afficher($donneeBis, 12, 3)) {
+                                echo ($donneeBis[12][3]);
+                              } else echo "/ressources/logo.png" ?>"></img>
+                    <a href="./removePicture.php?numero=3"><input type="button" value="Supprimer !"></a><br>
+                    <input type="file" id="photo3" name="photos3" accept="image/png, image/jpeg, image/jpg, image/gif">
+                  </div>
+
                 </li>
               </ul>
+              <div class="clear"></div>
               <input type="submit" value="Modifier !"></input>
             </form>
             <?php

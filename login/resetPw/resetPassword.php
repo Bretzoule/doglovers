@@ -11,7 +11,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         <link rel="shortcut icon" href="./../ressources/favicon.ico" />
     </head>
     <?php
-    
+
     function phpAlert($msg) {
         echo '<script type="text/javascript">alert("' . $msg . '")</script>';
     }
@@ -67,14 +67,18 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
 
     <body>
         <div id="bloc_Image_reset">
-            <img src="/ressources/dogloverslogo.png" alt="logo"></img>
+          <div id="part_logo">
+            <a href="../login.php"><img src="/ressources/dogloverslogo.png" alt="logo"></img></a>
+
+          </div>
+
             <div id="oubliage">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <label for="PseudoReset">Pseudo</label><br>
                     <input name="PseudoReset" type="text" pattern="[^\s§]+" value="" placeholder="Pseudo" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /> <br>
                 <label for="adresseM">Adresse Mail</label><br>
                     <input name="adresseM" type="text" pattern="[^\s§]+" value="" placeholder="Adresse Mail" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et ; ")' oninput="setCustomValidity('')" required /> <br>
-                    <span> <?php echo $erreurAdresseM ?></span> <br>
+                    <span> <?php echo $erreurAdresseM ?></span>
                     <label for="password">Mot de Passe</label><br>
                     <input name="Newpassword" type="password" pattern="[^\s§]+" value="" placeholder="Nouveau mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <br>
                     <span> <?php echo $erreurNewPassword ?></span> <br>

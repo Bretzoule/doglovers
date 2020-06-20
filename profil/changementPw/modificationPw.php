@@ -11,7 +11,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <link rel="shortcut icon" href="./../ressources/favicon.ico" />
     </head>
     <?php
-    
+
     function phpAlert($msg) {
         echo '<script type="text/javascript">alert("' . $msg . '")</script>';
     }
@@ -28,7 +28,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     $NewpasswordOk = $OldPwOk = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     if (empty($_POST["Newpassword"]) || empty($_POST["confirmNewPassword"])) {
         $erreurNewPassword = "Les champs  mot de passe sont requis.";
     } else {
@@ -59,18 +59,23 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
     <body>
         <div id="bloc_Image_reset">
-            <a href="./../monProfil/MonProfil.php"><img id="bloc_ImageTitre" src="/ressources/logoBis.png" alt="logo"></img></a>
+          <div id="part_logo">
+            <a href="./../monProfil/MonProfil.php"><img src="/ressources/logoBis.png" alt="logo" class="rounded-corners"></img></a>
+          </div>
+
             <div id="oubliage">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <label for="OldPw">Ancien mot de passe</label><br>
-                    <input name="OldPw" type="password" pattern="[^\s§]+" value="" placeholder="Ancien mot de passe." oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et §")' oninput="setCustomValidity('')" required /> <br>
-                    <span> <?php echo $erreurOldPw; ?></span> 
+                    <input name="OldPw" type="password" pattern="[^\s§]+" value="" placeholder="Ancien mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et §")' oninput="setCustomValidity('')" required /> <br>
+                    <span> <?php echo $erreurOldPw; ?></span>
                     <br>
                 <label for="Newpassword">Nouveau mot de passe</label><br>
                     <input name="Newpassword" type="password" pattern="[^\s§]+" value="" placeholder="Nouveau mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et §")' oninput="setCustomValidity('')" required /> <br>
-                    <span> <?php echo $erreurNewPassword ?></span> 
-                    <label for="confirmNewPassword">Mot de Passe</label><br>
+                    <span> <?php echo $erreurNewPassword ?></span>
+                    <br>
+                    <label for="confirmNewPassword">Confirmez mot de passe</label><br>
                     <input name="confirmNewPassword" type="password" pattern="[^\s§]+" value="" placeholder="Confirmez le mot de passe" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser \"espace\" et § ")' oninput="setCustomValidity('')" required /> <br>
+                    <br>
                     <input type="submit" value="Réinitialiser"></input>
                 </form>
                 <span><?php
