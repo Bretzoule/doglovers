@@ -64,8 +64,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         <?php } ?>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <?php if (intval($_SESSION['login_Type']) === 3) { ?>
-          <li><a href="../admin/bannir/bannir.php">Bannir <?php echo ($_SESSION["user"]); ?></a></li>
-          <li><a href="../admin/supprimerCompte.php">Supprimer <?php echo ($_SESSION["user"]); ?></a></li>
+          <li><a href="../admin/bannir/bannir.php?=">Bannir <?php echo ($_SESSION["user"]); ?></a></li>
+          <li><a href="../admin/bannir/debannir.php?=">Débannir <?php echo ($_SESSION["user"]); ?></a></li>
+          <li><a href="../admin/supprimerCompte.php?=">Supprimer <?php echo ($_SESSION["user"]); ?></a></li>
         <?php } ?>
       </ul>
     </div>
@@ -85,9 +86,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
           if ($userData[sizeOf($userData) - 6] == "banned") {
             $banned = true;
           }
-          if($userData[sizeOf($userData) - 6] == "free") {
-            $canSend = false;
-          }
+          // if($userData[sizeOf($userData) - 6] == "free") {
+          //   $canSend = false;
+          // }
           $lastvalue = false;
         }
       }
@@ -96,7 +97,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
     }
     $messageValide = true;
-    if (isset($_SESSION["user"]) && $canSend) {
+    if (isset($_SESSION["user"])) { //&& $canSend) {
       //on recupère les deux pseudos
       $nomFichier = array($_SESSION['pseudo'], $_SESSION['user']);
       //on les tri par ordre alphabétique
@@ -143,6 +144,28 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         file_put_contents('destinataires_' . $_SESSION['pseudo'] . '.txt', $destinataire, FILE_APPEND);
       }
     }
+    if (file_exists('destinataires_' . $_SESSION['user'] . '.txt') && $messageValide) {
+
+      //on gere le fichier destinataires
+      $contenu = file_get_contents('destinataires_' . $_SESSION['user'] . '.txt');
+      $nomDestinataire = explode('|', $contenu);
+      $i = 0;
+      $destinataireTrouve = false;
+      $destinataire = $_SESSION['pseudo'];
+      while (($i < sizeof($nomDestinataire) - 1) && !$destinataireTrouve) {
+        if ($nomDestinataire[$i] == $destinataire) {
+          $destinataireTrouve = true;
+        }
+        $i++;
+      }
+      if (!$destinataireTrouve) {
+        $destinataire = $_SESSION['pseudo'] . '|';
+        file_put_contents('destinataires_' . $_SESSION['user'] . '.txt', $destinataire, FILE_APPEND);
+      }
+    } else {
+      $destinataire = $_SESSION['pseudo'] . '|';
+      file_put_contents('destinataires_' . $_SESSION['user'] . '.txt', $destinataire, FILE_APPEND);
+    }
     ?>
       <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 
@@ -161,9 +184,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         récupérer les différentes données présentes dans chaque ligne*/
               $message = explode('§', $nbrMsg[$j]);
               if (startsWith($message[1],$_SESSION["pseudo"] . "_")) {
-                echo "<span class ='user1' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
+                echo "<div class ='user1' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</div> <br> ";
               } else {
-                echo "<span class ='user2' onclick='reportMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
+                echo "<div class ='user2' onclick='reportMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</div> <br> ";
               }
               $j++;
             }
@@ -175,12 +198,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
             if ($banned) { ?>
               <span> Cet utilisateur est banni, il ne recevra vos message qu'à son débanissement.</span> <br>
             <?php } ?>
-            <input name="message" type="text" pattern="[^§]+" value="" placeholder="écrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
-            <div class="part_boutons">
-              <!--partie boutons-->
-              <input type="submit" value="Envoyer "></input>
+            <div id="inputEnvoie">
+              <input name="message" type="text" pattern="[^§]+" value="" placeholder="Ecrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
+              <div class="part_boutons">
+                <!--partie boutons-->
+                <input type="submit" value="Envoyer "></input>
+              </div>
+              <!--fin partie boutons-->
             </div>
-            <!--fin partie boutons-->
+
           <?php } else { ?>
             <span>Cet utilisateur n'existe plus.... il a supprimé son profil</span> <br>
             <span>Vous pouvez choisir de supprimer la conversation via ce boutton : <a href='./supprimerConversation.php?user=<?php echo $user; ?>'><input type='button' id='bouton2' value='Supprimer'> </span>
