@@ -84,10 +84,19 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       //on les tri par ordre alphabétique
       usort($nomFichier, "strnatcmp");
       //on écrit le tableau pour vérifier
+      if (empty($_POST["profession"])) {
+        $_SESSION["profession"] = "";
+      } else {
+        $_SESSION["profession"] = test_input($_POST["profession"]);
+        if (preg_match("/[^a-zA-Z \-éàôöîïè]+/", $_SESSION["profession"])) {
+          $erreurMessage = "Le Message contient des caractères interdits.";
+          $messageValide = false;
+        }
+      }
       //print_r($nomFichier);
       //on met dans content ce qu'on veut écrire dans le fichier
       $heure = date("H:i");
-      if (!empty($_POST['message'])) {
+      if (!empty($_POST['message']) && $messageValide) {
         $content = $heure . " " . $_SESSION['pseudo'] . " : " . $_POST['message'] . "\n";
         //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
         //le fichier est créé s'il n'éxiste pas
@@ -120,9 +129,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
 
         <h3>Conversation :</h3>
         <?php
-        if (file_exists($nomFichier[0] . '_' . $nomFichier[1] . '.txt')) {
+        $leChemin = $nomFichier[0] . '_' . $nomFichier[1] . '.txt';
+        if (file_exists($leChemin)) {
           //on récupère le contenu du fichier à savoir la conversation
-          $conversation = file_get_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt');
+          $conversation = file_get_contents($leChemin);
           $nbrMsg = explode("\n", $conversation);
           $j = 0;
           while (($j < count($nbrMsg) - 1)) {
