@@ -148,7 +148,7 @@ ou jusqu'à la fin du tableau*/
               <div id="BlocInfo"> <!--photo-->
               <h2>Photos !</h2>
               <ul>
-              <?php if (afficher($donneeBis, 12, 1)) { ?>
+              <?php if (afficher($donneeBis, 12, 0)) { ?>
               <li><img src="<?php echo ($donneeBis[12][0]); ?>"></img></li>
               <?php } else {
                 echo "Aucune photo disponible... :(";
