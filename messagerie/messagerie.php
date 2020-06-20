@@ -9,7 +9,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
-    <link rel="stylesheet" type="text/css" href="./../profil/monProfil/MonProfil.css">
+    <link rel="stylesheet" type="text/css" href="./messagerieGenerale.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
     <script type="text/javascript" src="messagerie.js"></script>
   </head>
@@ -120,7 +120,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
         //le fichier est créé s'il n'éxiste pas
         file_put_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt', $content, FILE_APPEND);
-      }
       if (file_exists('destinataires_' . $_SESSION['pseudo'] . '.txt') && $messageValide) {
 
         //on gere le fichier destinataires
@@ -143,53 +142,58 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         $destinataire = $_SESSION['user'] . '|';
         file_put_contents('destinataires_' . $_SESSION['pseudo'] . '.txt', $destinataire, FILE_APPEND);
       }
+    }
     ?>
       <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 
-        <h3>Conversation :</h3>
-        <?php
-        $leChemin = $nomFichier[0] . '_' . $nomFichier[1] . '.txt';
-        if (file_exists($leChemin)) {
-          //on récupère le contenu du fichier à savoir la conversation
-          $conversation = file_get_contents($leChemin);
-          $nbrMsg = explode("\n", $conversation);
-          $j = 0;
-          while (($j < count($nbrMsg) - 1)) {
-            /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
-      récupérer les différentes données présentes dans chaque ligne*/
-            $message = explode('§', $nbrMsg[$j]);
-            if (startsWith($message[1],$_SESSION["pseudo"] . "_")) {
-              echo "<span class ='user1' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
-            } else {
-              echo "<span class ='user2' onclick='reportMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
+        <div id="textConv">Conversation :</div>
+
+        <div id="blocConv">
+          <?php
+          $leChemin = $nomFichier[0] . '_' . $nomFichier[1] . '.txt';
+          if (file_exists($leChemin)) {
+            //on récupère le contenu du fichier à savoir la conversation
+            $conversation = file_get_contents($leChemin);
+            $nbrMsg = explode("\n", $conversation);
+            $j = 0;
+            while (($j < count($nbrMsg) - 1)) {
+              /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
+        récupérer les différentes données présentes dans chaque ligne*/
+              $message = explode('§', $nbrMsg[$j]);
+              if (startsWith($message[1],$_SESSION["pseudo"] . "_")) {
+                echo "<span class ='user1' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
+              } else {
+                echo "<span class ='user2' onclick='reportMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
+              }
+              $j++;
             }
-            $j++;
+          } else {
+            echo ("<span> Pour démarrer la conversation, envoyez un message ! ☺ </span> <br>");
           }
-        } else {
-          echo ("<span> Pour démarrer la conversation, envoyez un message ! ☺ </span> <br>");
-        }
-        ?>
-        <?php if (!$lastvalue) {
-          if ($banned) { ?>
-            <span> Cet utilisateur est banni, il ne recevra vos message qu'à son débanissement.</span> <br>
+          ?>
+          <?php if (!$lastvalue) {
+            if ($banned) { ?>
+              <span> Cet utilisateur est banni, il ne recevra vos message qu'à son débanissement.</span> <br>
+            <?php } ?>
+            <input name="message" type="text" pattern="[^§]+" value="" placeholder="écrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
+            <div class="part_boutons">
+              <!--partie boutons-->
+              <input type="submit" value="Envoyer "></input>
+            </div>
+            <!--fin partie boutons-->
+          <?php } else { ?>
+            <span>Cet utilisateur n'existe plus.... il a supprimé son profil</span> <br>
+            <span>Vous pouvez choisir de supprimer la conversation via ce boutton : <a href='./supprimerConversation.php?user=<?php echo $user; ?>'><input type='button' id='bouton2' value='Supprimer'> </span>
           <?php } ?>
-          <input name="message" type="text" pattern="[^§]+" value="" placeholder="écrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
-          <div class="part_boutons">
-            <!--partie boutons-->
-            <input type="submit" value="Envoyer "></input>
-          </div>
-          <!--fin partie boutons-->
-        <?php } else { ?>
-          <span>Cet utilisateur n'existe plus.... il a supprimé son profil</span> <br>
-          <span>Vous pouvez choisir de supprimer la conversation via ce boutton : <a href='./supprimerConversation.php?user=<?php echo $user; ?>'><input type='button' id='bouton2' value='Supprimer'> </span>
-        <?php } ?>
+        </div>
+
       </form>
   </body>
 
   </html>
 <?php
     } else{
-  echo "<span>Vous ne pouvez pas communiquer avec cet utilisateur, il n'est pas abonné ou alors ce compte n'exite pas.</span>"; 
+  echo "<span>Vous ne pouvez pas communiquer avec cet utilisateur, il n'est pas abonné ou alors ce compte n'exite pas.</span>";
 }
     unset($_POST['message']);
     //unset($_SESSION['user']);
