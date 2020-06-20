@@ -185,7 +185,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $_SESSION["profession"] = "";
       } else {
         $_SESSION["profession"] = test_input($_POST["profession"]);
-        if (preg_match("/[^a-zA-Z \-éàôöîïè]+/", $_SESSION["profession"])) {
+        if (preg_match("/[^a-zA-Z \-éàôöîïèç]+/", $_SESSION["profession"])) {
           $erreurProfession = "La profession est invalide.";
           $professionFilled = false;
         }
