@@ -39,7 +39,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
             while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
                 $userData = explode("§", $line); // séparation des données de la ligne utilisateur
                 //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
-                if (trim($_SESSION["userToEdit"]) == trim($userData[0])) { // si l'adresse mail entrée correspond a une adresse mail en bdd alors 
+                if (trim($_SESSION["userToEdit"]) == trim($userData[0])) { // si l'adresse mail entrée correspond a une adresse mail en bdd alors
                     $_SESSION["editMsgAcc"] = $userData[7];
                     $_SESSION["editCitation"] = $userData[8];
                     $_SESSION["editInterets"] = $userData[9];
@@ -104,17 +104,19 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
 
     <body>
         <div id="bloc_Image_reset">
-            <a href="/admin/membres.php"><img id="bloc_ImageTitre" src="/ressources/logoBis.png" alt="logo"></img></a>
+          <div id="part_logo">
+            <a href="/admin/membres.php"><img src="/ressources/logoBis.png" alt="logo" class="rounded-corners"></img></a>
+          </div>
+
             <div id="oubliage">
                 <h1>Edition en tant qu'Admin de la page de <?php if (isset($_SESSION["userToEdit"])) { echo $_SESSION["userToEdit"];}?></h1>
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <label for="editMsgAcc">Editer le message d'accueil</label><br>
                     <input name="editMsgAcc" type="text" pattern="[^§]+" value="<?php echo $_SESSION["editMsgAcc"]?>" placeholder="Message d'accueil" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser § ")' oninput="setCustomValidity('')" /> <br>
-                    <span> <?php echo $erreurMsgAcc; ?></span> 
-                    <br>
+                    <span> <?php echo $erreurMsgAcc; ?></span>
                 <label for="editCitation">Editer la citation</label><br>
                     <input name="editCitation" type="text" pattern="[^§]+" value="<?php echo $_SESSION["editCitation"]?>" placeholder="Citation" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utilsier § ")' oninput="setCustomValidity('')" /> <br>
-                    <span> <?php echo $erreurCitation ?></span> 
+                    <span> <?php echo $erreurCitation ?></span>
                     <label for="editInterets">Editer les interets</label><br>
                     <input name="editInterets" type="text" pattern="[^§]+" value="<?php echo $_SESSION["editInterets"]?>" placeholder="Interets" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser  § ")' oninput="setCustomValidity('')" /> <br>
                     <span> <?php echo $erreurInterets ?></span>
