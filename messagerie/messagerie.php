@@ -11,6 +11,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
     <link rel="stylesheet" type="text/css" href="./../profil/monProfil/MonProfil.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
+    <script type="text/javascript" src="messagerie.js"></script>
   </head>
 
   <?php
@@ -38,15 +39,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
   } else {
     $user = $_SESSION["user"];
   }
+
+   // Merci stack Overflow - https://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
+   function startsWith($haystack, $needle)
+   {
+     $length = strlen($needle);
+     return (substr($haystack, 0, $length) === $needle);
+   }
+
   ?>
-
-  <script>
-    // Merci Stack OverFlow https://stackoverflow.com/questions/6320113/how-to-prevent-form-resubmission-when-page-is-refreshed-f5-ctrlr 
-    if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-    }
-  </script>
-
   <body>
     <!--Début bloc de présentation-->
     <div id="blocTitre"></div>
@@ -95,12 +96,12 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       //on les tri par ordre alphabétique
       usort($nomFichier, "strnatcmp");
       //on écrit le tableau pour vérifier
-      
+
       if (empty($_POST["message"]) || $_POST["message"] == "0") {
         $messageValide = false;
       } else {
         $message = test_input($_POST["message"]);
-        if (preg_match("/[^a-zA-Z \-éàôöîïè]+/", $message)) {
+        if (!preg_match("/[^§]+/", $message)) {
           $erreurMessage = "Le Message contient des caractères interdits.";
           $messageValide = false;
         }
@@ -109,7 +110,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       //on met dans content ce qu'on veut écrire dans le fichier
       $heure = date("H:i");
       if ($messageValide) {
-        $content = $heure . " " . $_SESSION['pseudo'] . " : " . $message . "§" . uniqid($_SESSION['pseudo']."_") ."\n";
+        $content = $heure . " " . $_SESSION['pseudo'] . " : " . $message . "§" . uniqid($_SESSION['pseudo'] . "_") . "\n";
         //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
         //le fichier est créé s'il n'éxiste pas
         file_put_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt', $content, FILE_APPEND);
@@ -151,7 +152,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
             /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
       récupérer les différentes données présentes dans chaque ligne*/
             $message = explode('§', $nbrMsg[$j]);
-            echo $message[0] . '<br>';
+            if (startsWith($message[1],$_SESSION["pseudo"] . "_")) {
+              echo "<span class ='user1' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
+            } else {
+              echo "<span class ='user2' onclick='reportMsg(" . '"' . $message[1] . '"' .",". '"' . $leChemin . '"' . ")'>" . $message[0] . "</span> <br> ";
+            }
             $j++;
           }
         } else {
@@ -174,6 +179,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         <?php } ?>
       </form>
   </body>
+
   </html>
 <?php
     }
