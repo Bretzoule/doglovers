@@ -3,7 +3,7 @@
     window.history.replaceState(null, null, window.location.href);
   }
 
-  function deleteMsg(msgId,convId) {
+  function deleteMsg(msgId,convID) {
     if (confirm('Voulez-vous vraiment supprimer ce message ?')) {
       if (msgId.length == 0) {
         return;
@@ -20,7 +20,7 @@
     }
   }
 
-  function deleteMsg(msgId,convId) {
+  function deleteMsg(msgId,convID) {
     if (confirm('Voulez-vous vraiment supprimer ce message ?')) {
       if (msgId.length == 0) {
         return;
@@ -32,7 +32,7 @@
           window.history.replaceState(null, null, window.location.href);
         }
       }
-      xmlhttp.open("GET", "./supprimerMessage.php?msgID=" + msgId + "&convID=" + convID, true); // on ouvre la requete
+      xmlhttp.open("GET", "./reportMessage.php?msgID=" + msgId + "&convID=" + convID, true); // on ouvre la requete
       xmlhttp.send();
     }
   }
