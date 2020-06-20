@@ -15,6 +15,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
 
   <?php
 
+  function test_input($data)
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
+
   function phpAlert($msg)
   {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
@@ -26,6 +35,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
     $user = $_SESSION["user"];
   } else if (!isset($_SESSION["user"])) {
     phpAlert("Aucun utilisateur en base.");
+  } else {
+    $user = $_SESSION["user"];
   }
   ?>
 
@@ -77,18 +88,19 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
     } else {
       phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
     }
-
+    $messageValide = true;
     if (isset($_SESSION["user"])) {
       //on recupère les deux pseudos
       $nomFichier = array($_SESSION['pseudo'], $_SESSION['user']);
       //on les tri par ordre alphabétique
       usort($nomFichier, "strnatcmp");
       //on écrit le tableau pour vérifier
-      if (empty($_POST["profession"])) {
-        $_SESSION["profession"] = "";
+      
+      if (empty($_POST["message"]) || $_POST["message"] == "0") {
+        $messageValide = false;
       } else {
-        $_SESSION["profession"] = test_input($_POST["profession"]);
-        if (preg_match("/[^a-zA-Z \-éàôöîïè]+/", $_SESSION["profession"])) {
+        $message = test_input($_POST["message"]);
+        if (preg_match("/[^a-zA-Z \-éàôöîïè]+/", $message)) {
           $erreurMessage = "Le Message contient des caractères interdits.";
           $messageValide = false;
         }
@@ -96,8 +108,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       //print_r($nomFichier);
       //on met dans content ce qu'on veut écrire dans le fichier
       $heure = date("H:i");
-      if (!empty($_POST['message']) && $messageValide) {
-        $content = $heure . " " . $_SESSION['pseudo'] . " : " . $_POST['message'] . "\n";
+      if ($messageValide) {
+        $content = $heure . " " . $_SESSION['pseudo'] . " : " . $message . "§" . uniqid($_SESSION['pseudo']."_") ."\n";
         //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
         //le fichier est créé s'il n'éxiste pas
         file_put_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt', $content, FILE_APPEND);
@@ -138,7 +150,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
           while (($j < count($nbrMsg) - 1)) {
             /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
       récupérer les différentes données présentes dans chaque ligne*/
-            echo $nbrMsg[$j] . "</br>";
+            $message = explode('§', $nbrMsg[$j]);
+            echo $message[0] . '<br>';
             $j++;
           }
         } else {

@@ -53,7 +53,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
           <?php
           //echo sizeof($dernierMessage);
           //$dernierMessage = array_filter($dernierMessage);
-          echo($dernierMessage[sizeof($dernierMessage)-2]);
+          $dernierMessageFlat = explode("§",$dernierMessage[sizeof($dernierMessage)-2]);
+          echo($dernierMessageFlat[0]);
           $i++;
          }
         }else{
