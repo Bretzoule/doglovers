@@ -143,7 +143,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         $destinataire = $_SESSION['user'] . '|';
         file_put_contents('destinataires_' . $_SESSION['pseudo'] . '.txt', $destinataire, FILE_APPEND);
       }
-    }
     if (file_exists('destinataires_' . $_SESSION['user'] . '.txt') && $messageValide) {
 
       //on gere le fichier destinataires
@@ -166,6 +165,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       $destinataire = $_SESSION['pseudo'] . '|';
       file_put_contents('destinataires_' . $_SESSION['user'] . '.txt', $destinataire, FILE_APPEND);
     }
+  }
     ?>
       <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 
