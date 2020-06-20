@@ -9,7 +9,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
-    <link rel="stylesheet" type="text/css" href="./../profil/monProfil/MonProfil.css">
+    <link rel="stylesheet" type="text/css" href="./messagerieGenerale.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
   <body>
@@ -31,7 +31,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
 
  <form accept-charset="UTF-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 
-         <h3>Conversation :</h3>
+   <div id="textConv">Conversations</div>
+   <div id="listeConv">
+     <div class="titreConv">
+       Retrouvez ici les derniers messages de chaque conversation.
+     </div>
          <?php
          if(file_exists('destinataires_'.$_SESSION['pseudo'].'.txt')){
          $conversation = file_get_contents('destinataires_'.$_SESSION['pseudo'].'.txt');
@@ -49,13 +53,14 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
           //echo sizeof($dernierMessage);
           //$dernierMessage = array_filter($dernierMessage);
           $dernierMessageFlat = explode("§",$dernierMessage[sizeof($dernierMessage)-2]);
-          echo($dernierMessageFlat[0] . "<br>"); 
+          echo($dernierMessageFlat[0] . "<br>");
           $i++;
          }
         }else{
           echo("Pour démarrer une conversation avec quelqu'un, rendez-vous sur son profil !");
         }
              ?>
+           </div>
 </form>
   </body>
 

@@ -1,0 +1,116 @@
+body,html {
+    height:100%;
+    margin: 0;
+    background-color: aliceblue;
+
+}
+
+#blocTitre {
+    padding:2%;
+    background-image: url(https://previews.123rf.com/images/booyy/booyy1508/booyy150800047/44063670-soft-color-roses-background.jpg);
+    height: 17%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top:0;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+#Titre {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-20%, -50%);
+    z-index: 1;
+    top: 15%;
+    width: 80%;
+    overflow: hidden;
+    font-family:Work Sans,Open Sans,Helvetica,Arial,sans-serif!important;
+}
+
+#Titre > h1 {
+    padding-top: 50px;
+}
+#Titre > img {
+    padding-right: 5px;
+    z-index: 0;
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+
+.menu {
+    z-index: 1;
+    position: sticky;
+    top:0;
+}
+.menu > ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    background-color:#EF5C76;
+}
+.menu > ul > li {
+    float:left;
+}
+.menu > ul > .deconnexion {
+    float:right;
+}
+.menu > ul > li > a {
+    display: block;
+    color:white;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 15px;
+
+}
+.menu > ul > li > a:hover:not(.active) {
+    background-color:#F68387;
+}
+.active {
+    background-color:#B85985;
+}
+
+#textConv{
+  font-size: 40px;
+  width:30%;
+  margin: 50px 0 50px 35%;
+  padding: 20px 0 20px 0;
+  background-color: white;
+  border:5px solid #b85985;
+  border-radius: 30px;
+  text-align: center;
+
+}
+
+#textNewConv{
+  margin-left: 50px;
+}
+
+#listeConv{
+  background-color: white;
+  border:5px solid #b85985;
+  border-radius: 30px;
+  width: 50%;
+  margin-left: 25%;
+  padding: 20px;
+}
+
+.titreConv{
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 0 10px 10px;
+}
+
+#blocConv{
+  border:5px solid #b85985;
+  border-radius: 30px;
+  background: white;
+  width: 60%;
+  margin-left: 20%;
+  padding:20px;
+}
