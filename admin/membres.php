@@ -61,15 +61,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
               </tr>\n";
               ?>
 <?php
-function afficher($donneeBis, $i, $j)
-{
-  if (!isset($donneeBis[$i][$j]) || ($donneeBis[$i][$j]) == "") {
-    $afficher = false;
-  } else {
-    $afficher = true;
-  }
-  return ($afficher);
-}
+
     //on récupère les contenus des fichiers prof et élèves
     $contenu_du_fichierUserList = file_get_contents('./../register/data/userList.txt');
     
