@@ -152,6 +152,8 @@ ou jusqu'à la fin du tableau*/
                   <li>Nombre d'enfants : <?php echo ($donneeBis[5][1]);
                                           $_SESSION["enfants"] = "on";
                                           $_SESSION["nombreEnf"] = $donneeBis[5][1]; ?></li>
+                <?php } elseif ($donneeBis[5][1] == "-1") { ?>
+                  <li>Nombre d'enfants : "non-mentionné" </li>
                 <?php } ?>
               </ul>
             </div>
