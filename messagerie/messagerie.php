@@ -59,7 +59,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       <ul>
         <li><a href="../home/accueil.php">Accueil</a></li>
         <li><a href="./../profil/profil.php?user=<?php echo $_SESSION["user"]; ?>">Infos <?php echo ($_SESSION["user"]); ?></a></li>
-        <li><a class="active" href="">Conversation</a></li>
+        <?php if (intval($_SESSION['login_Type']) >= 2) { ?>
+        <li><a class="active" href="">Conversation avec <?php echo $_SESSION["user"]; ?></a></li>
+        <?php } ?>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <?php if (intval($_SESSION['login_Type']) === 3) { ?>
           <li><a href="../admin/bannir/bannir.php">Bannir <?php echo ($_SESSION["user"]); ?></a></li>
@@ -70,6 +72,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
     <!--Fin bloc de présentation-->
     <?php
     $banned = false;
+    $canSend = true;
     $lastvalue = true;
     $path = "./../register/data/userList.txt"; // chemin fichier utilisateur
     $file = fopen($path, 'r'); // ouverture du fichier
@@ -79,8 +82,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         $userData = explode("§", $line); // séparation des données de la ligne utilisateur
         //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
         if ($userData[0] == $user) { // si le pseudo match avec une entrée en BDD
-          if ($userData[sizeOf($userData) - 7] == "banned") {
+          if ($userData[sizeOf($userData) - 6] == "banned") {
             $banned = true;
+          }
+          if($userData[sizeOf($userData) - 6] == "free") {
+            $canSend = false;
           }
           $lastvalue = false;
         }
@@ -90,7 +96,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       phpAlert("Une erreur est survenue lors de l'accès au site...Veuillez réessayer!");
     }
     $messageValide = true;
-    if (isset($_SESSION["user"])) {
+    if (isset($_SESSION["user"]) && $canSend) {
       //on recupère les deux pseudos
       $nomFichier = array($_SESSION['pseudo'], $_SESSION['user']);
       //on les tri par ordre alphabétique
@@ -182,10 +188,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
 
   </html>
 <?php
-    }
-    /*}else{
-  echo("erreurrrrrr");
-}*/
+    } else{
+  echo "<span>Vous ne pouvez pas communiquer avec cet utilisateur, il n'est pas abonné ou alors ce compte n'exite pas.</span>"; 
+}
     unset($_POST['message']);
     //unset($_SESSION['user']);
   } else {
