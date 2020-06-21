@@ -49,13 +49,26 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               usort($nomFichier, "strnatcmp");
               $messages = file_get_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt');
               $dernierMessage = explode("\n", $messages);
+                          $destinataireBis = explode("_",$destinataire[$i]);
+                          if($destinataireBis[1]!="bloqué"){
         ?>
               <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataire[$i] . "'" ?>><?php echo ($destinataire[$i]) ?></a>
         <?php
+      }else{
+        ?>
+        <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a>
+<?php
+echo(" est bloqué.<br>");
+    }
               //echo sizeof($dernierMessage);
               //$dernierMessage = array_filter($dernierMessage);
               $dernierMessageFlat = explode("§", $dernierMessage[sizeof($dernierMessage) - 2]);
-              echo ($dernierMessageFlat[0] . "<br>");
+              echo ($dernierMessageFlat[0]);
+if($destinataireBis[1]!="bloqué"){
+              ?>
+              <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION[$destinataire[$i]] = ""; ?></a>
+              <?php
+            }
               $i++;
             }
           } else {

@@ -116,6 +116,20 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       //print_r($nomFichier);
       //on met dans content ce qu'on veut écrire dans le fichier
       $heure = date("H:i");
+      ////////////////////////////////////
+      $contenu = file_get_contents('destinataires_' . $user . '.txt');
+      $nomDestinataireBloque = explode('|', $contenu);
+$b = 0;
+$destinataireBloque = false;
+while(($b < sizeof($nomDestinataireBloque) - 1) && !$destinataireBloque){
+  $destinataireBis = explode("_",$nomDestinataireBloque[$b]);
+      if(isset($destinataireBis[1]) && $destinataireBis[1]=="bloqué"){
+        echo("Cet utilisateur vous a bloqué, vous ne pouvez pas lui envoyer de message.");
+$destinataireBloque = true;
+      }
+      $b++;
+    }
+      ////////////////////////////////
       if ($messageValide) {
         $content = $heure . " " . $_SESSION['pseudo'] . " : " . $message . "§" . uniqid($_SESSION['pseudo'] . "_") . "\n";
         //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
@@ -130,9 +144,12 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
         $destinataireTrouve = false;
         $destinataire = $_SESSION['user'];
         while (($i < sizeof($nomDestinataire) - 1) && !$destinataireTrouve) {
-          if ($nomDestinataire[$i] == $destinataire) {
+          /////////////////////////
+          $destinataireBis = explode("_",$nomDestinataire[$i]);
+          if ($destinataireBis[0] == $destinataire) {
             $destinataireTrouve = true;
           }
+          //////////////////////
           $i++;
         }
         if (!$destinataireTrouve) {
