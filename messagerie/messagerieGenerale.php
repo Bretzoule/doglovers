@@ -52,25 +52,35 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                           $destinataireBis = explode("_",$destinataire[$i]);
                           if(!isset($destinataireBis[1])){
         ?>
-              <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataire[$i] . "'" ?>><?php echo ($destinataire[$i]) ?></a>
+        <div class="pseudoMess">
+          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataire[$i] . "'" ?>><?php echo ($destinataire[$i]) ?></a>
+        </div>
+
         <?php
       }else{
         ?>
-        <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a>
+        <div class="pseudoMess">
+          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a> est bloqué.
+        </div>
+
 <?php
-echo(" est bloqué.<br>");
-    }         if (isset($dernierMessage[1])) {
+    }
+           if (isset($dernierMessage[1])) {
               //echo sizeof($dernierMessage);
               //$dernierMessage = array_filter($dernierMessage);
               $dernierMessageFlat = explode("§", $dernierMessage[sizeof($dernierMessage) - 2]);
-              echo ($dernierMessageFlat[0]);
+              echo "<div class='mess'>".($dernierMessageFlat[0])."</div>";
     }
 if(!isset($destinataireBis[1])){
               ?>
-              <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION[$destinataire[$i]] = ""; ?></a>
+              <div class="boutonBloquer">
+                <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION[$destinataire[$i]] = ""; ?></a>
+              </div>
+
               <?php
             }
               $i++;
+              echo "<div class='clear'></div><br>";
             }
           } else {
             echo ("<div id='messPasAbo'> Pour démarrer une conversation avec quelqu'un, rendez-vous sur son profil !</div>");

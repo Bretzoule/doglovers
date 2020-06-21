@@ -179,3 +179,34 @@ transition: all .1s ease-in-out;
   margin-left: 30%;
   margin-top: 20px;
 }
+
+.boutonBloquer{
+  background: #e56651;
+  width:22%;
+  float: left;
+  text-align: center;
+  margin-left: 1%;
+}
+
+.mess{
+  background: #d5e9aa;
+  width:50%;
+  float: left;
+  margin-left: 1%;
+}
+
+.pseudoMess{
+  background: #e1f4f7;
+  width:22%;
+  float: left;
+  text-align: center;
+}
+
+.pseudoMess, .mess, .boutonBloquer{
+  padding: 0.5%;
+  border-radius: 30px;
+}
+
+.clear {
+  clear: both;
+}
