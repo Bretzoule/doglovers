@@ -38,21 +38,33 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["user"])) {
   $i = 0;
   $destinataireTrouve = false;
   while(($i < sizeOf($destinataireBis)) && !$destinataireTrouve){
-if($destinataireBis[$i]==$user){
-  $destinataireTrouve = true;
-  $destinataireBis[$i].="_bloqué";
+    print_r($destinataireBis);
+    $destinataireAutre = explode("_",$destinataireBis[$i]);
+if($destinataireAutre[$i]==$user){
+  $estinataireTrouve = true;
+echo($_SESSION['BloquerOuDebloquer']);
+  if ($_SESSION['BloquerOuDebloquer']=="bloquer") {
+    echo("llllllaaa<br>");
+    $destinataireAutre[1] = "bloqué";
+    $destinataireBis[$i] = implode("_",$destinataireAutre);
+  }else{
+    echo("iciiia<br>");
+    $destinataireAutre[1] = "";
+    $destinataireBis[$i] = implode("",$destinataireAutre);
+  }
 }
 $i++;
   }
   $donnee = implode("|",$destinataireBis);
 file_put_contents('destinataires_'.$_SESSION['pseudo'].'.txt',$donnee);
- header("Location: /messagerie/messagerieGenerale.php");
+ //header("Location: /messagerie/messagerieGenerale.php");
 }
  ?>
 
 </body>
 </html>
 <?php
+unset($_SESSION['BloquerOuDebloquer']);
 } else {
 header("Location: /home/erreur403.php");
 }

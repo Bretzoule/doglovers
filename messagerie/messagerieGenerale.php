@@ -44,30 +44,33 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             $destinataire = explode("|", $conversation);
             $i = 0;
             while ($i < sizeof($destinataire) - 1) {
-              $nomFichier = array($_SESSION['pseudo'], $destinataire[$i]);
+              $destinataireBis = explode("_",$destinataire[$i]);
+              $nomFichier = array($_SESSION['pseudo'], $destinataireBis[0]);
               //on les tri par ordre alphabétique
               usort($nomFichier, "strnatcmp");
               $messages = file_get_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt');
               $dernierMessage = explode("\n", $messages);
-                          $destinataireBis = explode("_",$destinataire[$i]);
-                          if(!isset($destinataireBis[1])){
+
+                          if(isset($destinataireBis[1]) && $destinataireBis[1] == "bloqué"){
         ?>
-              <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataire[$i] . "'" ?>><?php echo ($destinataire[$i]) ?></a>
+              <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a>
+              <?php echo(" est bloqué. "); ?>
+<a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataireBis[0] ."'"?>>Débloquer <?php echo ($destinataireBis[0] . "<br>"); $_SESSION["BloquerOuDebloquer"] = "debloquer"; ?></a>
         <?php
       }else{
         ?>
         <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a>
 <?php
-echo(" est bloqué.<br>");
-    }         if (isset($dernierMessage[1])) {
-              //echo sizeof($dernierMessage);
-              //$dernierMessage = array_filter($dernierMessage);
-              $dernierMessageFlat = explode("§", $dernierMessage[sizeof($dernierMessage) - 2]);
-              echo ($dernierMessageFlat[0]);
+if (isset($dernierMessage[1])) {
+          //echo sizeof($dernierMessage);
+          //$dernierMessage = array_filter($dernierMessage);
+          $dernierMessageFlat = explode("§", $dernierMessage[sizeof($dernierMessage) - 2]);
+          echo ($dernierMessageFlat[0]);
+}
     }
-if(!isset($destinataireBis[1])){
+if(!isset($destinataireBis[1])||($destinataireBis[1] != "bloqué")){
               ?>
-              <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION[$destinataire[$i]] = ""; ?></a>
+              <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION["BloquerOuDebloquer"] = "bloquer"; ?></a>
               <?php
             }
               $i++;
