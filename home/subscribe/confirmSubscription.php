@@ -9,12 +9,12 @@
     function subAdd(string $toAdd, string $memberType):string
     {
         $tmp = explode(':',$memberType);
-        $currentDate = (empty($tmp[1])) ? new DateTime(date("Y-m-d")) : new DateTime($tmp[1]); // génération de la date
-        $currentDate -> add(new DateInterval($toAdd));
-        if ($tmp[0] == "free") {
+        $currentDate = (empty($tmp[1])) ? new DateTime(date("Y-m-d")) : new DateTime($tmp[1]); // génération d'une nouvelle date ou récupération de la date précédemment entrée (afin de l'incrémenter)
+        $currentDate -> add(new DateInterval($toAdd)); // ajout de la date
+        if ($tmp[0] == "free") { // changement de mode utilisateur
             $tmp[0] = "member";
         }
-        $tmp[1] = $currentDate->format('Y-m-d');
+        $tmp[1] = $currentDate->format('Y-m-d'); // écriture de la date
         $data = implode(":", $tmp);
         return($data);
     }

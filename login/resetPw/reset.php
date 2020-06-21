@@ -30,9 +30,9 @@ if (isset($_SESSION["passworded"]) && ($_SESSION["passworded"] == "true")) { // 
     session_destroy();
     session_start();
     if ($lastvalue) {
-        $_SESSION["erreur"] = "badMail";
+        $_SESSION["erreur"] = "badMail"; // si l'utilisateur n'a pas été trouvé
     } else {
-        $_SESSION["erreur"] = "resetConfirmed";
+        $_SESSION["erreur"] = "resetConfirmed"; // si la réinitialisation à bien eu lieu 
     }
     header("Location: ./resetPassword.php");
 } else {

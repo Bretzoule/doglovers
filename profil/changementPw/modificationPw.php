@@ -1,12 +1,12 @@
 <?php
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
-    <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+    <!DOCTYPE html>
     <html>
 
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-        <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
+        <title>Dog Lovers - Modifier son Mot de passe</title>
         <link rel="stylesheet" type="text/css" href="./modificationPw.css">
         <link rel="shortcut icon" href="./../ressources/favicon.ico" />
     </head>
@@ -23,6 +23,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         $data = htmlspecialchars($data);
         return $data;
     }
+
+    /* VERIFICATIONS FORMULAIRE */ 
+
     $_SESSION["OldPw"] = $_SESSION["changePw"] = $_SESSION["Newpassword"] = $erreurOldPw  = $erreurNewPassword = "";
 
     $NewpasswordOk = $OldPwOk = false;
@@ -79,10 +82,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                     <input type="submit" value="Réinitialiser"></input>
                 </form>
                 <span><?php
-                        if (isset($_SESSION["erreur"]) &&  $_SESSION["erreur"] == "badMail") {
+                        if (isset($_SESSION["erreur"]) &&  $_SESSION["erreur"] == "badMail") { // erreur , mismatch avec le mot de passe actuel
                             echo "Ancien mot de passe incorrect.";
                             unset($_SESSION["erreur"]);
-                        } else if (isset($_SESSION["erreur"]) &&  $_SESSION["erreur"] == "resetConfirmed") {
+                        } else if (isset($_SESSION["erreur"]) &&  $_SESSION["erreur"] == "resetConfirmed") { // confirmation de réinitialisation
                             echo "Mot de passe réinitialisé!.";
                             unset($_SESSION["erreur"]);
                         }

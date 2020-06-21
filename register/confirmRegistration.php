@@ -6,13 +6,13 @@ function phpAlert($msg)
   echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 
-if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
-    if ($_SESSION['enfants'] == "on") {
+if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) { 
+    if ($_SESSION['enfants'] == "on") { // affinage des données données complméntaires
       $nbrEnfants = $_SESSION['nombreEnf'];
     } else {
       $nbrEnfants = "0";
     }
-    if ($_SESSION['chiens'] == "on") {
+    if ($_SESSION['chiens'] == "on") { // affinage des données données complméntaires
       $nbrDoggos = $_SESSION['nbDoggos'];
       $infosChiens = $_SESSION['infoschiens'];
     } else {

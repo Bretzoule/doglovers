@@ -15,8 +15,8 @@ if (isset($_SESSION["confirmEdit"]) && ($_SESSION["confirmEdit"] == "true")) { /
             //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
             if ((trim($_SESSION["userToEdit"]) == trim($userData[0]))) { // si l'adresse mail entrée correspond a une adresse mail en bdd alors 
                 $contents = file_get_contents($path);
-                $userData[7] = $_SESSION["editMsgAcc"];
-                $userData[8] = $_SESSION["editCitation"];
+                $userData[7] = $_SESSION["editMsgAcc"]; // change les données modifiables
+                $userData[8] = $_SESSION["editCitation"]; 
                 $userData[9] = $_SESSION["editInterets"];
                 $userData = implode("§",$userData);
                 $contents = str_replace($line,$userData,$contents);
@@ -34,7 +34,7 @@ if (isset($_SESSION["confirmEdit"]) && ($_SESSION["confirmEdit"] == "true")) { /
         $_SESSION["erreur"] = "erreur";
         header("Location: ./editUser.php");
     } else {
-        unset($_SESSION["confirmEdit"]);unset($_SESSION["editMsgAcc"]);unset($_SESSION["editCitation"]);unset($_SESSION["editInterets"]);unset($_SESSION["userToEdit"]);
+        unset($_SESSION["confirmEdit"]);unset($_SESSION["editMsgAcc"]);unset($_SESSION["editCitation"]);unset($_SESSION["editInterets"]);unset($_SESSION["userToEdit"]); // unset les vars utilisées
         header("Location: /admin/membres.php");
     }
     

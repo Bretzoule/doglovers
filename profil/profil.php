@@ -2,11 +2,11 @@
 //on démarre une session
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
+    <title>Dog Lovers - Profil</title>
     <link rel="stylesheet" type="text/css" href="./monProfil/MonProfil.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
@@ -23,7 +23,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
        return ($afficher);
      }
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-      $user = $_GET["user"];
+      $user = $_GET["user"]; // récupération ID Utilisateur dont le profil est à afficher
       $_SESSION["user"]=$user;
     ?>
       <div id="blocTitre"></div>

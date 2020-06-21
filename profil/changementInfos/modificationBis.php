@@ -5,7 +5,7 @@
   echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 
-    function remplacementData(array $userData, string $nbrEnfants, $nbrDoggos, $infosChiens):array
+    function remplacementData(array $userData, string $nbrEnfants, $nbrDoggos, $infosChiens):array // récupère toutes les informations mentionnées et les remplace dans la chaine utilisateur
     {
       $userData[1] = $_SESSION["lieuRes"];
       $userData[2] = $_SESSION["sexe"];
@@ -21,9 +21,9 @@
       return $userData;
     }
 
-if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
-    if ($_SESSION['enfants'] == "on") {
-      $nbrEnfants = $_SESSION['nombreEnf'];
+if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) { 
+    if ($_SESSION['enfants'] == "on") { // affine les données envoyées pour les stocker dans le fichier
+      $nbrEnfants = $_SESSION['nombreEnf']; 
       unset($_SESSION['enfants']);
     } else {
       $nbrEnfants = "0";
@@ -46,9 +46,9 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
             if ((password_verify(trim($_SESSION["password"]), trim($userData[sizeof($userData) - 1])) && (trim($_SESSION["pseudo"]) == trim($userData[0])))) {
             //echo "|" . trim($_SESSION["adresseM"]) . "| == |" . trim($userData[sizeof($userData)-2]) . "| <br>";
                 $contents = file_get_contents($path);
-                $userData = remplacementData($userData, $nbrEnfants, $nbrDoggos, $infosChiens);
+                $userData = remplacementData($userData, $nbrEnfants, $nbrDoggos, $infosChiens); // appel de la fonction de remplacement
                 $userData = implode("§",$userData);
-                $contents = str_replace($line,$userData,$contents);
+                $contents = str_replace($line,$userData,$contents); // remplacement des données dans le fichier
                 file_put_contents($path, $contents);
                 $lastvalue = false;
             }
@@ -60,7 +60,7 @@ if (isset($_SESSION["dataPassed"]) && ($_SESSION["dataPassed"] == "true")) {
       unset($_SESSION["lieuRes"]);unset($_SESSION["sexe"]);unset($_SESSION["situation"]);unset($_SESSION["poids"]);
         unset($_SESSION["taille"]);unset($_SESSION["couleurCheveux"]);unset($_SESSION["couleurYeux"]);unset($_SESSION["msgAcc"]);
         unset($_SESSION["citation"]);unset($_SESSION["interets"]);unset($_SESSION["fumeur"]);unset($_SESSION["nom"]);unset($_SESSION["prenom"]);
-        unset($_SESSION["dataPassed"]);unset($_SESSION["password"]);
+        unset($_SESSION["dataPassed"]);unset($_SESSION["password"]); // destruction des variable temporaires
         if ($lastvalue) {
          $_SESSION["erreur"] = "Mot de passe incorrect.";
         } else {

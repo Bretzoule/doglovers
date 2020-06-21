@@ -2,7 +2,7 @@
 //on démarre une session
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
 
   <head>
@@ -34,7 +34,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     $photo = explode("|", $photo);
     for ($i=0; $i < 4; $i++) {
     if (!empty($photo[$i])) {
-      $response = unlink("./.." . $photo[$i]);
+      $response = unlink("./.." . $photo[$i]); // supprime la photo associée l'indice 'i' si elle existe
     }
     }
   }
@@ -46,23 +46,22 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     $contenuLigne = explode("\n", $contenu);
     for ($i=0; $i < (sizeOf($contenuLigne)-2); $i++) {
       if (startsWith($contenuLigne[$i], $nomuser)) {
-        $contenuLigne[$i] = "";
-      } else if (strrpos($contenuLigne[$i], $nomuser) !== false) {
+        $contenuLigne[$i] = ""; // supprime les données utilisateur du fichier matchs
+      } else if (strrpos($contenuLigne[$i], $nomuser) !== false) { // cherche si l'utilisateur apparait comme "visiteur" sur un profil
         $part2 = explode("§", $contenuLigne[$i]);
         for ($j=1; $j < sizeOf($part2); $j++) {
-          print_r($part2);
           if (strrpos($part2[$j], $nomuser) !== false) {
-            $part2[$j] = "";
+            $part2[$j] = ""; // efface l'utilisateur des visiteurs
             $part2 = array_filter($part2);
           }
         }
         array_filter($part2);
-        $contenuLigne[$i] = implode("§",$part2);
+        $contenuLigne[$i] = implode("§",$part2); 
       }
     }
     $contenuLigne = array_filter($contenuLigne);
     $contents = implode("\n",$contenuLigne);
-    file_put_contents($path,$contents);
+    file_put_contents($path,$contents); // rassemble les données et retour dans le fichier
   }
   
       $user = $_GET["user"];
@@ -74,10 +73,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
           $userData = explode("§", $line); // séparation des données de la ligne utilisateur
           if ($userData[0] == $user) {
             $contents = file_get_contents($path);
-            removePic($userData[sizeof($userData) - 7]);
-            resetMatches(trim($userData[0]));
+            removePic($userData[sizeof($userData) - 7]); // supprimes les photos 
+            resetMatches(trim($userData[0])); // supprime les données du fichier matchs.txt
             $userData = "";
-            $contents = str_replace($line, $userData, $contents);
+            $contents = str_replace($line, $userData, $contents); // supprime les données dans le fichier userList.txt
             file_put_contents($path, $contents);
             $lastvalue = false;
           }

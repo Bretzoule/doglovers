@@ -4,17 +4,26 @@ function checkFumeur(string $field): string
 {
     $tmp = "";
     if ($field == "") {
-        $tmp = "Non fumeur";
+        $tmp = "Non fumeur"; // rassemble les données fumeur / non fumeur
     }
     return $tmp;
 }
+
+function addUnits(string $data): string
+      {
+        $tmp = explode("|",$data);
+        $tmp[0] .= "kg";
+        $tmp[1] .= "cm";
+        $data = implode("|",$tmp);
+        return($data);
+      }
 
 function getDateNaissance(string $date): string
 {
     $dateAnniv = explode("-", $date);
     $dateAjd = explode("-", date("Y-m-d"));
     $age = intval($dateAjd[0]) - intval($dateAnniv[0]);
-    if ((intval($dateAjd[1]) < intval($dateAnniv[1]) || ((intval($dateAjd[1])) == intval($dateAnniv[1])) && (intval($dateAjd[2]) < intval($dateAnniv[2])))) {
+    if ((intval($dateAjd[1]) < intval($dateAnniv[1]) || ((intval($dateAjd[1])) == intval($dateAnniv[1])) && (intval($dateAjd[2]) < intval($dateAnniv[2])))) { // calcule l'age (current)
         $age--;
     }
     return ($age . "ans");
@@ -30,6 +39,7 @@ if (!empty($_GET["recherche"])) {
             $userData = explode("§", $line);
             $userData[10] = checkFumeur($userData[10]); // permet d'écrire si l'utilisateur fume ou non
             $userData[3] = getDateNaissance($userData[3]); // permet d'écrire l'age de l'utilisateur 
+            $userData[6] = addUnits($userData[6]); // permet d'ajouter kg et cm
             array_push($data, array_slice($userData, 0, sizeof($userData) - 7)); // ajoute l'utilisateur à la liste de recherche
         }
         fclose($file);

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
 
   <head>
@@ -22,7 +22,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <script>
     // fonction ajax relative à la recherche dynamique
       function showResult(str) {
-        if (str.length == 0) { 
+        if (str.length == 0) {
           document.getElementById("resultats").innerHTML = "";
           document.getElementById("resultats").style.visibility = "hidden";
           return;
@@ -30,7 +30,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         var xmlhttp = new XMLHttpRequest(); // création de la requete
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) { // si la page est prete
-            document.getElementById("resultats").innerHTML = this.responseText; 
+            document.getElementById("resultats").innerHTML = this.responseText;
             document.getElementById("resultats").style.visibility = "visible";
           }
         }
@@ -44,7 +44,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <li><a  href="../profil/monProfil/MonProfil.php">Mon profil</a></li>
         <li><a  href="/home/subscribe/subscribe.php">Gérer l'abonnement</a></li>
         <li><a  href="../messagerie/messagerieGenerale.php">Mes messages</a></li>
-        <?php if ($_SESSION["login_Type"] == 3) { echo '<li><a  href="/admin/membres.php">Liste des utilisateurs</a></li>'; 
+        <?php if ($_SESSION["login_Type"] == 3) { echo '<li><a  href="/admin/membres.php">Liste des utilisateurs</a></li>'; // si l'utilisateur est admin
         echo '<li><a  href="/admin/reports/listeReports.php">Liste des signalements</a></li>';}?>
         <li class="deconnexion"><a href="./../login/logout.php">Deconnexion</a></li>
         <input type="checkbox" name="r" id="r1">

@@ -2,7 +2,7 @@
 //on démarre une session
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
 
   <head>
@@ -102,7 +102,7 @@ ou jusqu'à la fin du tableau*/
                     }
                     echo "<td class='tg-wa5c'><a href='./supprimerCompte.php?user=". $donnee[0] ."'><input type='button' id='bouton2' value='Supprimer'></a></td>
                     <td class='tg-wa5c'><a href='./editUser/editUser.php?userToEdit=". $donnee[0] ."'><input type='button' id='bouton2' value='Modifier'></a></td>
-                    <td class='tg-wa5c'>" . $donnee[0] ."</td>
+                    <td class='tg-wa5c'>" . $donnee[0] ."</td> 
                     <td class='tg-wa5c'>" . $donnee[1] . "</td>
                     <td class='tg-wa5c'>" . $donnee[2] . "</td>
                     <td class='tg-wa5c'>" . $donnee[3] . "</td>

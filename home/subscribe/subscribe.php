@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
   <?php
   function getDateFinAbonnement(string $username): string
@@ -10,10 +10,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     $file = fopen($path, 'r');
     if ($file) {
       $lastvalue = true;
-      while ((($line = fgets($file)) !== false) && $lastvalue) {
+      while ((($line = fgets($file)) !== false) && $lastvalue) { 
         $userData = explode("§", $line);
         if ((trim($_SESSION["pseudo"]) == trim($userData[0]))) {
-          $tmpdate = explode(':', trim($userData[sizeof($userData) - 6]));
+          $tmpdate = explode(':', trim($userData[sizeof($userData) - 6])); // récupère la date de fin d'abonnement
           $date = $tmpdate[1];
           $lastvalue = false;
         }

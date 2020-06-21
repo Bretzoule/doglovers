@@ -5,25 +5,8 @@ function phpAlert($msg)
 {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
-// // permet de trier les photos si jamais la personne a voulu mettre qqch dans la photo 3 et rien en photo 1 et 2
-// function triPhoto() 
-// {
-//     $j = 0;
-//     while($j < 4) {
-//     for ($i=0; $i < 3; $i++) {
-//         $iplus1 = $i+1;
-//         if (empty($_SESSION["photo".$i])) {
-
-//             $_SESSION["photo".$i] = $_SESSION["photo" . $iplus1];
-//             $_SESSION["photo" . $iplus1] = "";
-//         }
-//     }
-//     $j++;
-//   }
-// }
 
 // permet de changer les images
-
 function changePic(string $photos): string
 {
     //triPhoto(); // provisoire qui permettait de trier les images

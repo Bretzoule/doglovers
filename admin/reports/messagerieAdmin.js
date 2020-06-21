@@ -11,7 +11,7 @@
       var xmlhttp = new XMLHttpRequest(); // création de la requete
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { // si la page est prete
-          if(alert(this.responseText)){}
+          if(alert(this.responseText)){} // écriture du texte d'erreur ou de confirmation dans une alerte
           else window.location.reload();
         }
       }

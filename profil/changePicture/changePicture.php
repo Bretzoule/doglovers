@@ -1,12 +1,12 @@
 <?php
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
 
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <title>Dog Lovers - Recherche</title>
+    <title>Dog Lovers - Changer les images de son profil.</title>
     <link rel="stylesheet" type="text/css" href="./changePicture.css">
     <link rel="shortcut icon" href="./../../ressources/favicon.ico" />
     <script type="text/javascript" src="changePicture.js"></script>
@@ -31,16 +31,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
         function testImages($photosFilled, &$erreurPhotos, $numPhoto)
         {
-          if (empty($_FILES["photos" . $numPhoto]["name"]) && $_FILES["photos" . $numPhoto]["error"] == 0) {
+          if (empty($_FILES["photos" . $numPhoto]["name"]) && $_FILES["photos" . $numPhoto]["error"] == 0) { // vérification intégrité photos
             $_SESSION["photo" . $numPhoto] = "";
           } else {
-            $target_dir = "./../../register/data/uploads/";
-            $target_toWrite = "/register/data/uploads/";
+            $target_dir = "./../../register/data/uploads/"; // repertoire direct
+            $target_toWrite = "/register/data/uploads/"; // répertoire à renseigner dans le fichier utilisateur
             if ($_FILES["photos" . $numPhoto]["error"] == 0) {
-              $target_file = $target_dir . basename($_FILES["photos" . $numPhoto]["tmp_name"]);
-              $imageFileType = strtolower(pathinfo(basename($_FILES["photos" . $numPhoto]["name"]), PATHINFO_EXTENSION));
-              $check = getimagesize($_FILES["photos" . $numPhoto]["tmp_name"]);
-              if ($check === false) {
+              $target_file = $target_dir . basename($_FILES["photos" . $numPhoto]["tmp_name"]); // création fichier cible
+              $imageFileType = strtolower(pathinfo(basename($_FILES["photos" . $numPhoto]["name"]), PATHINFO_EXTENSION)); // extension image
+              $check = getimagesize($_FILES["photos" . $numPhoto]["tmp_name"]); // récupération taille image
+              if ($check === false) { 
                 $photosFilled = false;
                 $erreurPhotos = "Le fichier ne semble pas être une image";
               } else
@@ -48,7 +48,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                 $photosFilled = false;
                 $erreurPhotos = "Un fichier portant le même nom existe déjà...";
               } else
-                if ($_FILES["photos" . $numPhoto]["size"] > 10000000) {
+                if ($_FILES["photos" . $numPhoto]["size"] > 10000000) { 
                 $photosFilled = false;
                 $erreurPhotos = "Le fichier est trop volumineux !";
               } else
@@ -57,7 +57,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                 $erreurPhotos = "Format non pris en charge, les formats d'images acceptés sont .png, .jpg, .jpeg et .gif !";
               }
               if ($photosFilled) {
-                $file_name = uniqid($prefix = "photo_") . "." . $imageFileType;
+                $file_name = uniqid($prefix = "photo_") . "." . $imageFileType; // génération nom image
                 if (move_uploaded_file($_FILES["photos" . $numPhoto]["tmp_name"], $target_dir . $file_name)) {
                   $_SESSION["photo" . $numPhoto] = $target_toWrite . $file_name;
                 } else {
@@ -73,7 +73,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           }
           return ($photosFilled);
         }
-
 
 
         function afficher($donneeBis, $i, $j)

@@ -2,7 +2,7 @@
 //on démarre une session
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
 
   <head>
@@ -60,9 +60,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
 
         <div id="blocConv">
           <?php
-           if (($_SERVER["REQUEST_METHOD"] == "GET") && (isset($_GET["convID"]))) {
-            $leChemin = "./../../messagerie/" . $_GET["convID"];
-            $tmpFileName = explode("_",$_GET["convID"]);
+           if (($_SERVER["REQUEST_METHOD"] == "GET") && (isset($_GET["convID"]))) { 
+            $leChemin = "./../../messagerie/" . $_GET["convID"]; // on crée le chemin vers le fichier
+            $tmpFileName = explode("_",$_GET["convID"]); // on récupère le pseudo 1 de la conversation
           if (file_exists($leChemin)) {
             //on récupère le contenu du fichier à savoir la conversation
             $conversation = file_get_contents($leChemin);
@@ -72,8 +72,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
               /*on met ce qui est entre les § dans des cases d'un tableau afin de pouvoir
         récupérer les différentes données présentes dans chaque ligne*/
               $message = explode('§', $nbrMsg[$j]);
-              if (startsWith($message[1],$tmpFileName[0] . "_")) {
-                echo "<div class ='user1' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $_GET["convID"] . '"' . ")'>" . $message[0] . "</div> <br> ";
+              if (startsWith($message[1],$tmpFileName[0] . "_")) { // on utilise le pseudo1 du nom de la conversation afin de mettre un utilisateur à droite et l'autre à gauche en CSS
+                echo "<div class ='user1' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $_GET["convID"] . '"' . ")'>" . $message[0] . "</div> <br> "; // chaque message peut être supprimé en cliquant dessus
               } else {
                 echo "<div class ='user2' onclick='deleteMsg(" . '"' . $message[1] . '"' .",". '"' . $_GET["convID"] . '"' . ")'>" . $message[0] . "</div> <br> ";
               }

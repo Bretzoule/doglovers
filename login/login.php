@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!(isset($_SESSION["login_Type"])) || ((isset($_SESSION["logout"])) && ($_SESSION["logout"] == "success")) || ((isset($_SESSION['banned'])) && ($_SESSION['banned']=="true"))) { ?>
-<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+<!DOCTYPE html>
 <html>
 
   <head>

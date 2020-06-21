@@ -1,12 +1,12 @@
 <?php
 session_start();
 if (!(isset($_SESSION["login_Type"]))) { ?>
-    <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+    <!DOCTYPE html>
     <html>
 
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-        <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
+        <title>Dog Lovers - Réinitialiser le mot de passe</title>
         <link rel="stylesheet" type="text/css" href="./reset.css">
         <link rel="shortcut icon" href="./../ressources/favicon.ico" />
     </head>
@@ -23,6 +23,10 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
         $data = htmlspecialchars($data);
         return $data;
     }
+    
+
+     /*  VERIFICATION FORMULAIRE */
+
     $_SESSION["adresseM"] = $_SESSION["passworded"] = $_SESSION["Newpassword"] = $_SESSION["PseudoReset"] = $erreurPseudoReset = $erreurAdresseM = $erreurNewPassword = "";
 
     $adresseOk = $NewpasswordOk = $PseudoResetOk = false;
@@ -58,9 +62,9 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
                 $PseudoResetOk = false;
             }
     }
-    if ($adresseOk && $NewpasswordOk && $PseudoResetOk) {
-        $_SESSION["passworded"] = "true";
-        header("Location: /login/resetPw/reset.php");
+    if ($adresseOk && $NewpasswordOk && $PseudoResetOk) { // confirmation données
+        $_SESSION["passworded"] = "true"; 
+        header("Location: /login/resetPw/reset.php"); // envoi des données
     }
 }
     ?>

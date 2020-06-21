@@ -1,4 +1,4 @@
-<?php 
+<<?php 
 session_start();
 
 function phpAlert($msg)
@@ -10,7 +10,7 @@ function removePic(string $photo, int $indice):string
 {
     $photo = explode("|",$photo);
     if (!empty($photo[$indice])) {
-        $response = unlink("./../..".$photo[$indice]);
+        $response = unlink("./../..".$photo[$indice]); // suppression photo à l'indice $indice
         $photo[$indice] = "";
         $photo = array_filter($photo);
     }
@@ -31,8 +31,8 @@ function getData($indice) {
                 $contents = file_get_contents($path);
                 $userData[sizeof($userData) - 7] = removePic($userData[sizeof($userData) - 7],$indice); // récupération des données à modifier
                 $userData = implode("§", $userData);
-                $contents = str_replace($line, $userData, $contents);
-                file_put_contents($path, $contents);
+                $contents = str_replace($line, $userData, $contents); // remplacement dans la chaîne 
+                file_put_contents($path, $contents); // on remet les données dans le fichier 
                 $lastvalue = false;
             }
         }
@@ -45,7 +45,7 @@ function getData($indice) {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_SESSION["login_Type"])) && ($_SESSION["login_Type"] > 0)) {
     $nbPic = intval($_GET["numero"]);
-    switch ($nbPic) {
+    switch ($nbPic) { // $nbPic = indice de la photo à retirer
         case 0:
             getData(0);
             break;

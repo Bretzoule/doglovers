@@ -23,7 +23,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     <?php
 
     $user = $_GET["user"];
-    function remplacementData(array $userData): array
+    function remplacementData(array $userData): array // remplace le statut de l'utilisateur par "free" - débanni l'utilisateur mais réinitialise son abonnement
     {
       $userData[13] = "free";
       return $userData;
@@ -35,9 +35,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
       if ($file) { // si le fichier est bien ouvert alors
         while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
           $userData = explode("§", $line); // séparation des données de la ligne utilisateur
-          if ($userData[0] == $user) {
+          if ($userData[0] == $user) { // si l'utilisateur correspond
             $contents = file_get_contents($path);
-            $userData = remplacementData($userData);
+            $userData = remplacementData($userData); // remplace la ligne
             $userData = implode("§", $userData);
             $contents = str_replace($line, $userData, $contents);
             file_put_contents($path, $contents);

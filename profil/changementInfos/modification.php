@@ -1,13 +1,13 @@
 <?php
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
 
   <head>
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <title>Dog Lovers - Le site de rencontre pour les amoureux des chiens.</title>
+    <title>Dog Lovers - Modifier son profil</title>
     <link rel="stylesheet" type="text/css" href="modification.css">
     <script type="text/javascript" src="modification.js"></script>
     <link rel="shortcut icon" href="./../../ressources/favicon.ico" />
@@ -28,7 +28,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       $data = htmlspecialchars($data);
       return $data;
     }
-
+        /* VERIFICATION FORMULAIRE */
     $nomOk = $prenomOk = $adresseOk = $sexeOk = $situationOk = $tailleOk = $poidsOk = $CouleurCheveuxOk = $CouleurYeuxOk = $pseudoOk = $passwordOk = false;
 
     $lieuresFilled = $professionFilled = $enfantsFilled = $msgAccFilled = $interetFilled = $citationFilled = $fumeurFilled = $infoschiensFilled = true;
@@ -265,8 +265,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     }
 
     if ($nomOk && $prenomOk && $adresseOk && $sexeOk && $situationOk && $tailleOk && $poidsOk && $CouleurCheveuxOk && $CouleurYeuxOk && $passwordOk && $lieuresFilled && $professionFilled && $enfantsFilled && $msgAccFilled && $interetFilled && $citationFilled && $fumeurFilled && $infoschiensFilled) {
-      $_SESSION["dataPassed"] = "true";
-      header('Location: ./modificationBis.php');
+      $_SESSION["dataPassed"] = "true"; // confirmation envoi des données 
+      header('Location: ./modificationBis.php'); // redirection et envoi
     }
     ?>
     <div id="part_logo">

@@ -2,7 +2,7 @@
 //on démarre une session
 session_start();
 if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) { ?>
-  <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1−strict.dtd">
+  <!DOCTYPE html>
   <html>
 
   <head>
@@ -23,7 +23,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     <?php
 
     $user = $_GET["user"];
-    function remplacementData(array $userData): array
+    function remplacementData(array $userData): array // remplace le statut de l'utilisateur par "admin" - promouvoit l'utilisateur au rang d'admin
     {
       $userData[13] = "admin";
       return $userData;
@@ -35,10 +35,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
       if ($file) { // si le fichier est bien ouvert alors
         while ((($line = fgets($file)) !== false) && $lastvalue) { // on récupère chaque ligne tant que l'on trouve pas l'utilisateur
           $userData = explode("§", $line); // séparation des données de la ligne utilisateur
-          if ($userData[0] == $user) {
+          if ($userData[0] == $user) { // si l'utilisateur correspond
             $contents = file_get_contents($path);
-            $userData = remplacementData($userData);
-            $userData = implode("§", $userData);
+            $userData = remplacementData($userData); // promote admin
+            $userData = implode("§", $userData);  
             $contents = str_replace($line, $userData, $contents);
             file_put_contents($path, $contents);
             $lastvalue = false;
