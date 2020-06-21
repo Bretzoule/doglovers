@@ -116,7 +116,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       //print_r($nomFichier);
       //on met dans content ce qu'on veut écrire dans le fichier
       $heure = date("H:i");
-      ////////////////////////////////////
+      //////////bloc qui permet de savoir si l'utilisateur nous a bloqué/////
       $contenu = file_get_contents('destinataires_' . $user . '.txt');
       $nomDestinataireBloque = explode('|', $contenu);
 $b = 0;
@@ -129,7 +129,7 @@ $destinataireBloque = true;
       }
       $b++;
     }
-      ////////////////////////////////
+      ////////////////fin du bloc////////////////
       if ($messageValide) {
         $content = $heure . " " . $_SESSION['pseudo'] . " : " . $message . "§" . uniqid($_SESSION['pseudo'] . "_") . "\n";
         //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
