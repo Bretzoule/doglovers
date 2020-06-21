@@ -59,13 +59,14 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a> est bloqué.
         </div>
         <div class="boutonBloquer">
-<a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataireBis[0] ."'"?>>Débloquer <?php echo ($destinataireBis[0] . "<br>"); $_SESSION["BloquerOuDebloquer"] = "debloquer"; ?></a>
+<a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataireBis[0] ."'"?>>Débloquer <?php echo ($destinataireBis[0] . "<br>"); $_SESSION["BloquerOuDebloquer".$i] = "debloquer"; ?></a>
 </div>
         <?php
+        echo("oooooooooo<br>");
       }else{
         ?>
         <div class="pseudoMess">
-          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a> 
+          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a>
         </div>
 
 <?php
@@ -77,9 +78,10 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               echo "<div class='mess'>".($dernierMessageFlat[0])."</div>";
     }
 if(!isset($destinataireBis[1])||($destinataireBis[1] != "bloqué")){
+  echo("iciiiiiiiii<br>");
               ?>
               <div class="boutonBloquer">
-                <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION[$destinataire[$i]] = ""; ?></a>
+                <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataireBis[0] ."'"?>>Bloquer <?php echo ($destinataireBis[0] . "<br>"); $_SESSION["BloquerOuDebloquer".$i] = "bloquer"; ?></a>
               </div>
 
               <?php

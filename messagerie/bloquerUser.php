@@ -37,31 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["user"])) {
   $destinataireBis = explode('|',$destinataire);
   $i = 0;
   $destinataireTrouve = false;
-  while(($i < sizeOf($destinataireBis)-1)){
-    print_r($destinataireBis);
+  while(($i < sizeOf($destinataireBis)-1) && !$destinataireTrouve){
     $destinataireAutre = explode("_",$destinataireBis[$i]);
-    $j = 0;
-      while(($j < sizeOf($destinataireAutre)-1) && !$destinataireTrouve){
-if($destinataireAutre[$j]==$user){
-  $estinataireTrouve = true;
-echo($_SESSION['BloquerOuDebloquer']);
-  if ($_SESSION['BloquerOuDebloquer']=="bloquer") {
-    echo("llllllaaa<br>");
+if($destinataireAutre[0]==$user){
+  $destinataireTrouve = true;
+  if ($_SESSION['BloquerOuDebloquer'.$i]=="bloquer") {
     $destinataireAutre[1] = "bloqué";
     $destinataireBis[$i] = implode("_",$destinataireAutre);
   }else{
-    echo("iciiia<br>");
     $destinataireAutre[1] = "";
     $destinataireBis[$i] = implode("",$destinataireAutre);
   }
-}
-$j++;
 }
 $i++;
   }
   $donnee = implode("|",$destinataireBis);
 file_put_contents('destinataires_'.$_SESSION['pseudo'].'.txt',$donnee);
- //header("Location: /messagerie/messagerieGenerale.php");
+ header("Location: /messagerie/messagerieGenerale.php");
 }
  ?>
 

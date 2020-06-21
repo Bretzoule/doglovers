@@ -206,12 +206,17 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
                 $nomDestinataireBloque = explode('|', $contenu);
           $b = 0;
           $destinataireBloque = false;
-          while(($b < sizeof($nomDestinataireBloque) - 1) && !$destinataireBloque){
+          $destinatairetrouve = false;
+          while(($b < sizeof($nomDestinataireBloque) - 1) && !$destinatairetrouve){
             $destinataireBis = explode("_",$nomDestinataireBloque[$b]);
+            if($destinataireBis[0] == $_SESSION['pseudo']){
+            $destinataireBis = explode("_",$nomDestinataireBloque[$b]);
+            $destinatairetrouve = true;
                 if(isset($destinataireBis[1]) && $destinataireBis[1]=="bloqué"){
           $destinataireBloque = true;
                 ////////////////fin du bloc////////////////
-                   }               
+                   }
+                 }
                   $b++;
                 }
                 if($destinataireBloque){
