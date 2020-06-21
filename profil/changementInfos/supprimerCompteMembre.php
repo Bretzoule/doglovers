@@ -34,7 +34,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     $photo = explode("|", $photo);
     for ($i=0; $i < 4; $i++) {
     if (!empty($photo[$i])) {
-      $response = unlink("./.." . $photo[$i]);
+      $response = unlink("./../.." . $photo[$i]);
     }
     }
   }
@@ -44,7 +44,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     $path = "./../../register/data/matchs.txt"; // chemin fichier utilisateur
     $contenu = file_get_contents($path);
     $contenuLigne = explode("\n", $contenu);
-    for ($i=0; $i < (sizeOf($contenuLigne)-2); $i++) { // séparation par ligne et déplacement 
+    for ($i=0; $i < (sizeOf($contenuLigne)-1); $i++) { // séparation par ligne et déplacement 
       if (startsWith($contenuLigne[$i], $nomuser)) { // si l'utilisateur est à gauche dans le fichier matchs.txt ( visité )
         $contenuLigne[$i] = ""; // effacement de toute la ligne 
       } else if (strrpos($contenuLigne[$i], $nomuser) !== false) { // si l'utilisateur est à droite du ficher match.txt (visiteur)
@@ -73,7 +73,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
           $userData = explode("§", $line); // séparation des données de la ligne utilisateur
           if ($userData[0] == $user) {
             $contents = file_get_contents($path);
-            removePic($userData[sizeof($userData) - 7]); // suppression des images de l'utilisateur en cours 
+            removePic($userData[sizeof($userData) - 7]); // suppression des images de l'utilisateur en cours
+            $fileDest = "./../../messagerie/destinataires_" . $userData[0] . ".txt";
+            if (file_exists($fileDest)) {
+              unlink($fileDest);
+            }
             resetMatches(trim($userData[0])); // suppression des matchs de l'utilisateur en cours
             $userData = ""; // suppression de l'utilisateur
             $contents = str_replace($line, $userData, $contents); // ajout a l'ensemble des données
