@@ -52,6 +52,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
         <li><a class="active" href="">Aperçu conversation</a></li>
         <li><a href="/admin/membres.php">Liste des Utilisateurs</a></li>
         <li><a href="/admin/reports/listeReports.php">Liste des Signalements</a></li>
+        <li><a href="/admin/conversations.php">Liste des Conversations</a></li>
         <?php } ?>
       </ul>
     </div>
