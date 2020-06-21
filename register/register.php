@@ -90,7 +90,7 @@ if (!(isset($_SESSION["login_Type"]))) { ?>
     while ((($line = fgets($file)) !== false) && $lastvalue) {
       $userData = explode("§", $line);
       //echo "|" . trim($_SESSION["adresse"]) . "| == |" . trim($userData[1]) . "|";
-      if ((trim($_SESSION["pseudo"]) == trim($userData[0])) || (trim($_SESSION["adresse"]) == trim($userData[sizeof($userData) - 2]))) { // compare les mail/pseudo en BDD 
+      if ((trim($_SESSION["pseudo"]) == trim($userData[0])) || (trim($_SESSION["adresse"]) == trim($userData[sizeof($userData) - 2])) || (trim($_SESSION["pseudo"]) == "destinataires_" )|| ((trim($_SESSION["pseudo"]) == "reportList.txt"))) { // compare les mail/pseudo en BDD pour empecher l'utilisateur de choisir le même que quelqu'un d'autre ou un pseudo interdit
         $lastvalue = false;
         $_SESSION["erreur"] = "login_existant";
       }
