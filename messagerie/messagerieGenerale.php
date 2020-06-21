@@ -59,11 +59,12 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a>
 <?php
 echo(" est bloqué.<br>");
-    }
+    }         if (isset($dernierMessage[1])) {
               //echo sizeof($dernierMessage);
               //$dernierMessage = array_filter($dernierMessage);
               $dernierMessageFlat = explode("§", $dernierMessage[sizeof($dernierMessage) - 2]);
               echo ($dernierMessageFlat[0]);
+    }
 if(!isset($destinataireBis[1])){
               ?>
               <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION[$destinataire[$i]] = ""; ?></a>
