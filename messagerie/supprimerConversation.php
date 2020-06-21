@@ -6,10 +6,14 @@
     {
         $data = file_get_contents($fileDestPath);
         $data = explode("|",$data);
-        foreach ($data as $subUser) {
-            if ($user == $subUser) {
-                $subUser = "";
+        $trouve = false;
+        $i = 0;
+        while ($i < sizeOf($data) && !$trouve) {
+            if (strpos($data[$i],$user) !== FALSE) {
+                $trouve = true; 
+                unset($data[$i]);
             }
+            $i++;
         }
         $data = implode("|",$data);
         file_put_contents($fileDestPath,$data);
@@ -17,7 +21,6 @@
 
     if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["user"])) {
-            echo "yee";
             $user = trim($_GET["user"]);
             $nomFichier = array($user,trim($_SESSION['pseudo']));
             //on les tri par ordre alphabétique
@@ -27,8 +30,10 @@
                 unlink($fileName);
             }
             $fileDestPath = 'destinataires_' . trim($_SESSION['pseudo']) . '.txt';
+            if (file_exists($fileDestPath)) {
             removeEntryFromDestinataires($fileDestPath,$user);
+            }
         }
     } 
-        //header("Location: /home/accueil.php");
+       // header("Location: /home/accueil.php");
     ?>

@@ -185,7 +185,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         $_SESSION["msgAcc"] = "";
       } else {
         $_SESSION["msgAcc"] = test_input($_POST["msgAcc"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["msgAcc"])) {
+        if (preg_match("/[^a-zA-Z ,.\-'!:?éàôöîïèç]+/", $_SESSION["msgAcc"])) {
           $erreurMsgAcc = "Le message d'accueil est invalide.";
           $msgAccFilled = false;
         }
@@ -195,7 +195,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         $_SESSION["citation"] = "";
       } else {
         $_SESSION["citation"] = test_input($_POST["citation"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]/", $_SESSION["citation"])) {
+        if (preg_match("/[^a-zA-Z ,.\-'!:?éàôöîïèç]/", $_SESSION["citation"])) {
           $erreurCitation = "La citation est invalide.";
           $citationFilled = false;
         }
@@ -205,7 +205,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         $_SESSION["interets"] = "";
       } else {
         $_SESSION["interets"] = test_input($_POST["interets"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["interets"])) {
+        if (preg_match("/[^a-zA-Z ,.\-!':?éàôöîïèç]+/", $_SESSION["interets"])) {
           $erreurInterets = "Les centres d'interets sont invalides.";
           $interetFilled = false;
         }
@@ -246,7 +246,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         $_SESSION["infoschiens"]  = "";
       } else {
         $_SESSION["infoschiens"] = test_input($_POST["infoschiens"]);
-        if (preg_match("/[^a-zA-Z ,.\-!:?éàôöîïèç]+/", $_SESSION["infoschiens"])) {
+        if (preg_match("/[^a-zA-Z ,.\-'!:?éàôöîïèç]+/", $_SESSION["infoschiens"])) {
           $erreurInfoschiens = "Les informations à propos des chiens sont invalides ou contiennent des caractères interdits.";
           $infoschiensFilled = false;
         }
@@ -316,7 +316,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
             <label for="situation">Situation amoureuse</label> <span>* <?php echo $erreurSituation ?> </span><br>
             <label><input <?php if(isset($_SESSION['situation']) && ($_SESSION['situation'] == "Célibataire")) echo "checked='checked'"; ?> name="situation" type="radio" value="Célibataire" id="Célibataire" required /> Célibataire</label> /
             <label><input <?php if(isset($_SESSION['situation']) && ($_SESSION['situation'] == "Compliqué")) echo "checked='checked'"; ?> name="situation" type="radio" id="Compliqué" value="Compliqué" /> Compliqué</label>
-            <label><input id="enfants" name="enfants" type="checkbox" onclick="changeVisibility('nbEnfants')" <?php if (isset($_SESSION['enfants'])) echo "checked='checked'"; ?> />avec enfants.</label><br>
+            <label><input id="enfants" name="enfants" type="checkbox" onclick="changeVisibility('nbEnfants')" <?php if (isset($_SESSION['enfants']) && $_SESSION['enfants'] == "on") echo "checked='checked'"; ?> />avec enfants.</label><br>
             <div id="nbEnfants"> <span>* <?php echo $erreurNombreEnf; ?> </span>
               <select name="nombreEnf" id="nombreEnf">
                 <option <?php if (isset($_SESSION['nombreEnf']) && ($_SESSION['nombreEnf'] == '-1')) { ?>selected="true" <?php }; ?> value="-1">Ne pas mentionner</option>
@@ -388,8 +388,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
             <label for="interets">Interets</label><br>
             <input name="interets" pattern="[^§]+" type="text" value="<?php if(isset($_SESSION['interets'])) echo $_SESSION['interets']; ?>" placeholder="<?php if(isset($_SESSION['interets'])) echo $_SESSION['interets']; ?>" oninvalid='setCustomValidity("Merci de ne pas utiliser §")' oninput="setCustomValidity('')" /> <?php echo $erreurInterets; ?> <br>
-            <label><input type="checkbox" name="fumeur" id="fumeur" <?php if (isset($_SESSION['fumeur'])) echo "checked='checked'"; ?>>Fumeur ?</label><br>
-            <label><input name="chiens" id="chiens" type="checkbox" onclick="changeVisibility('nbChiens')" <?php if (isset($_SESSION['chiens'])) echo "checked='checked'"; ?> /> Je possède un ami à 4 pattes !</label><br>
+            <label><input type="checkbox" name="fumeur" id="fumeur" <?php if (isset($_SESSION['fumeur']) && ($_SESSION['fumeur'] == "on")) echo "checked='checked'"; ?>>Fumeur ?</label><br>
+            <label><input name="chiens" id="chiens" type="checkbox" onclick="changeVisibility('nbChiens')" <?php if (isset($_SESSION['chiens']) && ($_SESSION['chiens'] == "on")) echo "checked='checked'"; ?> /> Je possède un ami à 4 pattes !</label><br>
             <div id="nbChiens"> <span>* <?php echo $erreurNbDoggos; ?> </span>
               <select name="nbDoggos" id="nbDoggos">
                 <option <?php if (isset($_SESSION['nbDoggos']) && ($_SESSION['nbDoggos'] == '1')) { ?>selected="true" <?php }; ?> value="1">1 Chien</option>
@@ -435,8 +435,8 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     </form>
     <script>
       //en rapport avec les box à cocher
-      updateCheckBoxOnload('enfants', 'nbEnfants');
-      updateCheckBoxOnload('chiens', 'nbChiens');
+       updateCheckBoxOnload('enfants', 'nbEnfants');
+       updateCheckBoxOnload('chiens', 'nbChiens');
     </script>
   </body>
 
