@@ -9,7 +9,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <title>Dog Lovers - Supprimer un compte</title>
-    <link rel="stylesheet" type="text/css" href="bannir/bannir.css">
+    <link rel="stylesheet" type="text/css" href="../../admin/bannir/bannir.css">
     <link rel="shortcut icon" href="./../ressources/favicon.ico" />
   </head>
 
@@ -19,7 +19,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
       <img src="/ressources/dogloverslogo.png" alt="logoDogLovers">
       <h1>Supprimer</h1>
     </div>
-    
+
     <?php
 
     // Merci stack Overflow - https://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
@@ -39,18 +39,18 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     }
   }
 
-  function resetMatches(string $nomuser) // retire toutes les entrées du fichier "matchs.txt" pour un utilisateur 
+  function resetMatches(string $nomuser) // retire toutes les entrées du fichier "matchs.txt" pour un utilisateur
   {
     $path = "./../../register/data/matchs.txt"; // chemin fichier utilisateur
     $contenu = file_get_contents($path);
     $contenuLigne = explode("\n", $contenu);
-    for ($i=0; $i < (sizeOf($contenuLigne)-1); $i++) { // séparation par ligne et déplacement 
+    for ($i=0; $i < (sizeOf($contenuLigne)-1); $i++) { // séparation par ligne et déplacement
       if (startsWith($contenuLigne[$i], $nomuser)) { // si l'utilisateur est à gauche dans le fichier matchs.txt ( visité )
-        $contenuLigne[$i] = ""; // effacement de toute la ligne 
+        $contenuLigne[$i] = ""; // effacement de toute la ligne
       } else if (strrpos($contenuLigne[$i], $nomuser) !== false) { // si l'utilisateur est à droite du ficher match.txt (visiteur)
         $part2 = explode("§", $contenuLigne[$i]);
-        for ($j=1; $j < sizeOf($part2); $j++) { 
-          if (strrpos($part2[$j], $nomuser) !== false) {  // déplacement dans la ligne pour trouver l'utilisateur et son nombre de visites 
+        for ($j=1; $j < sizeOf($part2); $j++) {
+          if (strrpos($part2[$j], $nomuser) !== false) {  // déplacement dans la ligne pour trouver l'utilisateur et son nombre de visites
             $part2[$j] = ""; // suppression de l'entrée
             $part2 = array_filter($part2);
           }
@@ -63,7 +63,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     $contents = implode("\n",$contenuLigne);
     file_put_contents($path,$contents);
   }
-  
+
       $user = $_SESSION["pseudo"];
       $lastvalue = true;
       $path = "./../../register/data/userList.txt"; // chemin fichier utilisateur
@@ -94,12 +94,15 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         <li><a href="/login/logout.php">Quitter le site.</a></li>
       </ul>
     </div>
-    <?php
-    if (!$lastvalue) { ?>
-      <h1>Vous avez supprimé votre compte <?php echo $user; ?>!</h1>
-    <?php } else { ?>
-      <h1>Vous ne pouvez pas supprimer le compte de <?php echo $user; ?> ou cet utilisateur n'existe pas !</h1>
-    <?php } ?>
+
+    <div class="messBannir">
+      <?php
+      if (!$lastvalue) { ?>
+        <h1>Vous avez supprimé votre compte <?php echo $user; ?>!</h1>
+      <?php } else { ?>
+        <h1>Vous ne pouvez pas supprimer le compte de <?php echo $user; ?> ou cet utilisateur n'existe pas !</h1>
+      <?php } ?>
+    </div>
 
   </html>
 <?php
