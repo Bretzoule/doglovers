@@ -1,1 +1,3 @@
-titi_bloqué|Tilted_bloqué|lolo_bloqué|thorgal|
+titi_bloqué|Tilted|lolo|thorgal|
+TheTest|
+TheTest|titi|

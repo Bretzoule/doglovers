@@ -116,20 +116,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
       //print_r($nomFichier);
       //on met dans content ce qu'on veut écrire dans le fichier
       $heure = date("H:i");
-      //////////bloc qui permet de savoir si l'utilisateur nous a bloqué/////
-      $contenu = file_get_contents('destinataires_' . $user . '.txt');
-      $nomDestinataireBloque = explode('|', $contenu);
-$b = 0;
-$destinataireBloque = false;
-while(($b < sizeof($nomDestinataireBloque) - 1) && !$destinataireBloque){
-  $destinataireBis = explode("_",$nomDestinataireBloque[$b]);
-      if(isset($destinataireBis[1]) && $destinataireBis[1]=="bloqué"){
-        echo("Cet utilisateur vous a bloqué, vous ne pouvez pas lui envoyer de message.");
-$destinataireBloque = true;
-      }
-      $b++;
-    }
-      ////////////////fin du bloc////////////////
       if ($messageValide) {
         $content = $heure . " " . $_SESSION['pseudo'] . " : " . $message . "§" . uniqid($_SESSION['pseudo'] . "_") . "\n";
         //on met le contenu dans le fichier nommé pseudo1_pseudo2.txt avec pseudo1 et 2 triés par ordre alphabétique
@@ -214,11 +200,28 @@ $destinataireBloque = true;
           <?php if (!$lastvalue) {
             if ($banned) { ?>
               <span> Cet utilisateur est banni, il ne recevra vos message qu'à son débanissement.</span> <br>
-            <?php } ?>
-            <div id="inputEnvoie">
-              <input name="message" type="text" pattern="[^§]+" value="" placeholder="Ecrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
-              <div class="part_boutons">
-                <!--partie boutons-->
+            <?php } 
+                //////////bloc qui permet de savoir si l'utilisateur nous a bloqué/////
+                $contenu = file_get_contents('destinataires_' . $user . '.txt');
+                $nomDestinataireBloque = explode('|', $contenu);
+          $b = 0;
+          $destinataireBloque = false;
+          while(($b < sizeof($nomDestinataireBloque) - 1) && !$destinataireBloque){
+            $destinataireBis = explode("_",$nomDestinataireBloque[$b]);
+                if(isset($destinataireBis[1]) && $destinataireBis[1]=="bloqué"){
+                  echo("Cet utilisateur vous a bloqué, vous ne pouvez pas lui envoyer de message.");
+          $destinataireBloque = true;
+                ////////////////fin du bloc////////////////
+                   }else{
+                     ?>
+                     <div id="inputEnvoie">
+                       <input name="message" type="text" pattern="[^§]+" value="" placeholder="Ecrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
+                       <div class="part_boutons">
+                  <?php
+              }
+                  $b++;
+                }
+                ?>
                 <input type="submit" value="Envoyer "></input>
               </div>
               <!--fin partie boutons-->
