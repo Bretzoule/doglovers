@@ -47,7 +47,9 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               $nomFichier = array($_SESSION['pseudo'], $destinataire[$i]);
               //on les tri par ordre alphabétique
               usort($nomFichier, "strnatcmp");
-              $messages = file_get_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt');
+              $tmpNom = explode("_",$nomFichier[0]);
+              $tmpNom2 = explode("_",$nomFichier[1]);
+              $messages = file_get_contents($tmpNom[0] . '_' . $tmpNom2[0] . '.txt');
               $dernierMessage = explode("\n", $messages);
                           $destinataireBis = explode("_",$destinataire[$i]);
                           if(!isset($destinataireBis[1])){
