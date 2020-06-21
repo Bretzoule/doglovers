@@ -37,10 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["user"])) {
   $destinataireBis = explode('|',$destinataire);
   $i = 0;
   $destinataireTrouve = false;
-  while(($i < sizeOf($destinataireBis)) && !$destinataireTrouve){
+  while(($i < sizeOf($destinataireBis)-1)){
     print_r($destinataireBis);
     $destinataireAutre = explode("_",$destinataireBis[$i]);
-if($destinataireAutre[$i]==$user){
+    $j = 0;
+      while(($j < sizeOf($destinataireAutre)-1) && !$destinataireTrouve){
+if($destinataireAutre[$j]==$user){
   $estinataireTrouve = true;
 echo($_SESSION['BloquerOuDebloquer']);
   if ($_SESSION['BloquerOuDebloquer']=="bloquer") {
@@ -52,6 +54,8 @@ echo($_SESSION['BloquerOuDebloquer']);
     $destinataireAutre[1] = "";
     $destinataireBis[$i] = implode("",$destinataireAutre);
   }
+}
+$j++;
 }
 $i++;
   }
