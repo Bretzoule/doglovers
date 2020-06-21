@@ -24,6 +24,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
         <li><a href="/home/accueil.php">Accueil</a></li>
         <li><a href="/admin/membres.php">Liste des Utilisateurs</a></li>
         <li><a class="active" href="">Liste des Signalements</a></li>
+        <li><a href="/admin/conversations.php">Liste des Conversations</a></li>
         <li class="deconnexion"><a href="/login/logout.php">Deconnexion</a></li>
       </ul>
     </div>
