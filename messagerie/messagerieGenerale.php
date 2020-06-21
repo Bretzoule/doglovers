@@ -56,15 +56,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
                           if(isset($destinataireBis[1]) && $destinataireBis[1] == "bloqué"){
         ?>
           <div class="pseudoMess">
-          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a>
+          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a> est bloqué.
         </div>
-              
+        <div class="boutonBloquer">
 <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataireBis[0] ."'"?>>Débloquer <?php echo ($destinataireBis[0] . "<br>"); $_SESSION["BloquerOuDebloquer"] = "debloquer"; ?></a>
+</div>
         <?php
       }else{
         ?>
         <div class="pseudoMess">
-          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a> est bloqué.
+          <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataireBis[0] . "'" ?>><?php echo ($destinataireBis[0]) ?></a> 
         </div>
 
 <?php
