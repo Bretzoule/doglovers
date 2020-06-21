@@ -50,7 +50,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               $messages = file_get_contents($nomFichier[0] . '_' . $nomFichier[1] . '.txt');
               $dernierMessage = explode("\n", $messages);
                           $destinataireBis = explode("_",$destinataire[$i]);
-                          if($destinataireBis[1]!="bloqué"){
+                          if(isset($destinataireBis[1]) && $destinataireBis[1]!="bloqué"){
         ?>
               <a <?php echo "href='../messagerie/messagerie.php?user=" . $destinataire[$i] . "'" ?>><?php echo ($destinataire[$i]) ?></a>
         <?php
@@ -64,7 +64,7 @@ echo(" est bloqué.<br>");
               //$dernierMessage = array_filter($dernierMessage);
               $dernierMessageFlat = explode("§", $dernierMessage[sizeof($dernierMessage) - 2]);
               echo ($dernierMessageFlat[0]);
-if($destinataireBis[1]!="bloqué"){
+if(isset($destinataireBis[1]) && $destinataireBis[1]!="bloqué"){
               ?>
               <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataire[$i] ."'"?>>Bloquer <?php echo ($destinataire[$i] . "<br>"); $_SESSION[$destinataire[$i]] = ""; ?></a>
               <?php
