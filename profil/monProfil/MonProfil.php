@@ -52,7 +52,12 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         }
         $a++;
       }
-      echo "<div id=\"textAbo\">" . $informationsVisiteurs . "</div>";
+      echo "<div id=\"textAbo\">";
+      if (!empty($informationsVisiteurs)) {
+        echo $informationsVisiteurs . "</div>";
+      } else {
+        echo "Dommage, personne n'a visité votre profil pour l'instant... :( </div>";
+      }
     } else {
       echo "<div id=\"textAbo\"> Si vous étiez abonné(e), vous pourriez voir qui visite votre profil !</div>";
     }
