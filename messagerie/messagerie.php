@@ -226,10 +226,11 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
                   <div id="inputEnvoie">
                     <input name="message" type="text" pattern="[^§]+" value="" placeholder="Ecrire un message" oninvalid='setCustomValidity("Champ obligatoire - Merci de ne pas utiliser §")' oninput="setCustomValidity('')" required /><br>
                     <div class="part_boutons">
+                    <input type="submit" value="Envoyer "></input>
                <?php
                 }
                 ?>
-                <input type="submit" value="Envoyer "></input>
+
               </div>
               <!--fin partie boutons-->
             </div>
