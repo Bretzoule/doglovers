@@ -62,7 +62,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
 <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataireBis[0] ."'"?>>Débloquer <?php echo ($destinataireBis[0] . "<br>"); $_SESSION["BloquerOuDebloquer".$i] = "debloquer"; ?></a>
 </div>
         <?php
-        echo("oooooooooo<br>");
       }else{
         ?>
         <div class="pseudoMess">
@@ -78,7 +77,6 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
               echo "<div class='mess'>".($dernierMessageFlat[0])."</div>";
     }
 if(!isset($destinataireBis[1])||($destinataireBis[1] != "bloqué")){
-  echo("iciiiiiiiii<br>");
               ?>
               <div class="boutonBloquer">
                 <a <?php echo "href='../messagerie/bloquerUser.php?user=". $destinataireBis[0] ."'"?>>Bloquer <?php echo ($destinataireBis[0] . "<br>"); $_SESSION["BloquerOuDebloquer".$i] = "bloquer"; ?></a>
