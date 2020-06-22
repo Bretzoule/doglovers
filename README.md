@@ -20,6 +20,7 @@ Une fois à la racine de doglovers (/doglovers),
     ```bash
     > php -S localhost:8080
     ```
+    
 ## Utiliser DogLovers
 
     Ouvrir "index.php" dans votre navigateur.
@@ -71,9 +72,13 @@ pw : bogoss123
 
 Auteurs :
 BORDIS Thomas (bordisthom@eisti.eu)
+
 LE BRONEC Louve (lebroneclo@eisti.eu)
+
 LECUPPE Robin (lecupperob@eisti.eu)
+
 LEFLOCH Thomas (leflochtho@eisti.eu)
+
 MADRELLE Alexis (madrelleal@eisti.eu)
 
 
