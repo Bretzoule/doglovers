@@ -65,7 +65,7 @@ pw : youpi123
 
 Un seul identifiant existe pour se connecter comme "Administrateur", mais vous pourrez ensuite, via le panel d'administration, ajouter d'autres Administrateurs.
 
-id : SuperMan
+id : SuperWoman
 
 pw : bogoss123
 
