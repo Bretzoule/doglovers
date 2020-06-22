@@ -47,7 +47,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
     </div>
     <div class="menu">
       <ul>
-        <li><a href="../home/accueil.php">Accueil</a></li>
+        <li><a href="/home/accueil.php">Accueil</a></li>
         <?php if (intval($_SESSION['login_Type']) >= 2) { ?>
         <li><a class="active" href="">Aperçu conversation</a></li>
         <li><a href="/admin/membres.php">Liste des Utilisateurs</a></li>
