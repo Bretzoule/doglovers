@@ -7,7 +7,8 @@ Dog Lovers est un site de rencontre pour les amoureux de nos amis à 4 pattes, i
 
 Modifier la configuration php.ini - DogLovers utilise une configuration php modifiée, merci de changer dans le fichier php.ini les champs suivants
 
-```txt
+```ini
+    file_uploads = On
     post_max_size = 36M
     upload_max_filesize = 8M
 ```
@@ -72,14 +73,10 @@ pw : bogoss123
 
 Auteurs :
 BORDIS Thomas (bordisthom@eisti.eu)
-
 LE BRONEC Louve (lebroneclo@eisti.eu)
-
 LECUPPE Robin (lecupperob@eisti.eu)
-
 LEFLOCH Thomas (leflochtho@eisti.eu)
-
 MADRELLE Alexis (madrelleal@eisti.eu)
 
 
-GitLab : https://gitlab.etude.eisti.fr/leflochtho/poudlarel
+GitLab : https://gitlab.etude.eisti.fr/meetandlove/dog-lovers
