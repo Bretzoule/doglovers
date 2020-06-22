@@ -23,20 +23,20 @@ Une fois à la racine de doglovers (/doglovers),
 
 ## Utiliser DogLovers
 
-    Ouvrir "index.php" dans votre navigateur.
+Ouvrir "index.php" dans votre navigateur.
 
-    Toute personne non-connectée ne pourra pas accéder à la moindre page exceptée "login.php", sur laquelle il pourra se créer un compte "membre"
+Toute personne non-connectée ne pourra pas accéder à la moindre page exceptée "login.php", sur laquelle il pourra se créer un compte "membre"
 
-    DogLovers utilise un système de hierarchie.
+DogLovers utilise un système de hierarchie.
 
     -> Administrateur (admin) 
         \-> Membre (free) -- Abonné (member)
             \-> Visiteur (noRole)
             
-    Le Visiteur ne peut rien faire sur le site, hormis se créer un compte Membre (free).
-    Le Membre aura accès au fonctionnalités de base, pourra rechercher et visualiser des profils.
-    L'Abonné pourra en plus communiquer avec les autres utilisateurs.
-    L'Administrateur peut en plus, gérer les profils et les actions des Membres et Abonnés.
+Le Visiteur ne peut rien faire sur le site, hormis se créer un compte Membre (free).
+Le Membre (free) aura accès au fonctionnalités de base, pourra rechercher et visualiser des profils.
+L'Abonné (member) pourra en plus communiquer avec les autres utilisateurs.
+L'Administrateur (admin) peut en plus, gérer les profils et les actions des Membres et Abonnés.
 
 
 ## Connexion
