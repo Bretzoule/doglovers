@@ -5,7 +5,7 @@ Dog Lovers est un site de rencontre pour les amoureux de nos amis à 4 pattes, i
 
 ## Mettre en place DogLovers
 
-Modifier la configuration php.ini - DogLovers utilise un configuration php modifiée, merci de changer dans le fichier php.ini les champs suivants : 
+Modifier la configuration php.ini - DogLovers utilise une configuration php modifiée, merci de changer dans le fichier php.ini les champs suivants
 
 ```txt
     post_max_size = 36M
@@ -17,10 +17,10 @@ Modifier la configuration php.ini - DogLovers utilise un configuration php modif
 Démarrer le serveur local.
 Une fois à la racine de doglovers (/doglovers),
  
-    ```bash
+```bash
     > php -S localhost:8080
-    ```
-    
+```
+
 ## Utiliser DogLovers
 
     Ouvrir "index.php" dans votre navigateur.
