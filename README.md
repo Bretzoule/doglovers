@@ -44,7 +44,7 @@ L'Administrateur (admin) peut en plus, gérer les profils et les actions des Mem
 
 ### en tant que Membre...
 
-Les mot de passe sont salés et hashés en utilisant BCrypt, ils sont ensuite stockés dans "/register/data/userList.txt"  
+Les mot de passe sont salés et hashés en utilisant BCrypt, ils sont ensuite stockés avec le reste des informations utilisateur dans "/register/data/userList.txt"  
 
 
 Pour vous connecter en tant que "Membre", il vous faut un compte "Membre" vous pouvez en créer un via la page de création de compte, disponible depuis la page login.php ou alors directement à l'adresse suivante : "/register/register.php" - voici néanmoins un compte membre déjà crée :
@@ -55,7 +55,7 @@ id : Sah
 pw : test123
 
 
-Pour vous connecter en tant que "Abonné" il faut que le compte souscrive à un abonnement, pour cela, rendez-vous une fois connecté sur la page "/home/subscribe/subscribe.php", et selectionnez un abonnement - voici néanmoins un compte abonné déjà crée : 
+Pour vous connecter en tant que "Abonné" il faut que le compte souscrive à un abonnement, pour cela, rendez-vous une fois connecté sur la page Gérer l'abonnement, sur la page d'accueil ou directement à l'adresse suivante : "/home/subscribe/subscribe.php", et selectionnez une formule d'abonnement - voici néanmoins un compte abonné déjà crée : 
 
 id : Richie
 
