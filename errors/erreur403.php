@@ -33,8 +33,8 @@
       <div class="inner">
         <div class="content">
           <section>
-            <h3>Dog Lover</h3>
-            <p>Que vous soyez plutôt Bulldog, Caniche ou Labrador, DogLover est l'entremetteur des dresseurs. DogLover est un site de rencontre par affinités, dédié aux célibataires qui recherchent une relation durable et épanouie. L'interaction entre nos célibataires se fait dans un environnement sécurisé. Notre équipe est à votre écoute afin de vous offrir la meilleure expérience possible.</p>
+            <h3>Dog Lovers</h3>
+            <p>Que vous soyez plutôt Bulldog, Caniche ou Labrador, DogLovers est l'entremetteur des dresseurs. DogLovers est un site de rencontre par affinités, dédié aux célibataires qui recherchent une relation durable et épanouie. L'interaction entre nos célibataires se fait dans un environnement sécurisé. Notre équipe est à votre écoute afin de vous offrir la meilleure expérience possible.</p>
             <br>
           </section>
           <section>
@@ -58,7 +58,7 @@
         <div class="copyright">
           <img src="/ressources/favicon.ico"></img>
           <br>
-          &copy; DogLover - Tout droits réservés.
+          &copy; DogLovers - Tout droits réservés.
         </div>
       </div>
     </footer>
