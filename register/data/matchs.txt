@@ -1,6 +1,6 @@
-Sah§SuperWoman|3§lebroneclo|2
-SuperWoman§lebroneclo|6
-Richie§lebroneclo|4
+Sah§SuperWoman|3§lebroneclo|2§leflochtho|1
+SuperWoman§lebroneclo|6§leflochtho|3
+Richie§lebroneclo|4§leflochtho|1
 lebroneclo§SuperWoman|5§Sammy|2
-leflochtho§lebroneclo|4
-Sammy§lebroneclo|3
+leflochtho§lebroneclo|3
+Sammy§leflochtho|5

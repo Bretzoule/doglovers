@@ -242,8 +242,43 @@ ou jusqu'à la fin du tableau*/
       echo ("Une erreur s'est produite, ce profil n'existe pas.");
     }
     ?>
+    <div class="clear"></div>
   </body>
+ <!-- Footer -->
+ <footer id="footer">
+      <div class="inner">
+        <div class="content">
+          <section>
+            <h3>Dog Lovers</h3>
+            <p>Que vous soyez plutôt Bulldog, Caniche ou Labrador, DogLovers est l'entremetteur des dresseurs. DogLovers est un site de rencontre par affinités, dédié aux célibataires qui recherchent une relation durable et épanouie. L'interaction entre nos célibataires se fait dans un environnement sécurisé. Notre équipe est à votre écoute afin de vous offrir la meilleure expérience possible.</p>
+            <br>
+          </section>
+          <section>
+            <h4>Liens</h4>
+            <ul class="alt">
+              <li><a href="/home/accueil.php">Accueil</a></li>
+              <li><a href="/profil/MonProfil.php">Mon Profil</a></li>
+              <li><a href="/home/conseils.php">Conseils</a></li>
 
+            </ul>
+            <br>
+          </section>
+          <section>
+            <h4>Nous contacter</h4>
+            <ul class="plain">
+              <li><a href="mailto:staff@dog-lovers.fr"><i class="contact">&nbsp;</i>Contact</a></li>
+              <li><a href="https://gitlab.etude.eisti.fr/meetandlove/dog-lovers"><i class="github">&nbsp;</i>Github</a></li>
+            </ul>
+            <br>
+          </section>
+        </div>
+        <div class="copyright">
+          <img src="/ressources/favicon.ico"></img>
+          <br>
+          &copy; DogLovers - Tout droits réservés.
+        </div>
+      </div>
+    </footer>
   </html>
 <?php
 } else {
