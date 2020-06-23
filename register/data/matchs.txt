@@ -2,5 +2,5 @@ Sah§SuperWoman|3§lebroneclo|2
 SuperWoman§lebroneclo|6
 Richie§lebroneclo|4
 lebroneclo§SuperWoman|5§Sammy|2
-leflochtho§lebroneclo|3
-Sammy
+leflochtho§lebroneclo|4
+Sammy§lebroneclo|3
