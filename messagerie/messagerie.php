@@ -251,13 +251,14 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
           <?php }
           //////////bloc qui permet de savoir si l'utilisateur nous a bloqué/////
           //on récupère le contenu du fichier destinataire de celui à qui l'on parle
+          $destinataireBloque = false;
+          if (file_exists('destinataires_' . $user . '.txt')) {
           $contenu = file_get_contents('destinataires_' . $user . '.txt');
           //on sépare selon | pour récupérer les différents pseudo ou pseudo_bloqué
           $nomDestinataireBloque = explode('|', $contenu);
           //on initalise b à
           $b = 0;
           //on initialise les variables $destinataireBloque qui permet de savoir si on à été bloqué
-          $destinataireBloque = false;
           //et $destinataireTrouve pour voir si on est bien dans le fichier
           $destinatairetrouve = false;
           //on parcourt les noms des destinataires
@@ -276,6 +277,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) >= 2)) 
               }//fin de la recher de si l'utilsateur est bloqué
             }//fin de la comparaison des pseudos
             $b++;
+          }
           }//fin du while
           ///////////////fin du bloc////////////////
           //si l'utilisateur connecté à été bloqué par son destinataire alors on l'en informe et il ne peut pas écrire de message
