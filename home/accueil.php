@@ -127,6 +127,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
         </div>
         <div class="copyright">
           <img src="/ressources/favicon.ico"></img>
+          <p>DogLover - Car les animaux sont nés pour nous apprendre à aimer.</p>
           <br>
           &copy; DogLovers - Tout droits réservés.
         </div>
