@@ -70,7 +70,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
             $_SESSION["editMsgAcc"] = "";
         } else {
             $_SESSION["editMsgAcc"] = test_input($_POST["editMsgAcc"]);
-            if (preg_match("/[^a-zA-Z ';,.\-!:?éàôöîïêèç]+/", $_SESSION["editMsgAcc"])) {
+            if (preg_match("/[^a-zA-Z ';,.\-!:?éàôöîïùêèç]+/", $_SESSION["editMsgAcc"])) {
                 $erreurMsgAcc = "Le message d'accueil est invalide.";
                 $msgAccFilled = false;
             }
@@ -80,7 +80,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
             $_SESSION["editCitation"] = "";
         } else {
             $_SESSION["editCitation"] = test_input($_POST["editCitation"]);
-            if (preg_match("/[^a-zA-Z ';,.\-!:?éàôöîïèêç]/", $_SESSION["editCitation"])) {
+            if (preg_match("/[^a-zA-Z ';,.\-!:?éàôöîïèùêç]/", $_SESSION["editCitation"])) {
                 $erreurCitation = "La citation est invalide.";
                 $citationFilled = false;
             }
@@ -90,7 +90,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
             $_SESSION["editInterets"] = "";
         } else {
             $_SESSION["editInterets"] = test_input($_POST["editInterets"]);
-            if (preg_match("/[^a-zA-Z ';,.\-!:?éàôöîïèêç]+/", $_SESSION["editInterets"])) {
+            if (preg_match("/[^a-zA-Z ';,.\-!:?éàôöîïèêùç]+/", $_SESSION["editInterets"])) {
                 $erreurInterets = "Les centres d'interets sont invalides.";
                 $interetFilled = false;
             }
