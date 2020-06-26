@@ -77,6 +77,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
         </div>
         </div>
   </body>
+  <br><br><br><br><br><br><br><br>
  <!-- Footer -->
  <footer id="footer">
       <div class="inner">
@@ -106,7 +107,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) == 3)) 
           </section>
         </div>
         <div class="copyright">
-          <img src="./ressources/favicon.ico"></img>
+          <img src="/ressources/favicon.ico"></img>
           <br>
           &copy; DogLovers - Tout droits réservés.
         </div>

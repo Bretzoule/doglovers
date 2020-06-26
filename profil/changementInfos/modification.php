@@ -271,7 +271,7 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     ?>
     <div id="part_logo">
       <!--Partie logo-->
-      <a href="/login/login.php"><img src="/ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
+      <a href="/profil/monProfil/MonProfil.php"><img src="/ressources/logoBis.png" alt="logoBis" class="rounded-corners"></img></a>
     </div>
     <!--Fin partie logo-->
 

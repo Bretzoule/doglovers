@@ -7,7 +7,7 @@
 
     function remplacementData(array $userData, string $nbrEnfants, $nbrDoggos, $infosChiens):array // récupère toutes les informations mentionnées et les remplace dans la chaine utilisateur
     {
-      $userData[1] = $_SESSION["lieuRes"];
+      $userData[1] = $_SESSION["lieures"];
       $userData[2] = $_SESSION["sexe"];
       $userData[4] = $_SESSION["profession"];
       $userData[5] = $_SESSION["situation"] . "|" . $nbrEnfants;
