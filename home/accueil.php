@@ -66,14 +66,16 @@ if ((isset($_SESSION["login_Type"])) && (intval($_SESSION["login_Type"]) > 0)) {
     <div id="page">
       <h2 id='titreTab'> Bonjour <?php echo htmlspecialchars($_SESSION["pseudo"]); ?> !</h2>
       <div id="BlocInfo">
-        <span id="titreInfo">Liste de nos derniers membres :</span><br><br> 
+        
         <?php
         if (isset($_SESSION["memberShipExpired"]) && ($_SESSION["memberShipExpired"] == "true")) {
-          echo "<span id='memberShipExpired'> Votre abonnement à expiré, pour vous réabonner, cliquez ici : </span>";
-          echo "<br> <a href='/home/subscribe/subscribe.php'><input type='button' value='Se réabonner !'></a>";
+          echo "<div id='memberShipExpired'> Votre abonnement à expiré, pour vous réabonner, cliquez ici : ";
+          echo "<a href='/home/subscribe/subscribe.php'><input id='boutonreabo' type='button' value='Se réabonner !'></a> </div> <br>";
           unset($_SESSION["memberShipExpired"]);
         }
         ?>
+        <div class="clear"></div>
+        <span id="titreInfo">Liste de nos derniers membres :</span><br><br> 
           <?php 
              $path = "./../register/data/userList.txt"; // chemin du fichier des utilisateurs
              $content = file_get_contents($path); // récupère les données du fichier
